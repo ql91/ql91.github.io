@@ -610,11 +610,11 @@ a {
   margin-right: 0;
 }
 #header .header-nav .social a.weibo {
-  background: url("/img/weibo.png") center no-repeat #aaf;
-  border: 1px solid #aaf;
+  background: url("/img/weibo.png") center no-repeat #ef7522;
+  border: 1px solid #ef7522;
 }
 #header .header-nav .social a.weibo:hover {
-  border: 1px solid #aaf;
+  border: 1px solid #ef7522;
 }
 #header .header-nav .social a.rss {
   background: url("/img/rss.png") center no-repeat #ef7522;
@@ -673,11 +673,11 @@ a {
   border: 1px solid #06c611;
 }
 #header .header-nav .social a.mail {
-  background: url("/img/mail.png") center no-repeat #005a87;
-  border: 1px solid #005a87;
+  background: url("/img/mail.png") center no-repeat #aaf;
+  border: 1px solid #aaf;
 }
 #header .header-nav .social a.mail:hover {
-  border: 1px solid #006b98;
+  border: 1px solid #aaf;
 }
 #header .switch-part {
   width: 100%;
