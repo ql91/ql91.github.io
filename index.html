@@ -116,7 +116,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/web前端/" style="font-size: 10px;">web前端</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+						<a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/web前端/" style="font-size: 10px;">web前端</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
 					</div>
 				</section>
 				
@@ -193,6 +193,66 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-js函数调用的4种方法" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/31/js函数调用的4种方法/" class="article-date">
+  	<time datetime="2015-07-31T11:53:48.000Z" itemprop="datePublished">2015-07-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/31/js函数调用的4种方法/">js函数调用的4种方法</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>js的函数调用会有两个额外的参数：##this##和##arguments##。(arguments是参数组，并非真实的数组，但可以使用.length方法获得长度)</p>
+<p>js的4种调用模式：<br>1.方法调用模式<br>2.函数调用模式<br>3.构造器调用模式<br>4.apply调用模式</p>
+<p>详解如下:<br>1.方法调用模式<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var myobject=&#123;</span><br><span class="line">	value:<span class="number">0</span>,</span><br><span class="line">	inc:<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">                    alert(this.value)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">myobject.inc();</span><br></pre></td></tr></table></figure></p>
+<p>2.函数调用模式<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var add=<span class="keyword">function</span>(a,b)&#123;</span><br><span class="line">	alert(this);//this被绑定到window</span><br><span class="line">	<span class="built_in">return</span> a+b;</span><br><span class="line">&#125;</span><br><span class="line">var sum=add(<span class="number">3</span>,<span class="number">4</span>);</span><br><span class="line">alert(sum);</span><br></pre></td></tr></table></figure></p>
+<p>3.构造器调用模式(不使用)</p>
+<p>4.apply调用模式<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var add=<span class="keyword">function</span>(a,b)&#123;</span><br><span class="line">	<span class="built_in">return</span> a+b;</span><br><span class="line">&#125;</span><br><span class="line">var arr=[<span class="number">10</span>,<span class="number">20</span>];</span><br><span class="line">var sum=add.apply(this,arr);//this指针所指向的对象</span><br><span class="line">alert(sum);</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-浏览器是如何渲染页面和加载页面" class="article article-type-post" itemscope itemprop="blogPost">
   

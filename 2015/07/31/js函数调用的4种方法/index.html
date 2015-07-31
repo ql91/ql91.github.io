@@ -3,33 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>浏览器是如何渲染页面和加载页面 | ql&#39;blog</title>
+  <title>js函数调用的4种方法 | ql&#39;blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="浏览器是如何渲染页面和加载页面?
-浏览器加载的顺序是从上到下，渲染的顺序也是从上到下，加载和渲染是同时进行的。
-在渲染到页面的某一部分时，其上面的所有部分都已经加载完成（并不是说所有相关联的元素都已经加载完）。
-如果遇到语义解释性的标签嵌入文件（JS脚本，CSS样式），那么此时加载过程会启用单独连接进行加载
-并且在加载后进行解析，解析过程中，停止页面所有往下元素的加载。
-样式表在加载完成后，将和以">
+  <meta name="description" content="js的函数调用会有两个额外的参数：##this##和##arguments##。(arguments是参数组，并非真实的数组，但可以使用.length方法获得长度)
+js的4种调用模式：1.方法调用模式2.函数调用模式3.构造器调用模式4.apply调用模式
+详解如下:1.方法调用模式1234567var myobject=&amp;#123;	value:0,	inc:function()&amp;#123;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浏览器是如何渲染页面和加载页面">
-<meta property="og:url" content="http://yoursite.com/2015/07/27/浏览器是如何渲染页面和加载页面/index.html">
+<meta property="og:title" content="js函数调用的4种方法">
+<meta property="og:url" content="http://yoursite.com/2015/07/31/js函数调用的4种方法/index.html">
 <meta property="og:site_name" content="ql'blog">
-<meta property="og:description" content="浏览器是如何渲染页面和加载页面?
-浏览器加载的顺序是从上到下，渲染的顺序也是从上到下，加载和渲染是同时进行的。
-在渲染到页面的某一部分时，其上面的所有部分都已经加载完成（并不是说所有相关联的元素都已经加载完）。
-如果遇到语义解释性的标签嵌入文件（JS脚本，CSS样式），那么此时加载过程会启用单独连接进行加载
-并且在加载后进行解析，解析过程中，停止页面所有往下元素的加载。
-样式表在加载完成后，将和以">
-<meta property="og:updated_time" content="2015-07-29T03:01:06.449Z">
+<meta property="og:description" content="js的函数调用会有两个额外的参数：##this##和##arguments##。(arguments是参数组，并非真实的数组，但可以使用.length方法获得长度)
+js的4种调用模式：1.方法调用模式2.函数调用模式3.构造器调用模式4.apply调用模式
+详解如下:1.方法调用模式1234567var myobject=&amp;#123;	value:0,	inc:function()&amp;#123;">
+<meta property="og:updated_time" content="2015-07-31T12:17:59.156Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浏览器是如何渲染页面和加载页面">
-<meta name="twitter:description" content="浏览器是如何渲染页面和加载页面?
-浏览器加载的顺序是从上到下，渲染的顺序也是从上到下，加载和渲染是同时进行的。
-在渲染到页面的某一部分时，其上面的所有部分都已经加载完成（并不是说所有相关联的元素都已经加载完）。
-如果遇到语义解释性的标签嵌入文件（JS脚本，CSS样式），那么此时加载过程会启用单独连接进行加载
-并且在加载后进行解析，解析过程中，停止页面所有往下元素的加载。
-样式表在加载完成后，将和以">
+<meta name="twitter:title" content="js函数调用的4种方法">
+<meta name="twitter:description" content="js的函数调用会有两个额外的参数：##this##和##arguments##。(arguments是参数组，并非真实的数组，但可以使用.length方法获得长度)
+js的4种调用模式：1.方法调用模式2.函数调用模式3.构造器调用模式4.apply调用模式
+详解如下:1.方法调用模式1234567var myobject=&amp;#123;	value:0,	inc:function()&amp;#123;">
   
     <link rel="alternative" href="/atom.xml" title="ql&#39;blog" type="application/atom+xml">
   
@@ -208,11 +199,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-浏览器是如何渲染页面和加载页面" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-js函数调用的4种方法" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/07/27/浏览器是如何渲染页面和加载页面/" class="article-date">
-  	<time datetime="2015-07-27T02:05:21.000Z" itemprop="datePublished">2015-07-27</time>
+      <a href="/2015/07/31/js函数调用的4种方法/" class="article-date">
+  	<time datetime="2015-07-31T11:53:48.000Z" itemprop="datePublished">2015-07-31</time>
 </a>
     </div>
   
@@ -225,7 +216,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      浏览器是如何渲染页面和加载页面
+      js函数调用的4种方法
     </h1>
   
 
@@ -234,7 +225,7 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web前端/">web前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
 	</div>
 
         
@@ -245,14 +236,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="浏览器是如何渲染页面和加载页面?">浏览器是如何渲染页面和加载页面?</h1><ol>
-<li>浏览器加载的顺序是从上到下，渲染的顺序也是从上到下，加载和渲染是同时进行的。</li>
-<li>在渲染到页面的某一部分时，其上面的所有部分都已经加载完成（并不是说所有相关联的元素都已经加载完）。</li>
-<li>如果遇到语义解释性的标签嵌入文件（JS脚本，CSS样式），那么此时加载过程会启用单独连接进行加载</li>
-<li>并且在加载后进行解析，解析过程中，停止页面所有往下元素的加载。</li>
-<li>样式表在加载完成后，将和以前加载的所有样式表一起进行解析，解析完成后，将对此前所有元素（含以前已经渲染的）重新进行渲染。</li>
-<li>JS、CSS中如有重定义，后定义函数将覆盖前定义函数。</li>
-</ol>
+        <p>js的函数调用会有两个额外的参数：##this##和##arguments##。(arguments是参数组，并非真实的数组，但可以使用.length方法获得长度)</p>
+<p>js的4种调用模式：<br>1.方法调用模式<br>2.函数调用模式<br>3.构造器调用模式<br>4.apply调用模式</p>
+<p>详解如下:<br>1.方法调用模式<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var myobject=&#123;</span><br><span class="line">	value:<span class="number">0</span>,</span><br><span class="line">	inc:<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">                    alert(this.value)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">myobject.inc();</span><br></pre></td></tr></table></figure></p>
+<p>2.函数调用模式<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var add=<span class="keyword">function</span>(a,b)&#123;</span><br><span class="line">	alert(this);//this被绑定到window</span><br><span class="line">	<span class="built_in">return</span> a+b;</span><br><span class="line">&#125;</span><br><span class="line">var sum=add(<span class="number">3</span>,<span class="number">4</span>);</span><br><span class="line">alert(sum);</span><br></pre></td></tr></table></figure></p>
+<p>3.构造器调用模式(不使用)</p>
+<p>4.apply调用模式<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var add=<span class="keyword">function</span>(a,b)&#123;</span><br><span class="line">	<span class="built_in">return</span> a+b;</span><br><span class="line">&#125;</span><br><span class="line">var arr=[<span class="number">10</span>,<span class="number">20</span>];</span><br><span class="line">var sum=add.apply(this,arr);//this指针所指向的对象</span><br><span class="line">alert(sum);</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -262,18 +251,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/07/31/js函数调用的4种方法/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          js函数调用的4种方法
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/07/25/JS模块化编程之AMD规范/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">JS模块化编程之AMD规范</div>
+    <a href="/2015/07/27/浏览器是如何渲染页面和加载页面/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">浏览器是如何渲染页面和加载页面</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -302,7 +282,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="浏览器是如何渲染页面和加载页面" data-title="浏览器是如何渲染页面和加载页面" data-url="http://yoursite.com/2015/07/27/浏览器是如何渲染页面和加载页面/"></div>
+	<div class="ds-thread" data-thread-key="js函数调用的4种方法" data-title="js函数调用的4种方法" data-url="http://yoursite.com/2015/07/31/js函数调用的4种方法/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
