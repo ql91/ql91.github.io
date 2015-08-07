@@ -17,7 +17,7 @@
 &amp;lt;img src=&quot;planets.jpg&quot; border=&quot;0&quot; usemap=&quot;#planetmap&quot; alt=&quot;Planets&quot; /&amp;gt;
 
        &amp;lt;m">
-<meta property="og:updated_time" content="2015-08-07T07:13:48.198Z">
+<meta property="og:updated_time" content="2015-08-07T07:15:43.314Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端性能优化">
 <meta name="twitter:description" content="一、减少http请求次数1.捆绑文件：多个样式表文件捆绑成一个文件2.CSS Sprites：多个图片拼成一张大图，通过CSS来控制每个小图展示的位置3.Image Map(图片/图像映射区域)：通过坐标来控制显示导航
@@ -255,13 +255,10 @@
 <h1 id="六、根据域名划分内容">六、根据域名划分内容</h1><p>浏览器一般对同一个域的下载连接数有所限制，按照域名划分下载内容可以浏览器增大并行下载连接，但是注意控制域名使用在2-4个之间，不然dns查询也是个问题。<br>一般网站规划会将静态资源放在类似于static.example.com，动态内容放在www.example.com上。这样做还有一个好处是可以在静态的域名上避免使用cookie。后面我们会在cookie的规则中提到。</p>
 <h1 id="七、避免404">七、避免404</h1><p>404我们都不陌生，代表服务器没有找到资源，我们要特别要注意404的情况不要在我们提供的网页资源上，客户端发送一个请求但是服务器却返回一个无用的结果，时间浪费掉了。<br>更糟糕的是我们网页中需要加载一个外部脚本，结果返回一个404，不仅阻塞了其他脚本下载，下载回来的内容(404)客户端还会将其当成Javascript去解析。</p>
 <h1 id="八、CSS">八、CSS</h1><p>1.将样式表置顶<br>样式表(css)放在网页的HEAD中会让网页显得加载速度更快，因为这样做可以使浏览器逐步加载已将下载的网页内容。这对内容比较多的网页尤其重要，用户不用一直等待在一个白屏上，而是可以先看已经下载的内容。<br>2.用<link>代替@import<br>避免使用@import的原因很简单，因为它相当于将css放在网页内容底部。</p>
-<h1 id="九、JavaScript">九、JavaScript</h1><p>1.将脚本置底<br><em>1 把脚本置底，这样可以让网页渲染所需要的内容尽快加载显示给用户。
-</em>2 现在主流浏览器都支持defer关键字，可以指定脚本在文档加载后执行。<br><em>3 HTML5中新加了async关键字，可以让脚本异步执行。<br>2.使用外部Javascirpt和CSS文件
-</em>1 使用外部Javascript和CSS文件可以使这些文件被浏览器缓存，从而在不同的请求内容之间重用。<br>*2 使用外部Javascript和CSS文件的决定因素在于这些外部文件的重用率，如果用户在浏览我们的页面时会访问多次相同页面或者可以重用脚本的不同页面，那么外部文件形式可以为你带来很大的好处。但对于用户通常只会访问一次的页面.<br>3.精简Javascript和CSS<br>精简就是将Javascript或CSS中的空格和注释全去掉<br>精简的工具：<br>JS compressors:<br>Packer<br>JSMin<br>Closure compiler<br>YUICompressor (also does CSS)<br>AjaxMin (also does CSS)</p>
+<h1 id="九、JavaScript">九、JavaScript</h1><p>1.将脚本置底<br>-把脚本置底，这样可以让网页渲染所需要的内容尽快加载显示给用户。<br>-现在主流浏览器都支持defer关键字，可以指定脚本在文档加载后执行。<br>-HTML5中新加了async关键字，可以让脚本异步执行。<br>2.使用外部Javascirpt和CSS文件<br>-使用外部Javascript和CSS文件可以使这些文件被浏览器缓存，从而在不同的请求内容之间重用。<br>-使用外部Javascript和CSS文件的决定因素在于这些外部文件的重用率，如果用户在浏览我们的页面时会访问多次相同页面或者可以重用脚本的不同页面，那么外部文件形式可以为你带来很大的好处。但对于用户通常只会访问一次的页面.<br>3.精简Javascript和CSS<br>精简就是将Javascript或CSS中的空格和注释全去掉<br>精简的工具：<br>JS compressors:<br>Packer<br>JSMin<br>Closure compiler<br>YUICompressor (also does CSS)<br>AjaxMin (also does CSS)</p>
 <p>CSS compressors:<br>CSSTidy<br>Minify<br>YUICompressor (also does JS)<br>AjaxMin (also does JS)<br>CSSCompressor</p>
 <p>与VS集成比较好的工具如下：<br>YUICompressor - 编译集成，包含在NuGet.<br>AjaxMin  - 编译集成</p>
-<h1 id="十、图片">十、图片</h1><p>1.优化图像<br>尝试把GIF格式转换成PNG格式，看看是否节省空间。大多数情况下是可以压缩的。下面这条简单的命令可以安全地把GIF格式转换为PNG格式：<br>convert image.gif image.png<br>2.优化CSS Sprite<br><em>1 Spirite中水平排列图片，垂直排列会增加文件大小；
-</em>2 Spirite中把颜色较近的组合在一起可以降低颜色数，理想状况是低于256色以便适用PNG8格式；<br>*3 不要在Spirite的图像中间留有较大空隙。这虽然不大会增加文件大小,但对于用户代理来说它需要更少的内存来把图片解压为像素地图。100×100的图片为1万像素，1000×1000就是100万像素。<br>3.不要在HTML中缩放图片<br>不要通过图片缩放来适应页面，如果你需要小图片，就直接使用小图片吧。</p>
+<h1 id="十、图片">十、图片</h1><p>1.优化图像<br>尝试把GIF格式转换成PNG格式，看看是否节省空间。大多数情况下是可以压缩的。下面这条简单的命令可以安全地把GIF格式转换为PNG格式：<br>convert image.gif image.png<br>2.优化CSS Sprite<br>-Spirite中水平排列图片，垂直排列会增加文件大小；<br>-Spirite中把颜色较近的组合在一起可以降低颜色数，理想状况是低于256色以便适用PNG8格式；<br>-不要在Spirite的图像中间留有较大空隙。这虽然不大会增加文件大小,但对于用户代理来说它需要更少的内存来把图片解压为像素地图。100×100的图片为1万像素，1000×1000就是100万像素。<br>3.不要在HTML中缩放图片<br>不要通过图片缩放来适应页面，如果你需要小图片，就直接使用小图片吧。</p>
 <p><a href="http://www.cnblogs.com/developersupport/p/webpage-performance-best-practices.html" target="_blank" rel="external">前端优化参考链接</a></p>
 
       
