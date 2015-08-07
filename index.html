@@ -220,7 +220,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="减少http请求次数">减少http请求次数</h1><p>1.<strong>捆绑文件</strong>：多个样式表文件捆绑成一个文件<br>2.<strong>CSS Sprites*</strong>：多个图片拼成一张大图，通过CSS来控制每个小图展示的位置<br>3.<strong>Image Map(图片/图像映射区域)</strong>：通过坐标来控制显示导航</p>
+        <h1 id="一、减少http请求次数">一、减少http请求次数</h1><p>1.<strong>捆绑文件</strong>：多个样式表文件捆绑成一个文件<br>2.<strong>CSS Sprites</strong>：多个图片拼成一张大图，通过CSS来控制每个小图展示的位置<br>3.<strong>Image Map(图片/图像映射区域)</strong>：通过坐标来控制显示导航</p>
 <pre><code class="bash">&lt;img src=<span class="string">"planets.jpg"</span> border=<span class="string">"0"</span> usemap=<span class="string">"#planetmap"</span> alt=<span class="string">"Planets"</span> /&gt;
 
        &lt;map name=<span class="string">"planetmap"</span> id=<span class="string">"planetmap"</span>&gt;
@@ -229,21 +229,21 @@
                 &lt;area shape=<span class="string">"rect"</span> coords=<span class="string">"0,0,110,260"</span> href =<span class="string">"sun.html"</span> alt=<span class="string">"Sun"</span> /&gt;
        &lt;/map&gt;
 </code></pre>
-<h1 id="减少DNS查询次数:_域名系统（Domain_Name_System）">减少DNS查询次数: 域名系统（Domain Name System）</h1><p>当我们的网页引入了外部的脚本或者图片，DNS查询需要消耗响应的时间。</p>
-<h1 id="缓存Ajax">缓存Ajax</h1><p>缓存原理：Ajax在发送的数据成功后，会把请求的URL和返回的响应结果保存在缓存内，当下一次调用Ajax发送相同的请求时，它会直接从缓存中把数据取出来，这是为了提高页面的响应速度和用户体验。当前这要求两次请求URL完全相同，包括参数。这个时候，浏览器就不会与服务器交互。<br>不足：如果通过Ajax对一些后台数据进行更改的时候，虽然数据在后台已经发生改变，但是页面缓存中并没有改变，对于相同的URL，Ajax提交过去以后，浏览器还只是简单的从缓存中拿数据，这种情况当然就不行了。<br>解决缓存方法<br>1.在ajax发送请求前加上 xmlHttpRequest.setRequestHeader(“Cache-Control”,”no-cache”);<br>2.在服务端加 header(“Cache-Control: no-cache, must-revalidate”);<br>3.在ajax发送请求前加上 xmlHttpRequest.setRequestHeader(“If-Modified-Since”,”0″);</p>
-<h1 id="延迟加载和提前加载">延迟加载和提前加载</h1><p>通过延迟加载脚本来完成一些高级功能<br>通过提前加载网页中访问的资源：<br> 1.无条件提前加载<br> 2.有条件加载：根据用户输入的推断需要加载的内容<br> 3.有预期的加载：一般发生在网页重新设计的时候，由于用户经常访问旧网页，本地对旧的网页内容缓存充分从而显得旧网页速度很快，而新的网页内容却没有缓存，设计者可以在旧网页的内容中预先加载一些新网页中可能用到的内容，这样新的网页就会生下来一些需要下载的资源。</p>
-<h1 id="减少DOM元素数量">减少DOM元素数量</h1><p>网页中元素过多对网页的加载和脚本执行都是沉重的负担。<br>document.getElementsByTagName(‘*’).length ：可计算网页中的元素</p>
-<h1 id="根据域名划分内容">根据域名划分内容</h1><p>浏览器一般对同一个域的下载连接数有所限制，按照域名划分下载内容可以浏览器增大并行下载连接，但是注意控制域名使用在2-4个之间，不然dns查询也是个问题。<br>一般网站规划会将静态资源放在类似于static.example.com，动态内容放在www.example.com上。这样做还有一个好处是可以在静态的域名上避免使用cookie。后面我们会在cookie的规则中提到。</p>
-<h1 id="避免404">避免404</h1><p>404我们都不陌生，代表服务器没有找到资源，我们要特别要注意404的情况不要在我们提供的网页资源上，客户端发送一个请求但是服务器却返回一个无用的结果，时间浪费掉了。<br>更糟糕的是我们网页中需要加载一个外部脚本，结果返回一个404，不仅阻塞了其他脚本下载，下载回来的内容(404)客户端还会将其当成Javascript去解析。</p>
-<h1 id="CSS">CSS</h1><p>1.将样式表置顶<br>样式表(css)放在网页的HEAD中会让网页显得加载速度更快，因为这样做可以使浏览器逐步加载已将下载的网页内容。这对内容比较多的网页尤其重要，用户不用一直等待在一个白屏上，而是可以先看已经下载的内容。<br>2.用<link>代替@import<br>避免使用@import的原因很简单，因为它相当于将css放在网页内容底部。</p>
-<h1 id="JavaScript">JavaScript</h1><p>1.将脚本置底<br><em>把脚本置底，这样可以让网页渲染所需要的内容尽快加载显示给用户。
-</em>现在主流浏览器都支持defer关键字，可以指定脚本在文档加载后执行。<br><em>HTML5中新加了async关键字，可以让脚本异步执行。<br>2.使用外部Javascirpt和CSS文件
-</em>使用外部Javascript和CSS文件可以使这些文件被浏览器缓存，从而在不同的请求内容之间重用。<br>*使用外部Javascript和CSS文件的决定因素在于这些外部文件的重用率，如果用户在浏览我们的页面时会访问多次相同页面或者可以重用脚本的不同页面，那么外部文件形式可以为你带来很大的好处。但对于用户通常只会访问一次的页面.<br>3.精简Javascript和CSS<br>精简就是将Javascript或CSS中的空格和注释全去掉<br>精简的工具：<br>JS compressors:<br>Packer<br>JSMin<br>Closure compiler<br>YUICompressor (also does CSS)<br>AjaxMin (also does CSS)</p>
+<h1 id="二、减少DNS查询次数:_域名系统（Domain_Name_System）">二、减少DNS查询次数: 域名系统（Domain Name System）</h1><p>当我们的网页引入了外部的脚本或者图片，DNS查询需要消耗响应的时间。</p>
+<h1 id="三、缓存Ajax">三、缓存Ajax</h1><p>缓存原理：Ajax在发送的数据成功后，会把请求的URL和返回的响应结果保存在缓存内，当下一次调用Ajax发送相同的请求时，它会直接从缓存中把数据取出来，这是为了提高页面的响应速度和用户体验。当前这要求两次请求URL完全相同，包括参数。这个时候，浏览器就不会与服务器交互。<br>不足：如果通过Ajax对一些后台数据进行更改的时候，虽然数据在后台已经发生改变，但是页面缓存中并没有改变，对于相同的URL，Ajax提交过去以后，浏览器还只是简单的从缓存中拿数据，这种情况当然就不行了。<br>解决缓存方法<br>1.在ajax发送请求前加上 xmlHttpRequest.setRequestHeader(“Cache-Control”,”no-cache”);<br>2.在服务端加 header(“Cache-Control: no-cache, must-revalidate”);<br>3.在ajax发送请求前加上 xmlHttpRequest.setRequestHeader(“If-Modified-Since”,”0″);</p>
+<h1 id="四、延迟加载和提前加载">四、延迟加载和提前加载</h1><p>通过延迟加载脚本来完成一些高级功能<br>通过提前加载网页中访问的资源：<br> 1.无条件提前加载<br> 2.有条件加载：根据用户输入的推断需要加载的内容<br> 3.有预期的加载：一般发生在网页重新设计的时候，由于用户经常访问旧网页，本地对旧的网页内容缓存充分从而显得旧网页速度很快，而新的网页内容却没有缓存，设计者可以在旧网页的内容中预先加载一些新网页中可能用到的内容，这样新的网页就会生下来一些需要下载的资源。</p>
+<h1 id="五、减少DOM元素数量">五、减少DOM元素数量</h1><p>网页中元素过多对网页的加载和脚本执行都是沉重的负担。<br>document.getElementsByTagName(‘*’).length ：可计算网页中的元素</p>
+<h1 id="六、根据域名划分内容">六、根据域名划分内容</h1><p>浏览器一般对同一个域的下载连接数有所限制，按照域名划分下载内容可以浏览器增大并行下载连接，但是注意控制域名使用在2-4个之间，不然dns查询也是个问题。<br>一般网站规划会将静态资源放在类似于static.example.com，动态内容放在www.example.com上。这样做还有一个好处是可以在静态的域名上避免使用cookie。后面我们会在cookie的规则中提到。</p>
+<h1 id="七、避免404">七、避免404</h1><p>404我们都不陌生，代表服务器没有找到资源，我们要特别要注意404的情况不要在我们提供的网页资源上，客户端发送一个请求但是服务器却返回一个无用的结果，时间浪费掉了。<br>更糟糕的是我们网页中需要加载一个外部脚本，结果返回一个404，不仅阻塞了其他脚本下载，下载回来的内容(404)客户端还会将其当成Javascript去解析。</p>
+<h1 id="八、CSS">八、CSS</h1><p>1.将样式表置顶<br>样式表(css)放在网页的HEAD中会让网页显得加载速度更快，因为这样做可以使浏览器逐步加载已将下载的网页内容。这对内容比较多的网页尤其重要，用户不用一直等待在一个白屏上，而是可以先看已经下载的内容。<br>2.用<link>代替@import<br>避免使用@import的原因很简单，因为它相当于将css放在网页内容底部。</p>
+<h1 id="九、JavaScript">九、JavaScript</h1><p>1.将脚本置底<br><em>1.把脚本置底，这样可以让网页渲染所需要的内容尽快加载显示给用户。
+</em>2.现在主流浏览器都支持defer关键字，可以指定脚本在文档加载后执行。<br><em>3.HTML5中新加了async关键字，可以让脚本异步执行。<br>2.使用外部Javascirpt和CSS文件
+</em>1.使用外部Javascript和CSS文件可以使这些文件被浏览器缓存，从而在不同的请求内容之间重用。<br>*2.使用外部Javascript和CSS文件的决定因素在于这些外部文件的重用率，如果用户在浏览我们的页面时会访问多次相同页面或者可以重用脚本的不同页面，那么外部文件形式可以为你带来很大的好处。但对于用户通常只会访问一次的页面.<br>3.精简Javascript和CSS<br>精简就是将Javascript或CSS中的空格和注释全去掉<br>精简的工具：<br>JS compressors:<br>Packer<br>JSMin<br>Closure compiler<br>YUICompressor (also does CSS)<br>AjaxMin (also does CSS)</p>
 <p>CSS compressors:<br>CSSTidy<br>Minify<br>YUICompressor (also does JS)<br>AjaxMin (also does JS)<br>CSSCompressor</p>
 <p>与VS集成比较好的工具如下：<br>YUICompressor - 编译集成，包含在NuGet.<br>AjaxMin  - 编译集成</p>
-<h1 id="图片">图片</h1><p>1.优化图像<br>尝试把GIF格式转换成PNG格式，看看是否节省空间。大多数情况下是可以压缩的。下面这条简单的命令可以安全地把GIF格式转换为PNG格式：<br>convert image.gif image.png<br>2.优化CSS Sprite<br><em>Spirite中水平排列图片，垂直排列会增加文件大小；
-</em>Spirite中把颜色较近的组合在一起可以降低颜色数，理想状况是低于256色以便适用PNG8格式；<br>*不要在Spirite的图像中间留有较大空隙。这虽然不大会增加文件大小,但对于用户代理来说它需要更少的内存来把图片解压为像素地图。100×100的图片为1万像素，1000×1000就是100万像素。<br>3.不要在HTML中缩放图片<br>不要通过图片缩放来适应页面，如果你需要小图片，就直接使用小图片吧。</p>
-<p><a href="http://www.cnblogs.com/developersupport/p/webpage-performance-best-practices.html" target="_blank" rel="external">前端优化参考</a></p>
+<h1 id="十、图片">十、图片</h1><p>1.优化图像<br>尝试把GIF格式转换成PNG格式，看看是否节省空间。大多数情况下是可以压缩的。下面这条简单的命令可以安全地把GIF格式转换为PNG格式：<br>convert image.gif image.png<br>2.优化CSS Sprite<br><em>1.Spirite中水平排列图片，垂直排列会增加文件大小；
+</em>2.Spirite中把颜色较近的组合在一起可以降低颜色数，理想状况是低于256色以便适用PNG8格式；<br>*3.不要在Spirite的图像中间留有较大空隙。这虽然不大会增加文件大小,但对于用户代理来说它需要更少的内存来把图片解压为像素地图。100×100的图片为1万像素，1000×1000就是100万像素。<br>3.不要在HTML中缩放图片<br>不要通过图片缩放来适应页面，如果你需要小图片，就直接使用小图片吧。</p>
+<p><a href="http://www.cnblogs.com/developersupport/p/webpage-performance-best-practices.html" target="_blank" rel="external">前端优化参考链接</a></p>
 
       
     </div>
