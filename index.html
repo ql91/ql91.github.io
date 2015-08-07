@@ -116,7 +116,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/html5/" style="font-size: 10px;">html5</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/web前端/" style="font-size: 10px;">web前端</a> <a href="/tags/前端优化/" style="font-size: 10px;">前端优化</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+						<a href="/tags/html5/" style="font-size: 10px;">html5</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/web前端/" style="font-size: 10px;">web前端</a> <a href="/tags/冒泡/" style="font-size: 10px;">冒泡</a> <a href="/tags/前端优化/" style="font-size: 10px;">前端优化</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
 					</div>
 				</section>
 				
@@ -194,6 +194,551 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-js事件捕获和冒泡" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/07/js事件捕获和冒泡/" class="article-date">
+  	<time datetime="2015-08-07T13:47:40.000Z" itemprop="datePublished">2015-08-07</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/07/js事件捕获和冒泡/">js事件捕获和冒泡</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><mark>##转载</mark></p>
+<h3 id="事件冒泡">事件冒泡</h3><p>微软提出了名为事件冒泡(event bubbling)的事件流。事件冒泡可以形象地比喻为把一颗石头投入水中，泡泡会一直从水底冒出水面。也就是说，事件会从最内层的元素开始发生，一直向上传播，直到document对象。</p>
+<h3 id="事件捕获">事件捕获</h3><p>网景提出另一种事件流名为事件捕获(event capturing)。与事件冒泡相反，事件会从最外层开始发生，直到最具体的元素。</p>
+<h3 id="W3C模型">W3C模型</h3><p>上面两种模式都有合理之处，所以W3C模型是将两者进行中和，在W3C模型中，任何事件发生时，先从顶层开始进行事件捕获，直到事件触发到达了事件源元素。然后，再从事件源往上进行事件冒泡，直到到达document。</p>
+<pre><code><span class="keyword">element</span>.addEventListener(event, <span class="function"><span class="keyword">function</span>, <span class="title">useCapture</span>)</span>
+</code></pre><p>event：事件名称</p>
+<p>function：事件触发后的执行函数</p>
+<p>useCapture：指定事件是在捕获阶段执行（true）还是在冒泡阶段执行（false，默认）</p>
+<h3 id="阻止冒泡">阻止冒泡</h3><p>上面我们知道事件是通过传播后才有冒泡和捕获的概念，但是有时候这并不是我们想要的，我们要阻止时间的传播，怎么办呢？</p>
+<pre><code><span class="keyword">event</span>.stopPropagation();
+</code></pre><p>IE下阻止事件传播的方法</p>
+<pre><code><span class="built_in">window</span>.event.returnValue = <span class="literal">false</span>;
+</code></pre><p>演示例子：<a href=""></a></p>
+<h3 id="事件代理">事件代理</h3><p>假如我们有一个学生列表，我们希望点列表中的任意一个名字，就用alert的方式把学生的名字弹出。当名字少时我们可以给每一个名字添加点击事件，这很明显是一个很笨的做法。我们可以考虑用上面的事件传播的特性来处理，通常我们叫它事件代理的方法。</p>
+<p>HTML代码如下：</p>
+<pre><code><span class="tag">&lt;<span class="title">ul</span> <span class="attribute">id</span>=<span class="value">"names"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">li</span>&gt;</span>张三<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">li</span>&gt;</span>李四<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">li</span>&gt;</span>王五<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">li</span>&gt;</span>小明<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">li</span>&gt;</span>小黑<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">li</span>&gt;</span>小白<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
+</code></pre><p>js绑定事件：</p>
+<pre><code><span class="list">(<span class="keyword">function</span><span class="list">()</span><span class="collection">{
+    var names = document.getElementById<span class="list">(<span class="string">"names"</span>)</span><span class="comment">;</span>
+    names.addEventListener<span class="list">(<span class="keyword">'click'</span>,function<span class="list">(<span class="keyword">e</span>)</span><span class="collection">{
+        var x = e.target;
+        if<span class="list">(<span class="keyword">x.nodeName.toLowerCase</span><span class="list">()</span> === 'li')</span><span class="collection">{
+            alert<span class="list">(<span class="keyword">'name='+x.innerHTML</span>)</span>
+        }</span>
+    }</span>)</span>
+}</span>)</span><span class="list">()</span><span class="comment">;</span>
+</code></pre><p>我们通过获取到点击的目标元素（e.target），然后再对目标元素做出一系列的操作。</p>
+<p>当然实现这一方式的方法还很多，这里就介绍这一种。</p>
+<p><em>事件都未考虑兼容性问题,具体实施的时候可能有差别</em></p>
+<p>参考资料：</p>
+<p>不兼容的事件冒泡: <a href="http://blog.csdn.net/hdchangchang/article/details/9224579" target="_blank" rel="external">http://blog.csdn.net/hdchangchang/article/details/9224579</a></p>
+<p>HTML DOM addEventListener() 方法: <a href="http://www.runoob.com/jsref/met-element-addeventlistener.html" target="_blank" rel="external">http://www.runoob.com/jsref/met-element-addeventlistener.html</a></p>
+<p>JS浏览器兼容性问题： <a href="http://dada-fangfang.iteye.com/blog/811749" target="_blank" rel="external">http://dada-fangfang.iteye.com/blog/811749</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/冒泡/">冒泡</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-js模快化" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/07/js模快化/" class="article-date">
+  	<time datetime="2015-08-07T13:47:14.000Z" itemprop="datePublished">2015-08-07</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/07/js模快化/">js模快化</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><mark>##转载</mark></p>
+<h2 id="js模块化">js模块化</h2><p>何为模块？模块就是实现特定功能的一组方法。</p>
+<p>模块化的好处就不多说了，我们就介绍一些基本点，可以在以后的项目开发中应用到。</p>
+<h3 id="1、一般的写法">1、一般的写法</h3><p>简答的把函数和变量放在一起。</p>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">m1</span><span class="params">()</span></span>{
+    ...
+}
+
+<span class="function"><span class="keyword">function</span> <span class="title">m2</span><span class="params">()</span></span>{
+    ...
+}
+</code></pre><p>这种做法简单方便，但是很容易污染了全局变量，很容易与其他模块发生命名冲突，而且模块之间看不出来直接的关系。</p>
+<h3 id="2、对象的写法">2、对象的写法</h3><p>只要在上面的基础上稍作修改就能规避很多问题，我们把模块写成一个对象，该模块的方法和成员都放到这个对象里面。</p>
+<pre><code><span class="keyword">var</span> module1 = <span class="keyword">new</span> Objec({
+    name : <span class="string">'xhay'</span>,
+    m1 : <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
+        ...
+    },
+    m2 : <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
+        ...
+    }
+});
+</code></pre><p>通过这种方式很好的把成员和方法封装在一起了，这种方式很常用。但是它会暴露所有的成员变量，像这样module1.name = ‘xxx’的用法并不推荐使用。</p>
+<h3 id="3、立即执行函数的写法">3、立即执行函数的写法</h3><p>我们都知道在javascript中变量的作用域是函数，所以我们可以利用自执行函数来解决上面暴露成员变量的缺点。</p>
+<pre><code><span class="keyword">var</span> module1 = (<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
+    <span class="keyword">var</span> name = <span class="string">'xhay'</span>;
+
+    <span class="keyword">var</span> m1 = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
+        ...
+    }
+
+    <span class="keyword">var</span> m2 = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
+        ...
+    }
+
+    <span class="keyword">return</span> {
+        m1:m1,
+        m2:m2
+    }
+})();
+</code></pre><p>这种方式的关键在于return，如果没有return的内容也就没有任何意义了。</p>
+<p>如果我们要扩展这个模块我们可以这么做：</p>
+<pre><code>var module1 = (<span class="function"><span class="keyword">function</span><span class="params">(mod)</span></span>{
+
+    <span class="built_in">mod</span>.m3 = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
+        ...
+    }
+
+    <span class="keyword">return</span> <span class="built_in">mod</span>
+})(module1);
+</code></pre><p>在稍微演进一下，防止module1是空对象：</p>
+<pre><code>var module1 = (<span class="function"><span class="keyword">function</span><span class="params">(mod)</span></span>{
+
+    <span class="built_in">mod</span>.m3 = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
+        ...
+    }
+
+    <span class="keyword">return</span> <span class="built_in">mod</span>
+})(window.module1||{});
+</code></pre><p>如果说为了使我们的模块独立性更强，需要用到的相关js库都要传入模块内</p>
+<pre><code><span class="keyword">var</span> module1 = (<span class="function"><span class="keyword">function</span><span class="params">($)</span><span class="comment">{
+
+        ...
+
+}</span>)<span class="params">(jQuery)</span>;</span>
+</code></pre><h3 id="4、javascript模块规范">4、javascript模块规范</h3><p>就像javascript一样，当我们发现他的好处后，各种规范也相继产生了。在模块化的重要性提高的同时，也产生了相应的规范。目前，比较流行的模块规范有两种：CMD和AMD。</p>
+<h4 id="CMD">CMD</h4><p>我们先来说CommonJS，在CommonJS中，有一个全局性方法require()，用于加载模块。我们熟悉的NodeJS就是建立在CommonJS的规范上的。</p>
+<p>假定有一个数学模块math.js，就可以像下面这样加载。</p>
+<pre><code>var <span class="built_in">math</span> = <span class="built_in">require</span>(<span class="string">'math'</span>);
+
+<span class="built_in">math</span>.add(<span class="number">1</span>,<span class="number">23</span>);
+</code></pre><p>像这样很方便的math的模块引进来。</p>
+<p>在CMD的规范当中推崇的是<strong>依赖就近</strong>原则，我们需要用到谋个模块时就近加载。</p>
+<p>这样的模式如果是应用在服务端还是相当不错的。</p>
+<p>但是对于浏览器来说，如果需要的时候再去加载这个模块就会导致浏览器停止在这里等待加载。对于访问者来说这是不能容忍的。</p>
+<p>所以针对我们特殊的环境，应用同步加载的方式是不可行的。</p>
+<h4 id="AMD">AMD</h4><p>RequireJS就是AMD（异步模块定义）的一种实现，和我们的ajax有点儿类似，它采用<strong>依赖前置</strong>的特点，充分的利用了回调函数的优势，解决浏览器环境的问题。</p>
+<p>这种方式也是通过require加载模块的，但不同的是他有两个参数；</p>
+<pre><code><span class="keyword">require</span>([<span class="class"><span class="keyword">module</span>],<span class="title">callback</span>);</span>
+</code></pre><p>第一个参数是数组，表示需要加载的模块；第二个参数就是我们的回调函数了，等前面的模块加载完成后执行。我们改写上面的例子:</p>
+<pre><code><span class="built_in">require</span>([<span class="string">'math'</span>],<span class="function"><span class="keyword">function</span><span class="params">(math)</span></span>{
+    <span class="built_in">math</span>.add(<span class="number">1.23</span>);
+});
+</code></pre><p>通过这样的方式就解决了上面出现的浏览器在加载模块时出现的假死的问题。</p>
+<h3 id="5、总结">5、总结</h3><p>本文主要讲解我们对于模块化的应用和提出了AMD和CMD这两种规范的一些优势和差别。</p>
+<p>参考资料：</p>
+<p>JavaSript模块规范-AMD规范与CMD规范介绍: <a href="http://blog.chinaunix.net/uid-26672038-id-4112229.html" target="_blank" rel="external">http://blog.chinaunix.net/uid-26672038-id-4112229.html</a></p>
+<p>AMD规范文档: <a href="https://github.com/amdjs/amdjs-api/wiki/AMD" target="_blank" rel="external">https://github.com/amdjs/amdjs-api/wiki/AMD</a></p>
+<p>CMD模块定义规范: <a href="https://github.com/seajs/seajs/issues/242" target="_blank" rel="external">https://github.com/seajs/seajs/issues/242</a></p>
+<p>模块系统: <a href="https://github.com/seajs/seajs/issues/240" target="_blank" rel="external">https://github.com/seajs/seajs/issues/240</a></p>
+<p>前端模块化开发的价值: <a href="https://github.com/seajs/seajs/issues/240" target="_blank" rel="external">https://github.com/seajs/seajs/issues/547</a></p>
+<p>前端模块化开发那点历史: <a href="https://github.com/seajs/seajs/issues/240" target="_blank" rel="external">https://github.com/seajs/seajs/issues/588</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-js函数" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/07/js函数/" class="article-date">
+  	<time datetime="2015-08-07T13:46:28.000Z" itemprop="datePublished">2015-08-07</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/07/js函数/">js函数</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><mark>##转载</mark></p>
+<h3 id="一、函数定义的三种方式">一、函数定义的三种方式</h3><p>方式1、函数声明</p>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span></span>{}
+</code></pre><p>方式2、函数表达式</p>
+<pre><code><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{};
+</code></pre><p>方式3、构造函数</p>
+<pre><code><span class="keyword">var</span> foo=<span class="keyword">new</span> <span class="function"><span class="keyword">Function</span><span class="params">("alert(<span class="string">'xhay'</span>)</span>");</span>
+</code></pre><p><em>注意：申明提前的问题</em></p>
+<p>变量和函数都有申明提前的概念，但是赋值还是在实际地方复制的。所以使用方式2的时候特别要注意了。</p>
+<p>用方式1声明函数并使用：</p>
+<pre><code>foo<span class="params">()</span>; <span class="comment">// 正常运行，因为foo在代码运行前已经被创建</span>
+<span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span> {</span>}
+</code></pre><p>用方式2声明函数并使用：</p>
+<pre><code>foo; <span class="comment">// 'undefined'</span>
+foo(); <span class="comment">// 出错：TypeError</span>
+<span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{};<span class="comment">//因为变量的赋值操作使用时在这里才完成</span>
+</code></pre><h3 id="二、this的工作原理">二、this的工作原理</h3><p>this指针永远是这个引用所属的对象。</p>
+<p>参考资料： <a href="http://blog.chinaunix.net/uid-15223977-id-2774361.html" target="_blank" rel="external">http://blog.chinaunix.net/uid-15223977-id-2774361.html</a></p>
+<h3 id="三、闭包">三、闭包</h3><p>javascript规定，当前作用域总是能够访问外部作用域的变量。当我们需要在外部访问私有变量的时候就不可能了。只有通过闭包来实现这个功能。</p>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">Counter</span><span class="params">(start)</span> </span>{
+    <span class="keyword">var</span> count = start;
+    <span class="keyword">return</span> {
+        increment: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
+            count++;
+        },
+
+        <span class="keyword">get</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
+            <span class="keyword">return</span> count;
+        }
+    }
+}
+
+<span class="keyword">var</span> foo = Counter(<span class="number">4</span>);
+foo.increment();
+foo.<span class="keyword">get</span>(); <span class="comment">// 5</span>
+</code></pre><p>foo.get()能够输出5，是应为返回的两个闭包increment和get保持了维持着对外部作用域Counter的引用，所以总能够访问到这个作用域内定义的变量count</p>
+<h4 id="循环中的闭包问题">循环中的闭包问题</h4><p>在实际开发中最容易出问题的是在循环中使用闭包</p>
+<pre><code><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) {
+    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
+        <span class="built_in">console</span>.log(i);  
+    }, <span class="number">1000</span>);
+}
+</code></pre><p>这里我们期望输出的是0到9的数字，但是实际输出的是10次10.</p>
+<p>当console.log被调用的时候，匿名函数保持了对外部变量i的引用，此时for循环已经结束，i的值已经是10了。</p>
+<p>解决办法：每次循环中创建变量i的拷贝,setTimeout外部的匿名函数会立即执行，并且把i作为它的参数，此时函数内e变量就拥有了i的一个拷贝。</p>
+<pre><code>for<span class="list">(<span class="keyword">var</span> i = <span class="number">0</span><span class="comment">; i &lt; 10; i++) {</span>
+    <span class="list">(<span class="keyword">function</span><span class="list">(<span class="keyword">e</span>)</span>{
+        setTimeout<span class="list">(<span class="keyword">function</span><span class="list">()</span> {
+            console.log<span class="list">(<span class="keyword">e</span>)</span><span class="comment">;  </span>
+        }, <span class="number">1000</span>)</span><span class="comment">;</span>
+    })</span><span class="list">(<span class="keyword">i</span>)</span><span class="comment">;</span>
+}</span>
+</code></pre><h3 id="四、构造函数">四、构造函数</h3><p>JavaScript 中的构造函数和其它语言中的构造函数是不同的。 通过 new 关键字方式调用的函数都被认为是构造函数。</p>
+<p>在构造函数内部 - 也就是被调用的函数内 - this 指向新创建的对象 Object。 这个新创建的对象的 prototype 被指向到构造函数的 prototype。</p>
+<h3 id="五、作用域和命名空间">五、作用域和命名空间</h3><h4 id="作用域">作用域</h4><p>javascript的作用域并不是其他语言中的花括号代码段，它并不支持块级作用域；而是函数作用域。</p>
+<p>ES6提出的新的操作（let关键字）可以支持块级作用域。</p>
+<pre><code><span class="variable"><span class="keyword">var</span> a</span> = <span class="number">5</span>;
+<span class="keyword">if</span>(<span class="literal">true</span>){
+    <span class="variable"><span class="keyword">var</span> a</span> = <span class="number">10</span>;
+}
+console.log(a);<span class="comment">//10</span>
+</code></pre><p>使用let关键字</p>
+<pre><code><span class="built_in">let</span> a = <span class="number">5</span>;
+<span class="keyword">if</span><span class="params">(<span class="literal">true</span>)</span>{
+    <span class="built_in">let</span> a = <span class="number">10</span>;
+}
+console.<span class="built_in">log</span><span class="params">(a)</span>; <span class="comment">//5</span>
+</code></pre><h4 id="命名空间">命名空间</h4><p>只有一个全局作用域导致的常见错误是命名冲突。在 JavaScript中，这可以通过 匿名包装器 轻松解决。</p>
+<pre><code>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
+    <span class="comment">// 函数创建一个命名空间</span>
+
+    <span class="built_in">window</span>.foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
+        <span class="comment">// 对外公开的函数，创建了闭包</span>
+    };
+
+})(); <span class="comment">// 立即执行此匿名函数</span>
+</code></pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-js对象" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/07/js对象/" class="article-date">
+  	<time datetime="2015-08-07T13:46:06.000Z" itemprop="datePublished">2015-08-07</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/07/js对象/">js对象</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><mark>##转载</mark></p>
+<h2 id="对象">对象</h2><p>我们知道javascript并不是面向对象的语言，我们可以把javascript理解成基于对象的语言。在javascript当中所有的变量都是对象，除了null和undefined。</p>
+<h3 id="一、对象的使用和属性">一、对象的使用和属性</h3><p>前面说到所有变量都是对象，那我们尝试调用对象的toString方法来验证一下。</p>
+<pre><code>[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>].toString();    <span class="regexp">//</span><span class="string">"1,2,3,4"</span>
+<span class="keyword">true</span>.toString();    <span class="regexp">//</span><span class="string">"true"</span>
+<span class="string">' '</span>.toString();        <span class="regexp">//</span><span class="string">" "</span>
+<span class="number">2.14</span>.toString();    <span class="regexp">//</span><span class="string">"2.14"</span>
+<span class="number">2</span>.toString();    <span class="regexp">//</span><span class="constant">SyntaxError</span>
+</code></pre><p>为什么最后一项会出错呢？因为javascript的解释器尝试把“点操作符”解释为前面浮点数字中的一部分,所以就出错了。</p>
+<h4 id="访问属性">访问属性</h4><p>访问对象的属性有两种方式，点操作符和中括号操作符</p>
+<pre><code><span class="keyword">var</span> foo = {name: <span class="string">'xhay'</span>}
+foo.name; <span class="comment">// xhay</span>
+foo[<span class="string">'name'</span>]; <span class="comment">// xhay</span>
+
+<span class="keyword">var</span> <span class="keyword">get</span> = <span class="string">'name'</span>;
+foo[<span class="keyword">get</span>]; <span class="comment">// xhay</span>
+
+foo.1234; <span class="comment">// 出错：SyntaxError</span>
+foo[<span class="string">'1234'</span>]; <span class="comment">// 有效</span>
+</code></pre><p>从例子当中的最后两行我们可以看到js的对象属性并不是有效的的变量。我们并不推荐这么做，但是对js来说依旧有效。</p>
+<h4 id="删除属性">删除属性</h4><p>设置属性的值为null或undefined并不能真正的删除属性，而是移除了属性和值得关联关系；删除属性的唯一操作就是使用delete关键字。</p>
+<pre><code><span class="reserved">var</span> user = {
+    <span class="attribute">name</span>:<span class="string">'xhay'</span>,
+    <span class="attribute">sex</span>:<span class="string">'男'</span>,
+    <span class="attribute">age</span>:<span class="number">22</span>,
+    <span class="attribute">address</span>:<span class="string">'CQ'</span>
+}
+
+user.sex = <span class="literal">null</span>;
+user.age = <span class="literal">undefined</span>;
+<span class="keyword">delete</span> user.address;
+
+<span class="keyword">for</span>(<span class="reserved">var</span> i <span class="keyword">in</span> user){
+    <span class="keyword">if</span>(user.hasOwnProperty(i)){
+        <span class="built_in">console</span>.log(i+<span class="string">"="</span>+user[i]);
+    }
+}
+</code></pre><p>在浏览器控制信息为：</p>
+<pre><code><span class="variable">name=</span>xhay
+<span class="variable">sex=</span><span class="constant">null</span>
+<span class="variable">age=</span>undefined
+</code></pre><p>所以只能通过delete的方式对象的属性。</p>
+<h3 id="二、原型">二、原型</h3><p>在说原型之前，我们先来把对象的属性和方法，原型属性和方法，静态属性和方法的概念了解一下。</p>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>)</span>{
+    <span class="keyword">var</span> a1 = <span class="string">"a1"</span>;    <span class="comment">//对象的私有属性</span>
+
+    <span class="keyword">this</span>.b1 = <span class="string">"b2"</span>;        <span class="comment">//对象的属性</span>
+    <span class="keyword">this</span>.b2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{    <span class="comment">//对象的方法</span>
+        alert(<span class="string">"b2"</span>);
+    }
+}
+
+A.c1 = <span class="string">"c1"</span>;    <span class="comment">//静态属性</span>
+A.c2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{    <span class="comment">//静态方法</span>
+    alert(<span class="string">"c2"</span>);
+}
+
+A.prototype.d1 = <span class="string">"d1"</span>;    <span class="comment">//原型属性</span>
+A.prototype.d2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{    <span class="comment">//原型方法</span>
+    alert(<span class="string">"d2"</span>);
+}
+
+<span class="keyword">var</span> obj = <span class="keyword">new</span> A();
+<span class="built_in">console</span>.log(obj);
+</code></pre><p>在开发者工具下面我们看到：</p>
+<ol>
+<li>对象的方法和属性都在对象下</li>
+<li>对象的原型方法和原型属性在__proto__下</li>
+<li>对象的静态方法和属性在__proto__下的constructor里面</li>
+</ol>
+<p>有了上面的基础我们在来理解原型方面的东西。</p>
+<p>JavaScript 不包含传统的类继承模型，而是使用 prototype 原型模型。</p>
+<p>由于 JavaScript 是唯一一个被广泛使用的基于原型继承的语言，所以理解两种继承模式的差异是需要一定时间的。</p>
+<p>原型继承的本质实际上是在复制已经存在的对象。</p>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>{
+    <span class="keyword">this</span>.value = <span class="number">42</span>;
+}
+Foo.prototype = {
+    method: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{}
+};
+
+<span class="function"><span class="keyword">function</span> <span class="title">Bar</span>(<span class="params"></span>) </span>{}
+
+<span class="comment">// 设置Bar的prototype属性为Foo的实例对象</span>
+Bar.prototype = <span class="keyword">new</span> Foo();
+Bar.prototype.foo = <span class="string">'Hello World'</span>;
+
+<span class="comment">// 修正Bar.prototype.constructor为Bar本身</span>
+Bar.prototype.constructor = Bar;
+
+<span class="keyword">var</span> test = <span class="keyword">new</span> Bar() <span class="comment">// 创建Bar的一个新实例</span>
+
+<span class="comment">// 原型链</span>
+test [Bar的实例]
+    Bar.prototype [Foo的实例] 
+        { foo: <span class="string">'Hello World'</span> }
+        Foo.prototype
+            {method: ...};
+            <span class="built_in">Object</span>.prototype
+                {toString: ... <span class="comment">/* etc. */</span>};
+</code></pre><p>上面的例子中，test 对象从 Bar.prototype 和 Foo.prototype 继承下来；因此， 它能访问 Foo 的原型方法 method。同时，它也能够访问那个定义在原型上的 Foo 实例属性 value。 需要注意的是 new Bar() 不会创造出一个新的 Foo 实例，而是 重复使用它原型上的那个实例；因此，所有的 Bar 实例都会共享相同的 value 属性。</p>
+<p>在查找一个对象的属性的时候，javascript会在原型链上向上遍历，直到找到指定名称的值，当查找到原型链的顶端，也就是Object.prototype时已就位找到，则返回undefined。</p>
+<p><strong>应用</strong></p>
+<p>比如我们为数组Array添加一个删除的重复元素的方法，我们可以这么写：</p>
+<pre><code><span class="built_in">Array</span>.prototype.delRep = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+    <span class="comment">//...</span>
+}
+</code></pre><h3 id="三、hasOwnPrototype和in的区别">三、hasOwnPrototype和in的区别</h3><p>hasOwnPrototype和in都可以用来判断对象是否具有这个属性，但hasOwnPrototype是用来判断该属性是不是定义在自身上。</p>
+<pre><code><span class="comment">// 修改Object.prototype</span>
+<span class="built_in">Object</span>.prototype.bar = <span class="number">1</span>; 
+<span class="keyword">var</span> foo = {goo: <span class="literal">undefined</span>};
+
+<span class="string">'bar'</span> <span class="keyword">in</span> foo;    <span class="comment">// true</span>
+<span class="string">'goo'</span> <span class="keyword">in</span> foo;    <span class="comment">//true</span>
+
+foo.hasOwnProperty(<span class="string">'bar'</span>);    <span class="comment">// false,bar为原型上定义的属性，不属于foo本身自定义的属性，所以返回false</span>
+foo.hasOwnProperty(<span class="string">'goo'</span>);    <span class="comment">// true</span>
+</code></pre><p>参考资料：</p>
+<p>ECMAScript 6入门： <a href="http://es6.ruanyifeng.com/" target="_blank" rel="external">http://es6.ruanyifeng.com/</a></p>
+<p>js的Prototype属性 解释及常用方法: <a href="http://blog.sina.com.cn/s/blog_7045cb9e0100rtoh.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_7045cb9e0100rtoh.html</a></p>
+<p>前端开发必须知道的JS（一） 原型和继承：<a href="http://www.cnblogs.com/ljchow/archive/2010/06/08/1753526.html" target="_blank" rel="external">http://www.cnblogs.com/ljchow/archive/2010/06/08/1753526.html</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-HTML新特性" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -244,269 +789,6 @@
       
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html5/">html5</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-前端性能优化" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/08/07/前端性能优化/" class="article-date">
-  	<time datetime="2015-08-07T01:56:05.000Z" itemprop="datePublished">2015-08-07</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/07/前端性能优化/">前端性能优化</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="一、减少http请求次数">一、减少http请求次数</h1><p><strong>1.捆绑文件</strong>：多个样式表文件捆绑成一个文件<br><strong>2.CSS Sprites</strong>：多个图片拼成一张大图，通过CSS来控制每个小图展示的位置<br><strong>3.Image Map(图片/图像映射区域)</strong>：通过坐标来控制显示导航</p>
-<pre><code class="bash">&lt;img src=<span class="string">"planets.jpg"</span> border=<span class="string">"0"</span> usemap=<span class="string">"#planetmap"</span> alt=<span class="string">"Planets"</span> /&gt;
-
-       &lt;map name=<span class="string">"planetmap"</span> id=<span class="string">"planetmap"</span>&gt;
-                &lt;area shape=<span class="string">"circle"</span> coords=<span class="string">"180,139,14"</span> href =<span class="string">"venus.html"</span> alt=<span class="string">"Venus"</span> /&gt;
-                &lt;area shape=<span class="string">"circle"</span> coords=<span class="string">"129,161,10"</span> href =<span class="string">"mercur.html"</span> alt=<span class="string">"Mercury"</span> /&gt;
-                &lt;area shape=<span class="string">"rect"</span> coords=<span class="string">"0,0,110,260"</span> href =<span class="string">"sun.html"</span> alt=<span class="string">"Sun"</span> /&gt;
-       &lt;/map&gt;
-</code></pre>
-<h1 id="二、减少DNS查询次数:_域名系统（Domain_Name_System）">二、减少DNS查询次数: 域名系统（Domain Name System）</h1><p>当我们的网页引入了外部的脚本或者图片，DNS查询需要消耗响应的时间。</p>
-<h1 id="三、缓存Ajax">三、缓存Ajax</h1><p>缓存原理：Ajax在发送的数据成功后，会把请求的URL和返回的响应结果保存在缓存内，当下一次调用Ajax发送相同的请求时，它会直接从缓存中把数据取出来，这是为了提高页面的响应速度和用户体验。当前这要求两次请求URL完全相同，包括参数。这个时候，浏览器就不会与服务器交互。<br>不足：如果通过Ajax对一些后台数据进行更改的时候，虽然数据在后台已经发生改变，但是页面缓存中并没有改变，对于相同的URL，Ajax提交过去以后，浏览器还只是简单的从缓存中拿数据，这种情况当然就不行了。<br>解决缓存方法<br>1.在ajax发送请求前加上 xmlHttpRequest.setRequestHeader(“Cache-Control”,”no-cache”);<br>2.在服务端加 header(“Cache-Control: no-cache, must-revalidate”);<br>3.在ajax发送请求前加上 xmlHttpRequest.setRequestHeader(“If-Modified-Since”,”0″);</p>
-<h1 id="四、延迟加载和提前加载">四、延迟加载和提前加载</h1><p>通过延迟加载脚本来完成一些高级功能<br>通过提前加载网页中访问的资源：<br> 1.无条件提前加载<br> 2.有条件加载：根据用户输入的推断需要加载的内容<br> 3.有预期的加载：一般发生在网页重新设计的时候，由于用户经常访问旧网页，本地对旧的网页内容缓存充分从而显得旧网页速度很快，而新的网页内容却没有缓存，设计者可以在旧网页的内容中预先加载一些新网页中可能用到的内容，这样新的网页就会生下来一些需要下载的资源。</p>
-<h1 id="五、减少DOM元素数量">五、减少DOM元素数量</h1><p>网页中元素过多对网页的加载和脚本执行都是沉重的负担。<br>document.getElementsByTagName(‘*’).length ：可计算网页中的元素</p>
-<h1 id="六、根据域名划分内容">六、根据域名划分内容</h1><p>浏览器一般对同一个域的下载连接数有所限制，按照域名划分下载内容可以浏览器增大并行下载连接，但是注意控制域名使用在2-4个之间，不然dns查询也是个问题。<br>一般网站规划会将静态资源放在类似于static.example.com，动态内容放在www.example.com上。这样做还有一个好处是可以在静态的域名上避免使用cookie。后面我们会在cookie的规则中提到。</p>
-<h1 id="七、避免404">七、避免404</h1><p>404我们都不陌生，代表服务器没有找到资源，我们要特别要注意404的情况不要在我们提供的网页资源上，客户端发送一个请求但是服务器却返回一个无用的结果，时间浪费掉了。<br>更糟糕的是我们网页中需要加载一个外部脚本，结果返回一个404，不仅阻塞了其他脚本下载，下载回来的内容(404)客户端还会将其当成Javascript去解析。</p>
-<h1 id="八、CSS">八、CSS</h1><p>1.将样式表置顶<br>样式表(css)放在网页的HEAD中会让网页显得加载速度更快，因为这样做可以使浏览器逐步加载已将下载的网页内容。这对内容比较多的网页尤其重要，用户不用一直等待在一个白屏上，而是可以先看已经下载的内容。<br>2.用<link>代替@import<br>避免使用@import的原因很简单，因为它相当于将css放在网页内容底部。</p>
-<h1 id="九、JavaScript">九、JavaScript</h1><p>1.将脚本置底<br>-把脚本置底，这样可以让网页渲染所需要的内容尽快加载显示给用户。<br>-现在主流浏览器都支持defer关键字，可以指定脚本在文档加载后执行。<br>-HTML5中新加了async关键字，可以让脚本异步执行。<br>2.使用外部Javascirpt和CSS文件<br>-使用外部Javascript和CSS文件可以使这些文件被浏览器缓存，从而在不同的请求内容之间重用。<br>-使用外部Javascript和CSS文件的决定因素在于这些外部文件的重用率，如果用户在浏览我们的页面时会访问多次相同页面或者可以重用脚本的不同页面，那么外部文件形式可以为你带来很大的好处。但对于用户通常只会访问一次的页面.<br>3.精简Javascript和CSS<br>精简就是将Javascript或CSS中的空格和注释全去掉<br>精简的工具：<br>JS compressors:<br>Packer<br>JSMin<br>Closure compiler<br>YUICompressor (also does CSS)<br>AjaxMin (also does CSS)</p>
-<p>CSS compressors:<br>CSSTidy<br>Minify<br>YUICompressor (also does JS)<br>AjaxMin (also does JS)<br>CSSCompressor</p>
-<p>与VS集成比较好的工具如下：<br>YUICompressor - 编译集成，包含在NuGet.<br>AjaxMin  - 编译集成</p>
-<h1 id="十、图片">十、图片</h1><p>1.优化图像<br>尝试把GIF格式转换成PNG格式，看看是否节省空间。大多数情况下是可以压缩的。下面这条简单的命令可以安全地把GIF格式转换为PNG格式：<br>convert image.gif image.png<br>2.优化CSS Sprite<br>-Spirite中水平排列图片，垂直排列会增加文件大小；<br>-Spirite中把颜色较近的组合在一起可以降低颜色数，理想状况是低于256色以便适用PNG8格式；<br>-不要在Spirite的图像中间留有较大空隙。这虽然不大会增加文件大小,但对于用户代理来说它需要更少的内存来把图片解压为像素地图。100×100的图片为1万像素，1000×1000就是100万像素。<br>3.不要在HTML中缩放图片<br>不要通过图片缩放来适应页面，如果你需要小图片，就直接使用小图片吧。</p>
-<p><a href="http://www.cnblogs.com/developersupport/p/webpage-performance-best-practices.html" target="_blank" rel="external">前端优化参考链接</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端优化/">前端优化</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-js函数调用的4种方法" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/31/js函数调用的4种方法/" class="article-date">
-  	<time datetime="2015-07-31T11:53:48.000Z" itemprop="datePublished">2015-07-31</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/31/js函数调用的4种方法/">js函数调用的4种方法</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>js的函数调用会有两个额外的参数：<strong>this</strong>和<strong>arguments</strong>。(arguments是参数组，并非真实的数组，但可以使用.length方法获得长度)</p>
-<p>js的4种调用模式：<br>1.方法调用模式<br>2.函数调用模式<br>3.构造器调用模式<br>4.apply调用模式</p>
-<p>详解如下:<br>1.方法调用模式<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var myobject=&#123;</span><br><span class="line">	value:<span class="number">0</span>,</span><br><span class="line">	inc:<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">                    alert(this.value)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">myobject.inc();</span><br></pre></td></tr></table></figure></p>
-<p>2.函数调用模式<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var add=<span class="keyword">function</span>(a,b)&#123;</span><br><span class="line">	alert(this);//this被绑定到window</span><br><span class="line">	<span class="built_in">return</span> a+b;</span><br><span class="line">&#125;</span><br><span class="line">var sum=add(<span class="number">3</span>,<span class="number">4</span>);</span><br><span class="line">alert(sum);</span><br></pre></td></tr></table></figure></p>
-<p>3.构造器调用模式(不使用)</p>
-<p>4.apply调用模式<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var add=<span class="keyword">function</span>(a,b)&#123;</span><br><span class="line">	<span class="built_in">return</span> a+b;</span><br><span class="line">&#125;</span><br><span class="line">var arr=[<span class="number">10</span>,<span class="number">20</span>];</span><br><span class="line">var sum=add.apply(this,arr);//this指针所指向的对象</span><br><span class="line">alert(sum);</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-浏览器是如何渲染页面和加载页面" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/27/浏览器是如何渲染页面和加载页面/" class="article-date">
-  	<time datetime="2015-07-27T02:05:21.000Z" itemprop="datePublished">2015-07-27</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/27/浏览器是如何渲染页面和加载页面/">浏览器是如何渲染页面和加载页面</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="浏览器是如何渲染页面和加载页面?">浏览器是如何渲染页面和加载页面?</h1><ol>
-<li>浏览器加载的顺序是从上到下，渲染的顺序也是从上到下，加载和渲染是同时进行的。</li>
-<li>在渲染到页面的某一部分时，其上面的所有部分都已经加载完成（并不是说所有相关联的元素都已经加载完）。</li>
-<li>如果遇到语义解释性的标签嵌入文件（JS脚本，CSS样式），那么此时加载过程会启用单独连接进行加载</li>
-<li>并且在加载后进行解析，解析过程中，停止页面所有往下元素的加载。</li>
-<li>样式表在加载完成后，将和以前加载的所有样式表一起进行解析，解析完成后，将对此前所有元素（含以前已经渲染的）重新进行渲染。</li>
-<li>JS、CSS中如有重定义，后定义函数将覆盖前定义函数。</li>
-</ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web前端/">web前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-JS模块化编程之AMD规范" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/25/JS模块化编程之AMD规范/" class="article-date">
-  	<time datetime="2015-07-25T13:09:48.000Z" itemprop="datePublished">2015-07-25</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/25/JS模块化编程之AMD规范/">JS模块化编程之AMD规范</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="JS模块化编程之AMD规范">JS模块化编程之AMD规范</h1><p><strong>模块很重要</strong>？<br>有了模块，我们就可以更方便的使用别人的代码想要什么功能，就加载什么模块。<br>目前，Javascript模块规范共有两种：<strong>CommonJS</strong>和<strong>AMD</strong>。<br>这里介绍AMD(Asynchronous Module Definition)，意思是“异步模块定义”。</p>
-<h2 id="模块定义">模块定义</h2><p>define(id?, dependencies?, factory);<br>其中：<br>id: 模块标识，可以省略。<br>dependencies: 所依赖的模块，可以省略。<br>factory: 模块的实现，或者一个JavaScript对象。</p>
-<p>代码示例1: 定义一个alpha模块，依赖require，exports，beta模块</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">define(<span class="string">"alpha"</span>, [<span class="string">"require"</span>, <span class="string">"exports"</span>, <span class="string">"beta"</span>], <span class="keyword">function</span> (require, exports, beta) &#123;</span><br><span class="line">     exports.verb = <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">         <span class="built_in">return</span> beta.verb();</span><br><span class="line">         //Or:</span><br><span class="line">         <span class="built_in">return</span> require(<span class="string">"beta"</span>).verb();</span><br><span class="line">     &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>代码示例2: 定义个匿名模块，依赖alpha模块<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">define([<span class="string">"alpha"</span>], <span class="keyword">function</span> (alpha) &#123;</span><br><span class="line">    <span class="built_in">return</span> &#123;</span><br><span class="line">        verb: <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">            <span class="built_in">return</span> alpha.verb() + <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-<p>代码示例3: 使用JSON定义一个没有依赖的匿名模块。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">define(&#123;</span><br><span class="line">  add: <span class="keyword">function</span>(x, y)&#123;</span><br><span class="line">    <span class="built_in">return</span> x + y;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-<p>代码示例4：定义一个兼容Modules/Wrappings模块化规范的匿名模块。</p>
-<p>Modules/Wrappings是CommonJS Modules的浏览器端解决方案。AMD规范兼容Modules/Wrappings。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">define(<span class="keyword">function</span> (require, exports, beta) &#123;</span><br><span class="line">    exports.verb = <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">        <span class="built_in">return</span> beta.verb();</span><br><span class="line">        //Or:</span><br><span class="line">        <span class="built_in">return</span> require(<span class="string">"beta"</span>).verb();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-<h2 id="模块加载">模块加载</h2><p>require([module], callback)</p>
-<p>AMD模块化规范中使用全局或局部的require函数实现加载一个或多个模块，所有模块加载完成之后的回调函数。</p>
-<p>其中：</p>
-<p>[module]：是一个数组，里面的成员就是要加载的模块；<br>callback：是模块加载完成之后的回调函数。<br>代码示例：加载一个math模块，然后调用方法 math.add(2, 3);<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">require([<span class="string">'math'</span>], <span class="keyword">function</span> (math) &#123;</span><br><span class="line">　math.add(<span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
 	</div>
 
       

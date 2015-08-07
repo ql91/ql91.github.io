@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>js模快化 | ql&#39;blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="##转载
+js模块化何为模块？模块就是实现特定功能的一组方法。
+模块化的好处就不多说了，我们就介绍一些基本点，可以在以后的项目开发中应用到。
+1、一般的写法简答的把函数和变量放在一起。
+function m1(){
+    ...
+}
+
+function m2(){
+    ...
+}
+这种做法简单方便，但是很容易污染了全局变量，很容易与其他模块发生命名冲突，而且模块之间看不出来直接的关系。
+2、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js模快化">
+<meta property="og:url" content="http://yoursite.com/2015/08/07/js模快化/index.html">
+<meta property="og:site_name" content="ql'blog">
+<meta property="og:description" content="##转载
+js模块化何为模块？模块就是实现特定功能的一组方法。
+模块化的好处就不多说了，我们就介绍一些基本点，可以在以后的项目开发中应用到。
+1、一般的写法简答的把函数和变量放在一起。
+function m1(){
+    ...
+}
+
+function m2(){
+    ...
+}
+这种做法简单方便，但是很容易污染了全局变量，很容易与其他模块发生命名冲突，而且模块之间看不出来直接的关系。
+2、">
+<meta property="og:updated_time" content="2015-08-07T13:50:17.376Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js模快化">
+<meta name="twitter:description" content="##转载
+js模块化何为模块？模块就是实现特定功能的一组方法。
+模块化的好处就不多说了，我们就介绍一些基本点，可以在以后的项目开发中应用到。
+1、一般的写法简答的把函数和变量放在一起。
+function m1(){
+    ...
+}
+
+function m2(){
+    ...
+}
+这种做法简单方便，但是很容易污染了全局变量，很容易与其他模块发生命名冲突，而且模块之间看不出来直接的关系。
+2、">
+  
+    <link rel="alternative" href="/atom.xml" title="ql&#39;blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://ql91.github.io/img/max.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">QinLu</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">Simple is beautiful, the pursuit of simple, efficient code.</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+							<li><a href="/photo">相册</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/ql91" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/ql912015" title="weibo">weibo</a>
+					        
+								<a class="mail" target="_blank" href="mailto:Singapo91@163.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/html5/" style="font-size: 10px;">html5</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/web前端/" style="font-size: 10px;">web前端</a> <a href="/tags/冒泡/" style="font-size: 10px;">冒泡</a> <a href="/tags/前端优化/" style="font-size: 10px;">前端优化</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://xhay1122.com">熊孩纸的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://wangxizhu.github.io">张川的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://wangxizhu.gitcafe.io/">zc</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">QinLu</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="https://ql91.github.io/img/max.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">QinLu</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">Simple is beautiful, the pursuit of simple, efficient code.</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+					<li><a href="/photo">相册</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ql91" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/ql912015" title="weibo">weibo</a>
+			        
+						<a class="mail" target="_blank" href="mailto:Singapo91@163.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-js模快化" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/07/js模快化/" class="article-date">
+  	<time datetime="2015-08-07T13:47:14.000Z" itemprop="datePublished">2015-08-07</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      js模快化
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><mark>##转载</mark></p>
+<h2 id="js模块化">js模块化</h2><p>何为模块？模块就是实现特定功能的一组方法。</p>
+<p>模块化的好处就不多说了，我们就介绍一些基本点，可以在以后的项目开发中应用到。</p>
+<h3 id="1、一般的写法">1、一般的写法</h3><p>简答的把函数和变量放在一起。</p>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">m1</span><span class="params">()</span></span>{
+    ...
+}
+
+<span class="function"><span class="keyword">function</span> <span class="title">m2</span><span class="params">()</span></span>{
+    ...
+}
+</code></pre><p>这种做法简单方便，但是很容易污染了全局变量，很容易与其他模块发生命名冲突，而且模块之间看不出来直接的关系。</p>
+<h3 id="2、对象的写法">2、对象的写法</h3><p>只要在上面的基础上稍作修改就能规避很多问题，我们把模块写成一个对象，该模块的方法和成员都放到这个对象里面。</p>
+<pre><code><span class="keyword">var</span> module1 = <span class="keyword">new</span> Objec({
+    name : <span class="string">'xhay'</span>,
+    m1 : <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
+        ...
+    },
+    m2 : <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
+        ...
+    }
+});
+</code></pre><p>通过这种方式很好的把成员和方法封装在一起了，这种方式很常用。但是它会暴露所有的成员变量，像这样module1.name = ‘xxx’的用法并不推荐使用。</p>
+<h3 id="3、立即执行函数的写法">3、立即执行函数的写法</h3><p>我们都知道在javascript中变量的作用域是函数，所以我们可以利用自执行函数来解决上面暴露成员变量的缺点。</p>
+<pre><code><span class="keyword">var</span> module1 = (<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
+    <span class="keyword">var</span> name = <span class="string">'xhay'</span>;
+
+    <span class="keyword">var</span> m1 = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
+        ...
+    }
+
+    <span class="keyword">var</span> m2 = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
+        ...
+    }
+
+    <span class="keyword">return</span> {
+        m1:m1,
+        m2:m2
+    }
+})();
+</code></pre><p>这种方式的关键在于return，如果没有return的内容也就没有任何意义了。</p>
+<p>如果我们要扩展这个模块我们可以这么做：</p>
+<pre><code>var module1 = (<span class="function"><span class="keyword">function</span><span class="params">(mod)</span></span>{
+
+    <span class="built_in">mod</span>.m3 = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
+        ...
+    }
+
+    <span class="keyword">return</span> <span class="built_in">mod</span>
+})(module1);
+</code></pre><p>在稍微演进一下，防止module1是空对象：</p>
+<pre><code>var module1 = (<span class="function"><span class="keyword">function</span><span class="params">(mod)</span></span>{
+
+    <span class="built_in">mod</span>.m3 = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
+        ...
+    }
+
+    <span class="keyword">return</span> <span class="built_in">mod</span>
+})(window.module1||{});
+</code></pre><p>如果说为了使我们的模块独立性更强，需要用到的相关js库都要传入模块内</p>
+<pre><code><span class="keyword">var</span> module1 = (<span class="function"><span class="keyword">function</span><span class="params">($)</span><span class="comment">{
+
+        ...
+
+}</span>)<span class="params">(jQuery)</span>;</span>
+</code></pre><h3 id="4、javascript模块规范">4、javascript模块规范</h3><p>就像javascript一样，当我们发现他的好处后，各种规范也相继产生了。在模块化的重要性提高的同时，也产生了相应的规范。目前，比较流行的模块规范有两种：CMD和AMD。</p>
+<h4 id="CMD">CMD</h4><p>我们先来说CommonJS，在CommonJS中，有一个全局性方法require()，用于加载模块。我们熟悉的NodeJS就是建立在CommonJS的规范上的。</p>
+<p>假定有一个数学模块math.js，就可以像下面这样加载。</p>
+<pre><code>var <span class="built_in">math</span> = <span class="built_in">require</span>(<span class="string">'math'</span>);
+
+<span class="built_in">math</span>.add(<span class="number">1</span>,<span class="number">23</span>);
+</code></pre><p>像这样很方便的math的模块引进来。</p>
+<p>在CMD的规范当中推崇的是<strong>依赖就近</strong>原则，我们需要用到谋个模块时就近加载。</p>
+<p>这样的模式如果是应用在服务端还是相当不错的。</p>
+<p>但是对于浏览器来说，如果需要的时候再去加载这个模块就会导致浏览器停止在这里等待加载。对于访问者来说这是不能容忍的。</p>
+<p>所以针对我们特殊的环境，应用同步加载的方式是不可行的。</p>
+<h4 id="AMD">AMD</h4><p>RequireJS就是AMD（异步模块定义）的一种实现，和我们的ajax有点儿类似，它采用<strong>依赖前置</strong>的特点，充分的利用了回调函数的优势，解决浏览器环境的问题。</p>
+<p>这种方式也是通过require加载模块的，但不同的是他有两个参数；</p>
+<pre><code><span class="keyword">require</span>([<span class="class"><span class="keyword">module</span>],<span class="title">callback</span>);</span>
+</code></pre><p>第一个参数是数组，表示需要加载的模块；第二个参数就是我们的回调函数了，等前面的模块加载完成后执行。我们改写上面的例子:</p>
+<pre><code><span class="built_in">require</span>([<span class="string">'math'</span>],<span class="function"><span class="keyword">function</span><span class="params">(math)</span></span>{
+    <span class="built_in">math</span>.add(<span class="number">1.23</span>);
+});
+</code></pre><p>通过这样的方式就解决了上面出现的浏览器在加载模块时出现的假死的问题。</p>
+<h3 id="5、总结">5、总结</h3><p>本文主要讲解我们对于模块化的应用和提出了AMD和CMD这两种规范的一些优势和差别。</p>
+<p>参考资料：</p>
+<p>JavaSript模块规范-AMD规范与CMD规范介绍: <a href="http://blog.chinaunix.net/uid-26672038-id-4112229.html" target="_blank" rel="external">http://blog.chinaunix.net/uid-26672038-id-4112229.html</a></p>
+<p>AMD规范文档: <a href="https://github.com/amdjs/amdjs-api/wiki/AMD" target="_blank" rel="external">https://github.com/amdjs/amdjs-api/wiki/AMD</a></p>
+<p>CMD模块定义规范: <a href="https://github.com/seajs/seajs/issues/242" target="_blank" rel="external">https://github.com/seajs/seajs/issues/242</a></p>
+<p>模块系统: <a href="https://github.com/seajs/seajs/issues/240" target="_blank" rel="external">https://github.com/seajs/seajs/issues/240</a></p>
+<p>前端模块化开发的价值: <a href="https://github.com/seajs/seajs/issues/240" target="_blank" rel="external">https://github.com/seajs/seajs/issues/547</a></p>
+<p>前端模块化开发那点历史: <a href="https://github.com/seajs/seajs/issues/240" target="_blank" rel="external">https://github.com/seajs/seajs/issues/588</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/08/07/js事件捕获和冒泡/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          js事件捕获和冒泡
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/08/07/js函数/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">js函数</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="js模快化" data-title="js模快化" data-url="http://yoursite.com/2015/08/07/js模快化/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 QinLu
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
