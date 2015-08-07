@@ -35,7 +35,7 @@
 		</a>
 
 		<hgroup>
-		  <h1 class="header-author"><a href="/">QinLu</a></h1>
+		  <h1 class="header-author"><a href="/">Singa91</a></h1>
 		</hgroup>
 
 		
@@ -151,7 +151,7 @@
       <nav id="mobile-nav">
   	<div class="overlay">
   		<div class="slider-trigger"></div>
-  		<h1 class="header-author js-mobile-header hide">QinLu</h1>
+  		<h1 class="header-author js-mobile-header hide">Singa91</h1>
   	</div>
 	<div class="intrude-less">
 		<header id="header" class="inner">
@@ -159,7 +159,7 @@
 				<img lazy-src="https://ql91.github.io/img/max.jpg" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author">QinLu</h1>
+			  <h1 class="header-author">Singa91</h1>
 			</hgroup>
 			
 			<p class="header-subtitle">Simple is beautiful, the pursuit of simple, efficient code.</p>
@@ -328,7 +328,7 @@
 </code></pre><p>这种做法简单方便，但是很容易污染了全局变量，很容易与其他模块发生命名冲突，而且模块之间看不出来直接的关系。</p>
 <h3 id="2、对象的写法">2、对象的写法</h3><p>只要在上面的基础上稍作修改就能规避很多问题，我们把模块写成一个对象，该模块的方法和成员都放到这个对象里面。</p>
 <pre><code><span class="keyword">var</span> module1 = <span class="keyword">new</span> Objec({
-    name : <span class="string">'xhay'</span>,
+    name : <span class="string">'xiaoxiao'</span>,
     m1 : <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
         ...
     },
@@ -339,7 +339,7 @@
 </code></pre><p>通过这种方式很好的把成员和方法封装在一起了，这种方式很常用。但是它会暴露所有的成员变量，像这样module1.name = ‘xxx’的用法并不推荐使用。</p>
 <h3 id="3、立即执行函数的写法">3、立即执行函数的写法</h3><p>我们都知道在javascript中变量的作用域是函数，所以我们可以利用自执行函数来解决上面暴露成员变量的缺点。</p>
 <pre><code><span class="keyword">var</span> module1 = (<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
-    <span class="keyword">var</span> name = <span class="string">'xhay'</span>;
+    <span class="keyword">var</span> name = <span class="string">'xiaoxiao'</span>;
 
     <span class="keyword">var</span> m1 = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
         ...
@@ -466,7 +466,7 @@
 </code></pre><p>方式2、函数表达式</p>
 <pre><code><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{};
 </code></pre><p>方式3、构造函数</p>
-<pre><code><span class="keyword">var</span> foo=<span class="keyword">new</span> <span class="function"><span class="keyword">Function</span><span class="params">("alert(<span class="string">'xhay'</span>)</span>");</span>
+<pre><code><span class="keyword">var</span> foo=<span class="keyword">new</span> <span class="function"><span class="keyword">Function</span><span class="params">("alert(<span class="string">'xiaoxiao'</span>)</span>");</span>
 </code></pre><p><em>注意：申明提前的问题</em></p>
 <p>变量和函数都有申明提前的概念，但是赋值还是在实际地方复制的。所以使用方式2的时候特别要注意了。</p>
 <p>用方式1声明函数并使用：</p>
@@ -600,19 +600,19 @@ console.<span class="built_in">log</span><span class="params">(a)</span>; <span 
 <span class="number">2</span>.toString();    <span class="regexp">//</span><span class="constant">SyntaxError</span>
 </code></pre><p>为什么最后一项会出错呢？因为javascript的解释器尝试把“点操作符”解释为前面浮点数字中的一部分,所以就出错了。</p>
 <h4 id="访问属性">访问属性</h4><p>访问对象的属性有两种方式，点操作符和中括号操作符</p>
-<pre><code><span class="keyword">var</span> foo = {name: <span class="string">'xhay'</span>}
-foo.name; <span class="comment">// xhay</span>
-foo[<span class="string">'name'</span>]; <span class="comment">// xhay</span>
+<pre><code><span class="keyword">var</span> foo = {name: <span class="string">'xiao'</span>}
+foo.name; <span class="comment">// xiao</span>
+foo[<span class="string">'name'</span>]; <span class="comment">// xiao</span>
 
 <span class="keyword">var</span> <span class="keyword">get</span> = <span class="string">'name'</span>;
-foo[<span class="keyword">get</span>]; <span class="comment">// xhay</span>
+foo[<span class="keyword">get</span>]; <span class="comment">// xiao</span>
 
 foo.1234; <span class="comment">// 出错：SyntaxError</span>
 foo[<span class="string">'1234'</span>]; <span class="comment">// 有效</span>
 </code></pre><p>从例子当中的最后两行我们可以看到js的对象属性并不是有效的的变量。我们并不推荐这么做，但是对js来说依旧有效。</p>
 <h4 id="删除属性">删除属性</h4><p>设置属性的值为null或undefined并不能真正的删除属性，而是移除了属性和值得关联关系；删除属性的唯一操作就是使用delete关键字。</p>
 <pre><code><span class="reserved">var</span> user = {
-    <span class="attribute">name</span>:<span class="string">'xhay'</span>,
+    <span class="attribute">name</span>:<span class="string">'xiaoxiao'</span>,
     <span class="attribute">sex</span>:<span class="string">'男'</span>,
     <span class="attribute">age</span>:<span class="number">22</span>,
     <span class="attribute">address</span>:<span class="string">'CQ'</span>
@@ -628,7 +628,7 @@ user.age = <span class="literal">undefined</span>;
     }
 }
 </code></pre><p>在浏览器控制信息为：</p>
-<pre><code><span class="variable">name=</span>xhay
+<pre><code><span class="variable">name=</span>xiaoxiao
 <span class="variable">sex=</span><span class="constant">null</span>
 <span class="variable">age=</span>undefined
 </code></pre><p>所以只能通过delete的方式对象的属性。</p>
@@ -818,7 +818,7 @@ foo.hasOwnProperty(<span class="string">'goo'</span>);    <span class="comment">
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2015 QinLu
+    		&copy; 2015 Singa91
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
