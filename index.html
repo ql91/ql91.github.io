@@ -116,7 +116,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/html5/" style="font-size: 10px;">html5</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/web前端/" style="font-size: 10px;">web前端</a> <a href="/tags/冒泡/" style="font-size: 10px;">冒泡</a> <a href="/tags/前端优化/" style="font-size: 10px;">前端优化</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+						<a href="/tags/JavaScript命名空间/" style="font-size: 10px;">JavaScript命名空间</a> <a href="/tags/html5/" style="font-size: 10px;">html5</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/setTimeout作用域/" style="font-size: 10px;">setTimeout作用域</a> <a href="/tags/web前端/" style="font-size: 10px;">web前端</a> <a href="/tags/冒泡/" style="font-size: 10px;">冒泡</a> <a href="/tags/前端优化/" style="font-size: 10px;">前端优化</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
 					</div>
 				</section>
 				
@@ -195,6 +195,129 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-setTimeout的作用域一级this的指向" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/17/setTimeout的作用域一级this的指向/" class="article-date">
+  	<time datetime="2015-08-17T10:37:40.000Z" itemprop="datePublished">2015-08-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/17/setTimeout的作用域一级this的指向/">setTimeout的作用域一级this的指向</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>setTimeout中的两个this到底指向谁？？为了便于区分，我们把setTimeout调用环境下的this称之为第一个this，把延迟执行函数中的this称之为第二个this，并在代码注释中标出来，方便您区分。先说得出的结论：第一个this的指向是需要根据上下文来确定的，默认为window；第二个this就是指向window。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">Foo</span></span>() &#123;</span><br><span class="line">    this.value = <span class="number">42</span>;</span><br><span class="line">    this.method = <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">        // this 指向全局对象</span><br><span class="line">        alert(this)   // 输出window  第二个this</span><br><span class="line">        alert(this.value); // 输出：undefined   第二个this</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="built_in">set</span>Timeout(this.method, <span class="number">500</span>);  // this指向Foo的实例对象  第一个this</span><br><span class="line">&#125;</span><br><span class="line">new Foo();</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">var value=<span class="number">33</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">Foo</span></span>() &#123;</span><br><span class="line">    this.value = <span class="number">42</span>;</span><br><span class="line">    this.method = <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">        // this 指向全局对象</span><br><span class="line">        alert(this)   // 输出window    第二个this</span><br><span class="line">        alert(this.value); // 输出：<span class="number">33</span>   第二个this</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="built_in">set</span>Timeout(this.method, <span class="number">500</span>);  // 这里的this指向Foo的实例对象  第一个this</span><br><span class="line">&#125;</span><br><span class="line">new Foo();</span><br><span class="line"></span><br><span class="line">&lt;!-- 等价于 --&gt;</span><br><span class="line">var value=<span class="number">33</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">Foo</span></span>() &#123;</span><br><span class="line">    this.value = <span class="number">42</span>;</span><br><span class="line">    <span class="built_in">set</span>Timeout(<span class="function"><span class="title">function</span></span>()&#123;alert(this);alert(this.value)&#125;, <span class="number">500</span>);  // 先后输出 window   <span class="number">33</span>  这里是第二个this</span><br><span class="line">&#125;</span><br><span class="line">new Foo();</span><br></pre></td></tr></table></figure>
+<p><strong>代码验证</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">test</span> = <span class="string">"in the window"</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span>Timeout(<span class="function"><span class="title">function</span></span>() &#123;alert(<span class="string">'outer '</span> + <span class="built_in">test</span>)&#125;, <span class="number">0</span>); // 输出 outer <span class="keyword">in</span> the window ，默认在window的全局作用域下</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">f</span></span>() &#123;</span><br><span class="line">  var <span class="built_in">test</span> = <span class="string">'in the f!'</span>;  // 局部变量，window作用域不可访问</span><br><span class="line">  <span class="built_in">set</span>Timeout(<span class="string">'alert("inner " + test)'</span>, <span class="number">0</span>);  // 输出 inner <span class="keyword">in</span> the window, 虽然在f方法的中调用，但执行代码(字符串形式的代码)默认在window全局作用域下，<span class="built_in">test</span>也指向全局的<span class="built_in">test</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f();</span><br></pre></td></tr></table></figure></p>
+<p>在f方法中，setTimeout中的test的值是外层的test，而不是f作用域中的test。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">test</span> = <span class="string">"in the window"</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span>Timeout(<span class="function"><span class="title">function</span></span>() &#123;alert(<span class="string">'outer'</span> + <span class="built_in">test</span>)&#125;, <span class="number">0</span>); // outer <span class="keyword">in</span> the window  ，没有问题，在全局下调用，访问全局中的<span class="built_in">test</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">f</span></span>() &#123;</span><br><span class="line">  var <span class="built_in">test</span> = <span class="string">'in the f!'</span>;</span><br><span class="line">  <span class="built_in">set</span>Timeout(<span class="function"><span class="title">function</span></span>()&#123;alert(<span class="string">'inner '</span>+ <span class="built_in">test</span>)&#125;, <span class="number">0</span>);  // inner <span class="keyword">in</span> the f!  有问题，不是说好了执行函数中的this指向的是window吗？那<span class="built_in">test</span>也应该对应window下                                                      //  的值才对，怎么<span class="built_in">test</span>的值却是 f()中的值呢？？？？</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f();</span><br><span class="line"></span><br><span class="line">&lt;!-- 等价于 --&gt;</span><br><span class="line">var <span class="built_in">test</span> = <span class="string">"in the window"</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span>Timeout(<span class="function"><span class="title">function</span></span>() &#123;alert(<span class="string">'outer '</span> + <span class="built_in">test</span>)&#125;, <span class="number">0</span>); // <span class="keyword">in</span> the window</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">f</span></span>() &#123;</span><br><span class="line">  var <span class="built_in">test</span> = <span class="string">'in the f!'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="function"><span class="title">ff</span></span>() &#123;alert(<span class="string">'inner '</span> + <span class="built_in">test</span>)&#125; // 能访问到f中的<span class="built_in">test</span>局部变量</span><br><span class="line"></span><br><span class="line">  <span class="built_in">set</span>Timeout(ff, <span class="number">0</span>);  // inner <span class="keyword">in</span> the f!</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f();</span><br></pre></td></tr></table></figure>
+<p>博文链接[<a href="http://www.geekcome.com/content-10-2517-1.html" target="_blank" rel="external">http://www.geekcome.com/content-10-2517-1.html</a>]</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/setTimeout作用域/">setTimeout作用域</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-JavaScrip命名空间模式" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/17/JavaScrip命名空间模式/" class="article-date">
+  	<time datetime="2015-08-17T03:27:33.000Z" itemprop="datePublished">2015-08-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/17/JavaScrip命名空间模式/">JavaScrip命名空间模式</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="JavaScript命名空间模式">JavaScript命名空间模式</h1><p>命名空间是通过为项目或库创建一个全局对象，然后将所有的功能添加到该全局变量中。同时有效防止函数名、类名和其他人冲突。</p>
+<p>在学习JavaScript命名空间模式之前，我们先来了解简单的命名空间。</p>
+<h3 id="简单的命名空间">简单的命名空间</h3><p>由于JavaScript没有文件作用域，不同的函数分散在不同的文件中，甚至由不同的人编写，重名的概率大大增加。是不是足够小心就可以了呢？也不尽然，还有些意外情况，比如经常会用到继承，于是写了一个没出现过的函数名extend，不料在EcmaScript5中加入了extend函数，命名空间的必要性就体现出来了。<br>JavaScript有函数的作用域，可以利用这点把自定义的函数写到一个函数体内，这样函数内的变量、对象、函数就像在一个命名空间内一样和外部隔离。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;input <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"test"</span> onclick=<span class="string">"(new namespace()).alert();"</span>/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;script <span class="built_in">type</span>=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">          <span class="keyword">function</span> <span class="function"><span class="title">namespace</span></span>()&#123;</span><br><span class="line">              this.alert=<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">                   onsole.log(<span class="string">'test'</span>);</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">    &lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>这样自定义的alert方法就不会和window的alert冲突了。</p>
+<p>每次调用的时候都要实例化对象，然后调用其方法，很麻烦，那我们可以这样简化,如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;input <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"test"</span> onclick=<span class="string">"NS.alert();"</span>/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;script <span class="built_in">type</span>=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">         (<span class="keyword">function</span> <span class="function"><span class="title">namespace</span></span>()&#123;</span><br><span class="line">               this.alert=<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">                    console.log(<span class="string">'test'</span>);</span><br><span class="line">                  &#125;</span><br><span class="line"></span><br><span class="line">                window.NS=this;/*在自定义namespace函数最后把this赋值为window的NS属性，在调用的时候直接使用NS.xx就可以了。*/</span><br><span class="line">          &#125;)();</span><br><span class="line">      &lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>注:这里用到匿名函数，匿名函数是‘立即执行函数’</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span> <span class="function"><span class="title">xxx</span></span>()&#123;</span><br><span class="line">	//<span class="keyword">function</span> body</span><br><span class="line">&#125;)();&lt;!-- 最后的括号表示立即执行 ,可省略xxx --&gt;</span><br><span class="line">&lt;!-- 等价于 --&gt;</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">xxx</span></span>()&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line">xxx();</span><br></pre></td></tr></table></figure>
+<p>将匿名函数的方法定义到prototype中<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="title">fucntion</span></span>()&#123;</span><br><span class="line">	var _NS=<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	_NS.prototype.alert=<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">		console.log(<span class="string">'test'</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	window.NS=new _NS();</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
+<h3 id="JavaScript创建命名空间">JavaScript创建命名空间</h3><p><mark><strong>非常重要</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">// 编写一个namespace函数，要求此函数能够实现多层命名空间的嵌套</span><br><span class="line">// 声明一个全局对象Namespace，用来注册命名空间</span><br><span class="line">var Namespace = &#123;&#125;;</span><br><span class="line">// 全局对象仅仅存在register函数，参数为名称空间全路径，如<span class="string">"Grandsoft.GEA"</span></span><br><span class="line">Namespace.register = <span class="keyword">function</span>(fullPath) &#123;</span><br><span class="line">    // 将命名空间切成N部分, 比如Grandsoft、GEA等</span><br><span class="line">    var sArray = fullPath.split(<span class="string">'.'</span>);</span><br><span class="line">    var sEval = <span class="string">""</span>;</span><br><span class="line">    var str = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">for</span> (var i = <span class="number">0</span>; i &lt; sArray.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i != <span class="number">0</span>) str += <span class="string">"."</span>;</span><br><span class="line">        str += sArray[i];</span><br><span class="line">        //依次创建构造命名空间对象（假如不存在的话）的语句,比如先创建Grandsoft，然后创建Grandsoft.GEA，依次下去</span><br><span class="line">        sEval += <span class="string">"if (typeof("</span> + str + <span class="string">") == 'undefined') "</span> + str + <span class="string">" = new Object();"</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (sEval != <span class="string">""</span>) <span class="built_in">eval</span>(sEval);</span><br><span class="line">&#125;;</span><br><span class="line">// 上面就是在JavaScript中模拟命名空间机制的完整实现，使用方式如下： </span><br><span class="line">// 注册命名空间Grandsoft.GEA, Grandsoft.GCM</span><br><span class="line">Namespace.register(<span class="string">"Grandsoft.GEA"</span>);</span><br><span class="line">Namespace.register(<span class="string">"Grandsoft.GCM"</span>); </span><br><span class="line">// 在Grandsoft.GEA命名空间里面声明类Person</span><br><span class="line">Grandsoft.GEA.Person = <span class="keyword">function</span>(name, age)</span><br><span class="line">&#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">    this.age = age;</span><br><span class="line">&#125; </span><br><span class="line">// 给类Person添加一个公共方法show()</span><br><span class="line">Grandsoft.GEA.Person.prototype.show = <span class="function"><span class="title">function</span></span>()</span><br><span class="line">&#123;</span><br><span class="line">    alert(this.name + <span class="string">" is "</span> + this.age + <span class="string">" years old!"</span>);</span><br><span class="line">&#125; </span><br><span class="line">// 演示如何使用类Person</span><br><span class="line">var p = new Grandsoft.GEA.Person(<span class="string">"Singapo91"</span>, <span class="number">21</span>);</span><br><span class="line">p.show();</span><br></pre></td></tr></table></figure></mark></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript命名空间/">JavaScript命名空间</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-js事件捕获和冒泡" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -566,253 +689,9 @@ console.<span class="built_in">log</span><span class="params">(a)</span>; <span 
 
 
   
-    <article id="post-js对象" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/08/07/js对象/" class="article-date">
-  	<time datetime="2015-08-07T13:46:06.000Z" itemprop="datePublished">2015-08-07</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/07/js对象/">js对象</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><mark>##转载</mark></p>
-<h2 id="对象">对象</h2><p>我们知道javascript并不是面向对象的语言，我们可以把javascript理解成基于对象的语言。在javascript当中所有的变量都是对象，除了null和undefined。</p>
-<h3 id="一、对象的使用和属性">一、对象的使用和属性</h3><p>前面说到所有变量都是对象，那我们尝试调用对象的toString方法来验证一下。</p>
-<pre><code>[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>].toString();    <span class="regexp">//</span><span class="string">"1,2,3,4"</span>
-<span class="keyword">true</span>.toString();    <span class="regexp">//</span><span class="string">"true"</span>
-<span class="string">' '</span>.toString();        <span class="regexp">//</span><span class="string">" "</span>
-<span class="number">2.14</span>.toString();    <span class="regexp">//</span><span class="string">"2.14"</span>
-<span class="number">2</span>.toString();    <span class="regexp">//</span><span class="constant">SyntaxError</span>
-</code></pre><p>为什么最后一项会出错呢？因为javascript的解释器尝试把“点操作符”解释为前面浮点数字中的一部分,所以就出错了。</p>
-<h4 id="访问属性">访问属性</h4><p>访问对象的属性有两种方式，点操作符和中括号操作符</p>
-<pre><code><span class="keyword">var</span> foo = {name: <span class="string">'xiao'</span>}
-foo.name; <span class="comment">// xiao</span>
-foo[<span class="string">'name'</span>]; <span class="comment">// xiao</span>
-
-<span class="keyword">var</span> <span class="keyword">get</span> = <span class="string">'name'</span>;
-foo[<span class="keyword">get</span>]; <span class="comment">// xiao</span>
-
-foo.1234; <span class="comment">// 出错：SyntaxError</span>
-foo[<span class="string">'1234'</span>]; <span class="comment">// 有效</span>
-</code></pre><p>从例子当中的最后两行我们可以看到js的对象属性并不是有效的的变量。我们并不推荐这么做，但是对js来说依旧有效。</p>
-<h4 id="删除属性">删除属性</h4><p>设置属性的值为null或undefined并不能真正的删除属性，而是移除了属性和值得关联关系；删除属性的唯一操作就是使用delete关键字。</p>
-<pre><code><span class="reserved">var</span> user = {
-    <span class="attribute">name</span>:<span class="string">'xiaoxiao'</span>,
-    <span class="attribute">sex</span>:<span class="string">'男'</span>,
-    <span class="attribute">age</span>:<span class="number">22</span>,
-    <span class="attribute">address</span>:<span class="string">'CQ'</span>
-}
-
-user.sex = <span class="literal">null</span>;
-user.age = <span class="literal">undefined</span>;
-<span class="keyword">delete</span> user.address;
-
-<span class="keyword">for</span>(<span class="reserved">var</span> i <span class="keyword">in</span> user){
-    <span class="keyword">if</span>(user.hasOwnProperty(i)){
-        <span class="built_in">console</span>.log(i+<span class="string">"="</span>+user[i]);
-    }
-}
-</code></pre><p>在浏览器控制信息为：</p>
-<pre><code><span class="variable">name=</span>xiaoxiao
-<span class="variable">sex=</span><span class="constant">null</span>
-<span class="variable">age=</span>undefined
-</code></pre><p>所以只能通过delete的方式对象的属性。</p>
-<h3 id="二、原型">二、原型</h3><p>在说原型之前，我们先来把对象的属性和方法，原型属性和方法，静态属性和方法的概念了解一下。</p>
-<pre><code><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>)</span>{
-    <span class="keyword">var</span> a1 = <span class="string">"a1"</span>;    <span class="comment">//对象的私有属性</span>
-
-    <span class="keyword">this</span>.b1 = <span class="string">"b2"</span>;        <span class="comment">//对象的属性</span>
-    <span class="keyword">this</span>.b2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{    <span class="comment">//对象的方法</span>
-        alert(<span class="string">"b2"</span>);
-    }
-}
-
-A.c1 = <span class="string">"c1"</span>;    <span class="comment">//静态属性</span>
-A.c2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{    <span class="comment">//静态方法</span>
-    alert(<span class="string">"c2"</span>);
-}
-
-A.prototype.d1 = <span class="string">"d1"</span>;    <span class="comment">//原型属性</span>
-A.prototype.d2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{    <span class="comment">//原型方法</span>
-    alert(<span class="string">"d2"</span>);
-}
-
-<span class="keyword">var</span> obj = <span class="keyword">new</span> A();
-<span class="built_in">console</span>.log(obj);
-</code></pre><p>在开发者工具下面我们看到：</p>
-<ol>
-<li>对象的方法和属性都在对象下</li>
-<li>对象的原型方法和原型属性在__proto__下</li>
-<li>对象的静态方法和属性在__proto__下的constructor里面</li>
-</ol>
-<p>有了上面的基础我们在来理解原型方面的东西。</p>
-<p>JavaScript 不包含传统的类继承模型，而是使用 prototype 原型模型。</p>
-<p>由于 JavaScript 是唯一一个被广泛使用的基于原型继承的语言，所以理解两种继承模式的差异是需要一定时间的。</p>
-<p>原型继承的本质实际上是在复制已经存在的对象。</p>
-<pre><code><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>{
-    <span class="keyword">this</span>.value = <span class="number">42</span>;
-}
-Foo.prototype = {
-    method: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{}
-};
-
-<span class="function"><span class="keyword">function</span> <span class="title">Bar</span>(<span class="params"></span>) </span>{}
-
-<span class="comment">// 设置Bar的prototype属性为Foo的实例对象</span>
-Bar.prototype = <span class="keyword">new</span> Foo();
-Bar.prototype.foo = <span class="string">'Hello World'</span>;
-
-<span class="comment">// 修正Bar.prototype.constructor为Bar本身</span>
-Bar.prototype.constructor = Bar;
-
-<span class="keyword">var</span> test = <span class="keyword">new</span> Bar() <span class="comment">// 创建Bar的一个新实例</span>
-
-<span class="comment">// 原型链</span>
-test [Bar的实例]
-    Bar.prototype [Foo的实例] 
-        { foo: <span class="string">'Hello World'</span> }
-        Foo.prototype
-            {method: ...};
-            <span class="built_in">Object</span>.prototype
-                {toString: ... <span class="comment">/* etc. */</span>};
-</code></pre><p>上面的例子中，test 对象从 Bar.prototype 和 Foo.prototype 继承下来；因此， 它能访问 Foo 的原型方法 method。同时，它也能够访问那个定义在原型上的 Foo 实例属性 value。 需要注意的是 new Bar() 不会创造出一个新的 Foo 实例，而是 重复使用它原型上的那个实例；因此，所有的 Bar 实例都会共享相同的 value 属性。</p>
-<p>在查找一个对象的属性的时候，javascript会在原型链上向上遍历，直到找到指定名称的值，当查找到原型链的顶端，也就是Object.prototype时已就位找到，则返回undefined。</p>
-<p><strong>应用</strong></p>
-<p>比如我们为数组Array添加一个删除的重复元素的方法，我们可以这么写：</p>
-<pre><code><span class="built_in">Array</span>.prototype.delRep = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
-    <span class="comment">//...</span>
-}
-</code></pre><h3 id="三、hasOwnPrototype和in的区别">三、hasOwnPrototype和in的区别</h3><p>hasOwnPrototype和in都可以用来判断对象是否具有这个属性，但hasOwnPrototype是用来判断该属性是不是定义在自身上。</p>
-<pre><code><span class="comment">// 修改Object.prototype</span>
-<span class="built_in">Object</span>.prototype.bar = <span class="number">1</span>; 
-<span class="keyword">var</span> foo = {goo: <span class="literal">undefined</span>};
-
-<span class="string">'bar'</span> <span class="keyword">in</span> foo;    <span class="comment">// true</span>
-<span class="string">'goo'</span> <span class="keyword">in</span> foo;    <span class="comment">//true</span>
-
-foo.hasOwnProperty(<span class="string">'bar'</span>);    <span class="comment">// false,bar为原型上定义的属性，不属于foo本身自定义的属性，所以返回false</span>
-foo.hasOwnProperty(<span class="string">'goo'</span>);    <span class="comment">// true</span>
-</code></pre><p>参考资料：</p>
-<p>ECMAScript 6入门： <a href="http://es6.ruanyifeng.com/" target="_blank" rel="external">http://es6.ruanyifeng.com/</a></p>
-<p>js的Prototype属性 解释及常用方法: <a href="http://blog.sina.com.cn/s/blog_7045cb9e0100rtoh.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_7045cb9e0100rtoh.html</a></p>
-<p>前端开发必须知道的JS（一） 原型和继承：<a href="http://www.cnblogs.com/ljchow/archive/2010/06/08/1753526.html" target="_blank" rel="external">http://www.cnblogs.com/ljchow/archive/2010/06/08/1753526.html</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-HTML新特性" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/08/07/HTML新特性/" class="article-date">
-  	<time datetime="2015-08-07T08:36:23.000Z" itemprop="datePublished">2015-08-07</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/07/HTML新特性/">HTML新特性</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="HTML的十五大新特性">HTML的十五大新特性</h1><h3 id="1-新的文档类型(New_Doctype)">1.新的文档类型(New Doctype)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!Doctype html&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="2-脚本和链接无type">2.脚本和链接无type</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- HTML4或XHTML --&gt;</span><br><span class="line">&lt;link rel=<span class="string">"stylesheet"</span> <span class="built_in">type</span>=<span class="string">"text/css"</span> href=<span class="string">""</span>&gt;</span><br><span class="line">&lt;script <span class="built_in">type</span>=<span class="string">"text/javascript"</span> src=<span class="string">""</span>&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- HMTL5 --&gt;</span><br><span class="line">&lt;link rel=<span class="string">"stylesheet"</span> href=<span class="string">""</span>&gt;</span><br><span class="line">&lt;script src=<span class="string">""</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="3-语义Header和Footer">3.语义Header和Footer</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- HTML4或XHTML --&gt;</span><br><span class="line">&lt;div id=<span class="string">"header"</span>&gt;&lt;/div&gt;</span><br><span class="line">...</span><br><span class="line">&lt;div id=<span class="string">"footer"</span>&gt;&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- HMTL5 --&gt;</span><br><span class="line">&lt;header&gt;&lt;/header&gt;</span><br><span class="line">...</span><br><span class="line">&lt;footer&gt;&lt;/footer&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="4-Hgroup">4.Hgroup</h3><p>在HTML5中，有许多新引入的元素，hgroup就是其中之一。假设我的网站名下面紧跟着一个子标题，我可以用</p><h1>和<h2>标签来分别定义。然而，这种定义没有说明这两者之间的关系。而且，h2标签的使用会带来更多问题，比如该页面上还有其他标题的时候。在HTML5中，我们可以用hgroup元素来将它们分组，这样就不会影响文件的大纲。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;header&gt;</span><br><span class="line">	&lt;hgroup&gt;</span><br><span class="line">		&lt;h1&gt;Aaaa&lt;/h1&gt;</span><br><span class="line">		&lt;h2&gt;Bbbb&lt;/h2&gt;</span><br><span class="line">	&lt;/hgroup&gt;</span><br><span class="line">&lt;/header&gt;</span><br></pre></td></tr></table></figure><p></p>
-<h3 id="5-标记元素_(Mark_Element)">5.标记元素 (Mark Element)</h3><p>你可以把它当做高亮标签。被这个标签修饰的字符串应当和用户当前的行动相关。比如说，当我在某博客中搜索“Open your Mind”时，我可以利用一些JavaScript将出现的词组用<mark>修饰一下。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;h3&gt;Hello,world&lt;/h3&gt;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">	&lt;mark&gt;China&lt;/mark&gt;</span><br><span class="line">&lt;/p&gt;</span><br></pre></td></tr></table></figure></mark></p>
-<h3 id="6-图形元素">6.图形元素</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- HTML4或XHTML --&gt;</span><br><span class="line">&lt;img src=<span class="string">""</span> alt=<span class="string">"About me"</span>/&gt;</span><br><span class="line">&lt;p&gt;Image of Amy &lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- HMTL5 --&gt;</span><br><span class="line">&lt;!-- 然而，上述代码没有将文字和图片内在联系起来。因此，HTML5引入了&lt;figure&gt;元素。当和&lt;figcaption&gt;结合起来后，我们可以语义化地将注释和相应的图片联系起来。 --&gt;</span><br><span class="line">&lt;figure&gt;</span><br><span class="line">	&lt;img src=<span class="string">""</span> alt=<span class="string">"About me"</span>&gt;</span><br><span class="line">	&lt;figcaption&gt;</span><br><span class="line">		&lt;p&gt;Image of Amy&lt;/p&gt;</span><br><span class="line">	&lt;/figcaption&gt;</span><br><span class="line">&lt;/figure&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="7-重新定义small">7.重新定义small</h3><p>在HTML4或XHTML中，<small>元素已经存在。然而，却没有如何正确使用这一元素的完整说明。在HTML5中，<small>被用来定义小字。试想下你网站底部的版权状态，根据对此元素新的HTML5定义，<small>可以正确地诠释这些信息。</small></small></small></p>
-<h3 id="8-占位符_(Placeholder)">8.占位符 (Placeholder)</h3><p>在HTML4或XHTML中，你需要用JavaScript来给文本框添加占位符。比如，你可以提前设置好一些信息，当用户开始输入时，文本框中的文字就消失。而在HTML5中，新的“placeholder”就简化了这个问题。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;form action=<span class="string">"demo-form.php"</span>&gt;</span><br><span class="line">  &lt;input <span class="built_in">type</span>=<span class="string">"text"</span> name=<span class="string">"fname"</span> placeholder=<span class="string">"First name"</span>&gt;&lt;br&gt;</span><br><span class="line">  &lt;input <span class="built_in">type</span>=<span class="string">"text"</span> name=<span class="string">"lname"</span> placeholder=<span class="string">"Last name"</span>&gt;&lt;br&gt;</span><br><span class="line">  &lt;input <span class="built_in">type</span>=<span class="string">"submit"</span> value=<span class="string">"Submit"</span>&gt;</span><br><span class="line">&lt;/form</span><br><span class="line"></span><br><span class="line">&lt;p&gt;&lt;strong&gt;注意：&lt;/strong&gt; Internet Explorer <span class="number">9</span>及更早IE版本不支持input标签的 placeholder 属性。&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
-<h3 id="9-必要属性_(Required_Attribute)">9.必要属性 (Required Attribute)</h3><p>HTML5中的新属性“required”指定了某一输入是否必需。有两种方法声明这一属性。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;input <span class="built_in">type</span>=<span class="string">"text"</span> name=<span class="string">"someInput"</span> required /&gt;</span><br><span class="line">&lt;input <span class="built_in">type</span>=<span class="string">"text"</span> name=<span class="string">"someInput"</span> required=<span class="string">"required"</span>/&gt;</span><br><span class="line">&lt;!-- 当文本框被指定必需时，如果空白的话表格就不能提交 --&gt;</span><br></pre></td></tr></table></figure></p>
-<h3 id="10-Autofocus_属性_(Autofocus_Attribute)">10.Autofocus 属性 (Autofocus Attribute)</h3><h3 id="11-Audio_支持_(Audio_Support)">11.Audio 支持 (Audio Support)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;audio autoplay=<span class="string">"autoplay"</span> controls=<span class="string">"controls"</span>&gt;</span><br><span class="line">	&lt;<span class="built_in">source</span> src=<span class="string">"file.ogg"</span>/&gt;</span><br><span class="line">	&lt;<span class="built_in">source</span> src=<span class="string">"file.mp3"</span>/&gt;</span><br><span class="line">	&lt;<span class="built_in">source</span> src=<span class="string">"file.mp3"</span>/&gt;</span><br><span class="line">	&lt;a href=<span class="string">"file.mp3"</span>&gt;Download this file&lt;/a&gt;</span><br><span class="line">&lt;/audio&gt;</span><br><span class="line">&lt;!-- 使用&lt;audio&gt;元素时请记得包含两种音频格式。FireFox想要.ogg格式的文件，而Webkit浏览器则需要.mp3格式的。和往常一样，IE是不支持的，且Opera <span class="number">10</span>及以下版本只支持.wav格式 --&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="12-Video_支持_(Video_Support)">12.Video 支持 (Video Support)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;video controls preload&gt;</span><br><span class="line">	&lt;<span class="built_in">source</span> src=<span class="string">"cohagenPhoneCall.ogv"</span> <span class="built_in">type</span>=<span class="string">"video/ogg; codecs='vorbis, theora' "</span> /&gt;</span><br><span class="line">	&lt;<span class="built_in">source</span> src=<span class="string">"cohagenPhoneCall.mp4"</span> <span class="built_in">type</span>=<span class="string">"video/mp4; 'codecs='avc1.42E01E, mp4a.40.2'"</span> /&gt;</span><br><span class="line">	&lt;p&gt;</span><br><span class="line"> 		Your browser is old. </span><br><span class="line">		&lt;a href=<span class="string">"cohagenPhoneCall.mp4"</span>&gt;</span><br><span class="line">			Download this video instead.</span><br><span class="line">		&lt;/a&gt;</span><br><span class="line">	&lt;/p&gt;</span><br><span class="line">&lt;/video&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="13-视频预载_(Preload_attribute_in_Videos_element)">13.视频预载 (Preload attribute in Videos element)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;video preload&gt;&lt;/video&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="14-显示控制条">14.显示控制条</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 如果你使用过上面的每一个提到的技术点，你可能已经注意到，使用上面的代码，视频仅仅显示的是张图片，没有控制条。为了渲染出播放控制条，我们必须在video元素内指定controls属性。  --&gt;</span><br><span class="line">&lt;video preload controls&gt;&lt;/video&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="15-正规表达式_(Regular_Expressions)">15.正规表达式 (Regular Expressions)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 在HTML4或XHTML中，你需要用一些正规表达式来验证特定的文本。而HTML5中新的pattern属性让我们能够在标签处直接插入一个正规表达式。 --&gt;</span><br><span class="line">&lt;form action=<span class="string">""</span> method=<span class="string">"post"</span>&gt;</span><br><span class="line">	&lt;label <span class="keyword">for</span>=<span class="string">"username"</span>&gt;Username:&lt;/label&gt;</span><br><span class="line">	&lt;input <span class="built_in">type</span>=<span class="string">"text"</span> name=<span class="string">"username"</span> placeholder=<span class="string">"4 &lt;&gt; 10"</span> pattern=<span class="string">"[A-Za-z]&#123;4,10&#125;"</span>  autofocus  required &gt;</span><br><span class="line">	&lt;button&gt;Go&lt;/button&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
-<p>总结：内容不完善，后面继续补充~</p>
-</h2></h1>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html5/">html5</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 </div>
