@@ -5,22 +5,22 @@
   
   <title>JavaScrip命名空间模式 | ql&#39;blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="JavaScript命名空间模式命名空间是通过为项目或库创建一个全局对象，然后将所有的功能添加到该全局变量中。同时有效防止函数名、类名和其他人冲突。
+  <meta name="description" content="命名空间是通过为项目或库创建一个全局对象，然后将所有的功能添加到该全局变量中。同时有效防止函数名、类名和其他人冲突。
 在学习JavaScript命名空间模式之前，我们先来了解简单的命名空间。
-简单的命名空间由于JavaScript没有文件作用域，不同的函数分散在不同的文件中，甚至由不同的人编写，重名的概率大大增加。是不是足够小心就可以了呢？也不尽然，还有些意外情况，">
+简单的命名空间由于JavaScript没有文件作用域，不同的函数分散在不同的文件中，甚至由不同的人编写，重名的概率大大增加。是不是足够小心就可以了呢？也不尽然，还有些意外情况，比如经常会用到继承，于是写了一个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScrip命名空间模式">
 <meta property="og:url" content="http://yoursite.com/2015/08/17/JavaScrip命名空间模式/index.html">
 <meta property="og:site_name" content="ql'blog">
-<meta property="og:description" content="JavaScript命名空间模式命名空间是通过为项目或库创建一个全局对象，然后将所有的功能添加到该全局变量中。同时有效防止函数名、类名和其他人冲突。
+<meta property="og:description" content="命名空间是通过为项目或库创建一个全局对象，然后将所有的功能添加到该全局变量中。同时有效防止函数名、类名和其他人冲突。
 在学习JavaScript命名空间模式之前，我们先来了解简单的命名空间。
-简单的命名空间由于JavaScript没有文件作用域，不同的函数分散在不同的文件中，甚至由不同的人编写，重名的概率大大增加。是不是足够小心就可以了呢？也不尽然，还有些意外情况，">
-<meta property="og:updated_time" content="2015-08-17T10:33:20.912Z">
+简单的命名空间由于JavaScript没有文件作用域，不同的函数分散在不同的文件中，甚至由不同的人编写，重名的概率大大增加。是不是足够小心就可以了呢？也不尽然，还有些意外情况，比如经常会用到继承，于是写了一个">
+<meta property="og:updated_time" content="2015-08-17T10:57:37.311Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScrip命名空间模式">
-<meta name="twitter:description" content="JavaScript命名空间模式命名空间是通过为项目或库创建一个全局对象，然后将所有的功能添加到该全局变量中。同时有效防止函数名、类名和其他人冲突。
+<meta name="twitter:description" content="命名空间是通过为项目或库创建一个全局对象，然后将所有的功能添加到该全局变量中。同时有效防止函数名、类名和其他人冲突。
 在学习JavaScript命名空间模式之前，我们先来了解简单的命名空间。
-简单的命名空间由于JavaScript没有文件作用域，不同的函数分散在不同的文件中，甚至由不同的人编写，重名的概率大大增加。是不是足够小心就可以了呢？也不尽然，还有些意外情况，">
+简单的命名空间由于JavaScript没有文件作用域，不同的函数分散在不同的文件中，甚至由不同的人编写，重名的概率大大增加。是不是足够小心就可以了呢？也不尽然，还有些意外情况，比如经常会用到继承，于是写了一个">
   
     <link rel="alternative" href="/atom.xml" title="ql&#39;blog" type="application/atom+xml">
   
@@ -238,7 +238,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="JavaScript命名空间模式">JavaScript命名空间模式</h1><p>命名空间是通过为项目或库创建一个全局对象，然后将所有的功能添加到该全局变量中。同时有效防止函数名、类名和其他人冲突。</p>
+        <p>命名空间是通过为项目或库创建一个全局对象，然后将所有的功能添加到该全局变量中。同时有效防止函数名、类名和其他人冲突。</p>
 <p>在学习JavaScript命名空间模式之前，我们先来了解简单的命名空间。</p>
 <h3 id="简单的命名空间">简单的命名空间</h3><p>由于JavaScript没有文件作用域，不同的函数分散在不同的文件中，甚至由不同的人编写，重名的概率大大增加。是不是足够小心就可以了呢？也不尽然，还有些意外情况，比如经常会用到继承，于是写了一个没出现过的函数名extend，不料在EcmaScript5中加入了extend函数，命名空间的必要性就体现出来了。<br>JavaScript有函数的作用域，可以利用这点把自定义的函数写到一个函数体内，这样函数内的变量、对象、函数就像在一个命名空间内一样和外部隔离。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;input <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"test"</span> onclick=<span class="string">"(new namespace()).alert();"</span>/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;script <span class="built_in">type</span>=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">          <span class="keyword">function</span> <span class="function"><span class="title">namespace</span></span>()&#123;</span><br><span class="line">              this.alert=<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">                   onsole.log(<span class="string">'test'</span>);</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">    &lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
 <p>这样自定义的alert方法就不会和window的alert冲突了。</p>
@@ -260,7 +260,7 @@
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          setTimeout的作用域一级this的指向
+          setTimeout的作用域以及this的指向
         
       </div>
     </a>
