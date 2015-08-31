@@ -169,7 +169,7 @@
                             var sel=document.getElementById("selAddress");
                             var selText=sel.selectedIndex;//默认下标
                             var addr=sel.options[selText].text;
-                            if((noArray[m]==data[j].no&&addr=="筛选"||addr==data[j].address)){                           
+                            if(noArray[m]==data[j].no&&(addr=="筛选"||addr==data[j].address)){                           
                                 noArray.splice(m,1);//删除已完成排序的序号数组防止重复
                                 tcontent.innerHTML+="<tr id=trs"+data[j].no+"><td><input value="+data[j].no+" type='checkbox' id='"+data[j].no+"''  /></td><td>"+data[j].no+"</td><td>"+data[j].name+"</td><td>"+data[j].age+"</td><td>"+data[j].address+"</td></tr>";                                                             
                             }
