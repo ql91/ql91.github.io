@@ -5,24 +5,24 @@
   
   <title>阿里笔试编程题 | ql&#39;blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前不久做了阿里的笔试题，题目要求如下，当时没有做出来，总觉得还是该整理下此题。大体思路：1.使用一个data对象存储各状态(删除、排序、筛选)后的对象的值；2.使用一个ageArray数组存储年龄,便于排序；3.给各状态添加相应的事件。
-
-运行https://ql91.github.io/Programby91/aliTable/aliTable.html">
+  <meta name="description" content="前不久做了阿里的笔试题，题目要求如下，当时没有做出来，总觉得还是该整理下此题。大体思路：(题目中描述表格的元素id为person-list奇数行的class名为odd没理解，所以按着自己的思路编写了程序。)
+方式一：[运行示例为方式一]1.使用一个data对象存储各状态(删除、排序、筛选)后的对象的值；2.使用一个ageArray数组存储年龄,便于排序；3.给各状态添加相应的事件。
+方式二：换种方">
 <meta property="og:type" content="article">
 <meta property="og:title" content="阿里笔试编程题">
 <meta property="og:url" content="http://yoursite.com/2015/08/31/阿里笔试编程题/index.html">
 <meta property="og:site_name" content="ql'blog">
-<meta property="og:description" content="前不久做了阿里的笔试题，题目要求如下，当时没有做出来，总觉得还是该整理下此题。大体思路：1.使用一个data对象存储各状态(删除、排序、筛选)后的对象的值；2.使用一个ageArray数组存储年龄,便于排序；3.给各状态添加相应的事件。
-
-运行https://ql91.github.io/Programby91/aliTable/aliTable.html">
+<meta property="og:description" content="前不久做了阿里的笔试题，题目要求如下，当时没有做出来，总觉得还是该整理下此题。大体思路：(题目中描述表格的元素id为person-list奇数行的class名为odd没理解，所以按着自己的思路编写了程序。)
+方式一：[运行示例为方式一]1.使用一个data对象存储各状态(删除、排序、筛选)后的对象的值；2.使用一个ageArray数组存储年龄,便于排序；3.给各状态添加相应的事件。
+方式二：换种方">
 <meta property="og:image" content="https://ql91.github.io/imgby91/aliTable/表格排序.png">
 <meta property="og:image" content="https://ql91.github.io/imgby91/aliTable/要求.png">
-<meta property="og:updated_time" content="2015-08-31T17:41:11.270Z">
+<meta property="og:updated_time" content="2015-09-01T01:58:53.302Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="阿里笔试编程题">
-<meta name="twitter:description" content="前不久做了阿里的笔试题，题目要求如下，当时没有做出来，总觉得还是该整理下此题。大体思路：1.使用一个data对象存储各状态(删除、排序、筛选)后的对象的值；2.使用一个ageArray数组存储年龄,便于排序；3.给各状态添加相应的事件。
-
-运行https://ql91.github.io/Programby91/aliTable/aliTable.html">
+<meta name="twitter:description" content="前不久做了阿里的笔试题，题目要求如下，当时没有做出来，总觉得还是该整理下此题。大体思路：(题目中描述表格的元素id为person-list奇数行的class名为odd没理解，所以按着自己的思路编写了程序。)
+方式一：[运行示例为方式一]1.使用一个data对象存储各状态(删除、排序、筛选)后的对象的值；2.使用一个ageArray数组存储年龄,便于排序；3.给各状态添加相应的事件。
+方式二：换种方">
   
     <link rel="alternative" href="/atom.xml" title="ql&#39;blog" type="application/atom+xml">
   
@@ -240,9 +240,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>前不久做了阿里的笔试题，题目要求如下，当时没有做出来，总觉得还是该整理下此题。<br>大体思路：<br>1.使用一个data对象存储各状态(删除、排序、筛选)后的对象的值；<br>2.使用一个ageArray数组存储年龄,便于排序；<br>3.给各状态添加相应的事件。</p>
-<p><img src="https://ql91.github.io/imgby91/aliTable/表格排序.png" alt="image"><br><img src="https://ql91.github.io/imgby91/aliTable/要求.png" alt="image"></p>
-<p><mark>运行</mark><a href="https://ql91.github.io/Programby91/aliTable/aliTable.html" target="_blank" rel="external">https://ql91.github.io/Programby91/aliTable/aliTable.html</a></p>
+        <p>前不久做了阿里的笔试题，题目要求如下，当时没有做出来，总觉得还是该整理下此题。<br>大体思路：<br>(题目中描述表格的元素id为person-list奇数行的class名为odd没理解，所以按着自己<br>的思路编写了程序。)</p>
+<p>方式一：[运行示例为方式一]<br>1.使用一个data对象存储各状态(删除、排序、筛选)后的对象的值；<br>2.使用一个ageArray数组存储年龄,便于排序；<br>3.给各状态添加相应的事件。</p>
+<p>方式二：<br>换种方式考虑，可以用到HTML DOM TableRow 对象,TableRow 对象代表一个 HTML 表格行。<br>可以用TableRow对象的deleteCell(index)删除行中的指定的单元格<br>和insertCell(index)在一行中的指定位置插入一个空的 <td> 元素。</td></p>
+<p>题目要求：<br><img src="https://ql91.github.io/imgby91/aliTable/表格排序.png" alt="image"><br><img src="https://ql91.github.io/imgby91/aliTable/要求.png" alt="image"></p>
+<p><mark>运行示例</mark><a href="http://htmlpreview.github.io/?https://github.com/ql91/small-example/blob/master/aliTable/aliTable.html" target="_blank" rel="external">http://htmlpreview.github.io/?https://github.com/ql91/small-example/blob/master/aliTable/aliTable.html</a><br>源码<a href="https://github.com/ql91/small-example/blob/master/aliTable/aliTable.html" target="_blank" rel="external">https://github.com/ql91/small-example/blob/master/aliTable/aliTable.html</a></p>
 
       
     </div>
