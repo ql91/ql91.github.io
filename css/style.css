@@ -29,10 +29,10 @@
   background: url(http://ww4.sinaimg.cn/small/649a4735gw1et7gnhy5fej20zk0m8q3q.jpg) right no-repeat;
 }
 
-/* #ds-recent-visitors .ds-avatar {
+#ds-recent-visitors .ds-avatar {
   float: left
 }
-#ds-recent-visitors div img {
+/* #ds-recent-visitors div img {
   border-radius:100%
 }
 #ds-recent-visitors div:hover img {
