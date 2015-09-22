@@ -245,7 +245,8 @@
 <p>与VS集成比较好的工具如下：<br>YUICompressor - 编译集成，包含在NuGet.<br>AjaxMin  - 编译集成</p>
 <h1 id="十、图片">十、图片</h1><p>1.优化图像<br>尝试把GIF格式转换成PNG格式，看看是否节省空间。大多数情况下是可以压缩的。下面这条简单的命令可以安全地把GIF格式转换为PNG格式：<br>convert image.gif image.png<br>2.优化CSS Sprite<br>-Spirite中水平排列图片，垂直排列会增加文件大小；<br>-Spirite中把颜色较近的组合在一起可以降低颜色数，理想状况是低于256色以便适用PNG8格式；<br>-不要在Spirite的图像中间留有较大空隙。这虽然不大会增加文件大小,但对于用户代理来说它需要更少的内存来把图片解压为像素地图。100×100的图片为1万像素，1000×1000就是100万像素。<br>3.不要在HTML中缩放图片<br>不要通过图片缩放来适应页面，如果你需要小图片，就直接使用小图片吧。</p>
 <p><a href="http://www.cnblogs.com/developersupport/p/webpage-performance-best-practices.html" target="_blank" rel="external">前端优化参考链接</a></p>
-
+<p>最近访客：</p>
+<div class="ds-recent-visitors" data-num-items="50" data-avatar-size="30" id="ds-recent-visitors"></div>
       
     </div>
     
@@ -305,6 +306,9 @@
 <p>2.函数调用模式<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var add=<span class="keyword">function</span>(a,b)&#123;</span><br><span class="line">	alert(this);//this被绑定到window</span><br><span class="line">	<span class="built_in">return</span> a+b;</span><br><span class="line">&#125;</span><br><span class="line">var sum=add(<span class="number">3</span>,<span class="number">4</span>);</span><br><span class="line">alert(sum);</span><br></pre></td></tr></table></figure></p>
 <p>3.构造器调用模式(不使用)</p>
 <p>4.apply调用模式<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var add=<span class="keyword">function</span>(a,b)&#123;</span><br><span class="line">	<span class="built_in">return</span> a+b;</span><br><span class="line">&#125;</span><br><span class="line">var arr=[<span class="number">10</span>,<span class="number">20</span>];</span><br><span class="line">var sum=add.apply(this,arr);//this指针所指向的对象</span><br><span class="line">alert(sum);</span><br></pre></td></tr></table></figure></p>
+<p>最近访客：</p>
+<div class="ds-recent-visitors" data-num-items="50" data-avatar-size="30" id="ds-recent-visitors"></div>
+
 
       
     </div>
@@ -367,7 +371,8 @@
 <li>样式表在加载完成后，将和以前加载的所有样式表一起进行解析，解析完成后，将对此前所有元素（含以前已经渲染的）重新进行渲染。</li>
 <li>JS、CSS中如有重定义，后定义函数将覆盖前定义函数。</li>
 </ol>
-
+<p>最近访客：</p>
+<div class="ds-recent-visitors" data-num-items="50" data-avatar-size="30" id="ds-recent-visitors"></div>
       
     </div>
     
@@ -433,7 +438,8 @@
 <p>AMD模块化规范中使用全局或局部的require函数实现加载一个或多个模块，所有模块加载完成之后的回调函数。</p>
 <p>其中：</p>
 <p>[module]：是一个数组，里面的成员就是要加载的模块；<br>callback：是模块加载完成之后的回调函数。<br>代码示例：加载一个math模块，然后调用方法 math.add(2, 3);<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">require([<span class="string">'math'</span>], <span class="keyword">function</span> (math) &#123;</span><br><span class="line">　math.add(<span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-
+<p>最近访客：</p>
+<div class="ds-recent-visitors" data-num-items="50" data-avatar-size="30" id="ds-recent-visitors"></div>
       
     </div>
     

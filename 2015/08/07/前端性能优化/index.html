@@ -17,7 +17,7 @@
 &amp;lt;img src=&quot;planets.jpg&quot; border=&quot;0&quot; usemap=&quot;#planetmap&quot; alt=&quot;Planets&quot; /&amp;gt;
 
        &amp;lt;m">
-<meta property="og:updated_time" content="2015-08-07T07:15:43.314Z">
+<meta property="og:updated_time" content="2015-09-22T15:29:49.344Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端性能优化">
 <meta name="twitter:description" content="一、减少http请求次数1.捆绑文件：多个样式表文件捆绑成一个文件2.CSS Sprites：多个图片拼成一张大图，通过CSS来控制每个小图展示的位置3.Image Map(图片/图像映射区域)：通过坐标来控制显示导航
@@ -264,7 +264,8 @@
 <p>与VS集成比较好的工具如下：<br>YUICompressor - 编译集成，包含在NuGet.<br>AjaxMin  - 编译集成</p>
 <h1 id="十、图片">十、图片</h1><p>1.优化图像<br>尝试把GIF格式转换成PNG格式，看看是否节省空间。大多数情况下是可以压缩的。下面这条简单的命令可以安全地把GIF格式转换为PNG格式：<br>convert image.gif image.png<br>2.优化CSS Sprite<br>-Spirite中水平排列图片，垂直排列会增加文件大小；<br>-Spirite中把颜色较近的组合在一起可以降低颜色数，理想状况是低于256色以便适用PNG8格式；<br>-不要在Spirite的图像中间留有较大空隙。这虽然不大会增加文件大小,但对于用户代理来说它需要更少的内存来把图片解压为像素地图。100×100的图片为1万像素，1000×1000就是100万像素。<br>3.不要在HTML中缩放图片<br>不要通过图片缩放来适应页面，如果你需要小图片，就直接使用小图片吧。</p>
 <p><a href="http://www.cnblogs.com/developersupport/p/webpage-performance-best-practices.html" target="_blank" rel="external">前端优化参考链接</a></p>
-
+<p>最近访客：</p>
+<div class="ds-recent-visitors" data-num-items="50" data-avatar-size="30" id="ds-recent-visitors"></div>
       
     </div>
     
