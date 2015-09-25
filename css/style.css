@@ -33,7 +33,9 @@
   float: left
 } */
 #ds-recent-visitors div img {
-  border-radius:100%
+  border-radius:100%;
+  width: 20px;
+  height: 20px;
 }
 #ds-recent-visitors div:hover img {
   transform: scale(1.5, 1.5);
