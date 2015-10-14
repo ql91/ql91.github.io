@@ -15,7 +15,7 @@ js的4种调用模式：1.方法调用模式2.函数调用模式3.构造器调�
 <meta property="og:description" content="js的函数调用会有两个额外的参数：this和arguments。(arguments是参数组，并非真实的数组，但可以使用.length方法获得长度)
 js的4种调用模式：1.方法调用模式2.函数调用模式3.构造器调用模式4.apply调用模式
 详解如下:1.方法调用模式1234567var myobject=&amp;#123;	value:0,	inc:function()&amp;#123;">
-<meta property="og:updated_time" content="2015-09-22T15:30:34.878Z">
+<meta property="og:updated_time" content="2015-10-14T14:05:12.704Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js函数调用的4种方法">
 <meta name="twitter:description" content="js的函数调用会有两个额外的参数：this和arguments。(arguments是参数组，并非真实的数组，但可以使用.length方法获得长度)
@@ -246,9 +246,6 @@ js的4种调用模式：1.方法调用模式2.函数调用模式3.构造器调�
 <p>2.函数调用模式<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var add=<span class="keyword">function</span>(a,b)&#123;</span><br><span class="line">	alert(this);//this被绑定到window</span><br><span class="line">	<span class="built_in">return</span> a+b;</span><br><span class="line">&#125;</span><br><span class="line">var sum=add(<span class="number">3</span>,<span class="number">4</span>);</span><br><span class="line">alert(sum);</span><br></pre></td></tr></table></figure></p>
 <p>3.构造器调用模式(不使用)</p>
 <p>4.apply调用模式<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var add=<span class="keyword">function</span>(a,b)&#123;</span><br><span class="line">	<span class="built_in">return</span> a+b;</span><br><span class="line">&#125;</span><br><span class="line">var arr=[<span class="number">10</span>,<span class="number">20</span>];</span><br><span class="line">var sum=add.apply(this,arr);//this指针所指向的对象</span><br><span class="line">alert(sum);</span><br></pre></td></tr></table></figure></p>
-<p>最近访客：</p>
-<div class="ds-recent-visitors" data-num-items="50" data-avatar-size="30" id="ds-recent-visitors"></div>
-
 
       
     </div>
