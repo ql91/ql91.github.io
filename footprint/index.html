@@ -169,7 +169,8 @@
         <div class="post-main">
 
             <div class="post-content" itemprop="postContent"><p>最近访客：<br><!-- <div class="ds-recent-visitors" data-num-items="50" data-avatar-size="30" id="ds-recent-visitors"></div> --></p>
-<div class="duoshuo"><br>    <ul class="ds-recent-visitors" data-num-items="50" data-avatar-size="30" id="ds-recent-visitors"></ul><br>    <div class="ds-thread" data-thread-key="<%=key%>" data-title="<%=title%>" data-url="<%=url%>"></div><br>    <!-- 多说评论框 end --><br>    <!-- 多说公共JS代码 start (一个网页只需插入一次) --><br>    <script type="text/javascript"><br>    var duoshuoQuery = {short_name:&lt;%=theme.duoshuo%&gt;};<br>    (function() {<br>        var ds = document.createElement(“script”);<br>        ds.type = “text/javascript”;ds.async = true;<br>        ds.src = (document.location.protocol == “https:” ? “https:” : “http:”) + “//static.duoshuo.com/embed.js”;<br>        ds.charset = “UTF-8”;<br>        (document.getElementsByTagName(“head”)[0]<br>         || document.getElementsByTagName(“body”)[0]).appendChild(ds);<br>    })();<br>    </script><br></div></div>
+<div class="duoshuo"><br>    <!-- 多说评论框 start --><br>    <div class="ds-thread" data-thread-key="<%=key%>" data-title="<%=title%>" data-url="<%=url%>"></div><br>    <!-- 多说评论框 end --><br>    <!-- 多说公共JS代码 start (一个网页只需插入一次) --><br>    <script type="text/javascript"><br>    var duoshuoQuery = {short_name:”&lt;%=theme.duoshuo%&gt;”};<br>    (function() {<br>        var ds = document.createElement(‘script’);<br>        ds.type = ‘text/javascript’;ds.async = true;<br>        ds.src = (document.location.protocol == ‘https:’ ? ‘https:’ : ‘http:’) + ‘//static.duoshuo.com/embed.js’;<br>        ds.charset = ‘UTF-8’;<br>        (document.getElementsByTagName(‘head’)[0]<br>         || document.getElementsByTagName(‘body’)[0]).appendChild(ds);<br>    })();<br>    </script><br>    <!-- 多说公共JS代码 end --><br></div>
+</div>
 
             
 
