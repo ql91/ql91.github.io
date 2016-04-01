@@ -485,6 +485,14 @@ hr,
   flex: 10;
   width: 0;
 }
+.footprint-c {
+  overflow: hidden;
+}
+.post-toc-child-link > li {
+  display: inline-block;
+  float: left;
+  margin-left: 20px;
+}
 #loading {
   position: fixed;
   top: 0;
