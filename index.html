@@ -114,14 +114,14 @@
   <ul class="post-list">
   
     <li class="post-list-item">
-  <article id="post-使用Hexo搭建博客" class="article article-type-post" itemscope itemprop="blogPost">
+  <article id="post-js函数调用的4种方法" class="article article-type-post" itemscope itemprop="blogPost">
     
       
 
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/04/01/使用Hexo搭建博客/">使用Hexo搭建博客</a>
+      <a class="post-title-link" href="/2016/01/04/js函数调用的4种方法/">js函数调用的4种方法</a>
     </h3>
   
 
@@ -129,28 +129,199 @@
 
       <div class="post-meat flex-row">
         <div class="flex-col">
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/调用模式/">调用模式</a></li></ul>
 </div>
-        <time datetime="2016-04-01T07:40:58.222Z" itemprop="datePublished" class="post-tiem">
-  2016-04-01
+        <time datetime="2016-01-04T11:53:48.000Z" itemprop="datePublished" class="post-tiem">
+  2016-01-04
 </time>
       </div>
       <div class="post-content" itemprop="postContent" >
         
-          <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+          <p>js的函数调用会有两个额外的参数：<strong>this</strong>和<strong>arguments</strong>。(arguments是参数组，并非真实的数组，但可以使用.length方法获得长度)</p>
+<p>js的4种调用模式：<br>1.方法调用模式<br>2.函数调用模式<br>3.构造器调用模式<br>4.apply调用模式</p>
+<p>详解如下:<br>1.方法调用模式<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var myobject=&#123;</span><br><span class="line">	value:<span class="number">0</span>,</span><br><span class="line">	inc:<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">                    alert(this.value)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">myobject.inc();</span><br></pre></td></tr></table></figure></p>
+<p>2.函数调用模式<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var add=<span class="keyword">function</span>(a,b)&#123;</span><br><span class="line">	alert(this);//this被绑定到window</span><br><span class="line">	<span class="built_in">return</span> a+b;</span><br><span class="line">&#125;</span><br><span class="line">var sum=add(<span class="number">3</span>,<span class="number">4</span>);</span><br><span class="line">alert(sum);</span><br></pre></td></tr></table></figure></p>
+<p>备注:普通函数的调用this指向全局变量<br>普通的函数调用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">a</span></span>()&#123;&#125;</span><br><span class="line">a();</span><br></pre></td></tr></table></figure></p>
+<p>等价于匿名函数:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span>()&#125;&#123;</span><br><span class="line"></span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></p>
+<p>3.构造器调用模式(不使用)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> Persion(name,age)&#123;</span><br><span class="line">    this.name = name;//this指向所调用的对象</span><br><span class="line">    this.age = age;</span><br><span class="line">&#125;</span><br><span class="line">var obj = new Person(<span class="string">'Singapo91'</span>,<span class="number">88</span>);</span><br></pre></td></tr></table></figure></p>
+<p>4.apply调用模式<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var add=<span class="keyword">function</span>(a,b)&#123;</span><br><span class="line">	<span class="built_in">return</span> a+b;</span><br><span class="line">&#125;</span><br><span class="line">var arr=[<span class="number">10</span>,<span class="number">20</span>];</span><br><span class="line">var sum=add.apply(this,arr);//this指针所指向的对象</span><br><span class="line">alert(sum);</span><br></pre></td></tr></table></figure></p>
 
         
       </div>
       <div class="post-footer clearfix">
-        <a href="/2016/04/01/使用Hexo搭建博客/" class="post-more waves-button-light">MORE</a>
+        <a href="/2016/01/04/js函数调用的4种方法/" class="post-more waves-button-light">MORE</a>
+      </div>
+    
+
+  </article>
+
+
+</li>
+  
+    <li class="post-list-item">
+  <article id="post-js实现文本框内容发生改变触发事件" class="article article-type-post" itemscope itemprop="blogPost">
+    
+      
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/10/10/js实现文本框内容发生改变触发事件/">js实现文本框内容发生改变触发事件</a>
+    </h3>
+  
+
+
+
+      <div class="post-meat flex-row">
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+</div>
+        <time datetime="2015-10-10T07:16:24.000Z" itemprop="datePublished" class="post-tiem">
+  2015-10-10
+</time>
+      </div>
+      <div class="post-content" itemprop="postContent" >
+        
+          <p><code>场景一：在用户动态输入文字的时候，修改提示&#39;您还可以输入XX字&#39;</code><br><code>场景二：动态显示用户输入的文本框内容</code></p>
+<p>oninput,onpropertychange,onchange的用法和区别<br>1.<mark>onchange</mark>触发事件必须满足两个条件：<br><br>a)当前对象属性改变，并且是由键盘或鼠标事件激发的（脚本触发无效）<br><br>b)当前对象失去焦点(onblur)；<br></p>
+<p>2.<mark>onpropertychange</mark>的话，只要当前对象属性发生改变，都会触发事件，但是它是<mark>IE专属</mark>的；<br></p>
+<p>3.<mark>oninput支持ie9以上以及firefox和opera等浏览器</mark>，但有一点不同，它绑定于对象时，并非该对象所有属性改变都能触发事件，它只在对象<mark>value值</mark>发生改变时奏效。<br></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1&gt;输入信息&lt;/h1&gt;</span><br><span class="line">	&lt;input <span class="built_in">type</span>=<span class="string">"text"</span> id=<span class="string">"in"</span>&gt;</span><br><span class="line">	&lt;h2&gt;Console&lt;/h2&gt;</span><br><span class="line">	&lt;div id=<span class="string">"out"</span>&gt;&lt;/div&gt;</span><br><span class="line">	&lt;script&gt;</span><br><span class="line">       window.onload=<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">       	 var input=document.getElementById(<span class="string">"in"</span>);</span><br><span class="line">       	 var out=document.getElementById(<span class="string">"out"</span>);</span><br><span class="line">       /*	 input.oninput=<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">       	 	out.innerHTML=input.value;</span><br><span class="line">       	 &#125;*/</span><br><span class="line">       	 input.onchange=<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">       	 	out.innerHTML=input.value;</span><br><span class="line">       	 &#125;</span><br><span class="line">       	 /*input.onpropertychange=<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">       	 	out.innerHTML=input.value;</span><br><span class="line">       	 &#125;*/</span><br><span class="line">       &#125;</span><br><span class="line">	&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+        
+      </div>
+      <div class="post-footer clearfix">
+        <a href="/2015/10/10/js实现文本框内容发生改变触发事件/" class="post-more waves-button-light">MORE</a>
+      </div>
+    
+
+  </article>
+
+
+</li>
+  
+    <li class="post-list-item">
+  <article id="post-attachEvent和addEventListener区别以及兼容" class="article article-type-post" itemscope itemprop="blogPost">
+    
+      
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/08/28/attachEvent和addEventListener区别以及兼容/">attachEvent和addEventListener区别以及兼容</a>
+    </h3>
+  
+
+
+
+      <div class="post-meat flex-row">
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/兼容/">兼容</a></li></ul>
+</div>
+        <time datetime="2015-08-28T07:47:27.000Z" itemprop="datePublished" class="post-tiem">
+  2015-08-28
+</time>
+      </div>
+      <div class="post-content" itemprop="postContent" >
+        
+          <p>attachEvent和addEventListener都是动态为网页内的元素添加一个事件。通常你想为某个按扭添加一个单击事件时．你都会在按扭内写上onclick=事件名称.但是若对象需要绑定多个事件则无法使用这种方式。所以我们来看看下面的代码：</p>
+<p>区别:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">	&lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;input id=<span class="string">"a"</span> <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"点我"</span> /&gt;注意该按扭没有任何事件&lt;br/&gt;</span><br><span class="line">    &lt;input id=<span class="string">"b"</span> <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"点我绑定事件"</span> onclick=<span class="string">"att_Event()"</span> /&gt;点击该按扭为上面的按扭添加一个事件．</span><br><span class="line">	&lt;script <span class="built_in">type</span>=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">	  <span class="keyword">function</span> <span class="function"><span class="title">att_Event</span></span>()&#123;</span><br><span class="line">	  	var btn_a=document.getElementById(<span class="string">'a'</span>);</span><br><span class="line">	  	btn_a.value=<span class="string">"点我有事件"</span>;</span><br><span class="line">	   //方式：非ie都支持,但ie9以上支持</span><br><span class="line">	   btn_a.addEventListener(<span class="string">'click'</span>,Hello_ok,<span class="literal">false</span>);</span><br><span class="line">	   /*不一样的是，该方法不可以把同一事件绑定多次,但支持把不同的事件绑定到一个元素,<span class="literal">false</span>代表支持浏览器事件捕获功能，<span class="literal">true</span>代表支持浏览事件冒泡功能． 事件名称有click、mouseover、keydown等</span><br><span class="line">	   */</span><br><span class="line">	    </span><br><span class="line">	   //方式：只支持ie游览器,且版本<span class="number">11</span>以下支持,<span class="number">11</span>不支持</span><br><span class="line">	   //btn_a.attachEvent(<span class="string">'onclick'</span>,Hello_ok);</span><br><span class="line">	   /*attachEvent支持为某个元素绑定多个事件．执行顺序是，后绑定的先执行</span><br><span class="line">         事件名称有onclick、onmouseover、onkeydown等</span><br><span class="line">	   */</span><br><span class="line">	  &#125;</span><br><span class="line"></span><br><span class="line">	  <span class="keyword">function</span> <span class="function"><span class="title">Hello_ok</span></span>()&#123;</span><br><span class="line">	  	alert(<span class="string">"Hello word"</span>);</span><br><span class="line">	  &#125;</span><br><span class="line">	&lt;/script&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>兼容：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">	&lt;title&gt;&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;input id=<span class="string">"a"</span> <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"点我"</span> /&gt;注意该按扭没有任何事件&lt;br/&gt;</span><br><span class="line">    &lt;input id=<span class="string">"b"</span> <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"点我绑定事件"</span> onclick=<span class="string">"att_Event()"</span>/&gt;点击该按扭为上面的按扭添加一个事件．</span><br><span class="line">	&lt;script&gt;</span><br><span class="line">        <span class="keyword">function</span> <span class="function"><span class="title">att_Event</span></span>()&#123;</span><br><span class="line">        	var btn_a=document.getElementById(<span class="string">'a'</span>);</span><br><span class="line">        	a.value=<span class="string">"点我有事件"</span>;</span><br><span class="line"></span><br><span class="line">        	/*在网上看到document.all(返回所有页面元素这两个的集合)</span><br><span class="line">        	是判断是否为ie游览器的方法,但是经测试发现document.all</span><br><span class="line">        	的方法ff和chrome都支持，因此不能作为判断是否为ie游览器。</span><br><span class="line">        	经测试可以使用JavaScript框架的navigator的userAgent的属</span><br><span class="line">        	性来判断游览器的类别：</span><br><span class="line">        	<span class="number">1</span>.是否为ff;</span><br><span class="line">        	<span class="number">2</span>.是否为ie[&lt;mark&gt;注：ie11不支持&lt;/mark&gt;];</span><br><span class="line">        	<span class="number">3</span>.是否为其他游览器.</span><br><span class="line">        	*/</span><br><span class="line">             </span><br><span class="line">            <span class="keyword">function</span> <span class="function"><span class="title">isIE</span></span>()&#123;</span><br><span class="line">                <span class="keyword">if</span> ((navigator.userAgent.indexOf(<span class="string">'MSIE'</span>) &gt;= <span class="number">0</span>) &amp;&amp; (navigator.userAgent.indexOf(<span class="string">'Opera'</span>) &lt; <span class="number">0</span>))&#123;</span><br><span class="line">	            	alert(<span class="string">'你是使用IE'</span>);</span><br><span class="line">	            	<span class="built_in">return</span> <span class="literal">true</span>;</span><br><span class="line">	            &#125;<span class="keyword">else</span> <span class="keyword">if</span> (navigator.userAgent.indexOf(<span class="string">'Firefox'</span>) &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">	            	alert(<span class="string">'你是使用Firefox'</span>);</span><br><span class="line">	            	<span class="built_in">return</span> <span class="literal">false</span>;</span><br><span class="line">	            &#125;<span class="keyword">else</span> <span class="keyword">if</span> (navigator.userAgent.indexOf(<span class="string">'Opera'</span>) &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">	            	alert(<span class="string">'你是使用Opera'</span>);</span><br><span class="line">	            	<span class="built_in">return</span> <span class="literal">false</span>;</span><br><span class="line">	            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	            	alert(<span class="string">'你是使用其他的浏览器浏览网页！'</span>);</span><br><span class="line">	            	<span class="built_in">return</span> <span class="literal">false</span>;</span><br><span class="line">	            &#125;	</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        	<span class="keyword">if</span>(isIE())&#123;//返回所有页面元素这两个的集合,这是ie游览器特有的属性，放在<span class="keyword">if</span>中表示这是ie</span><br><span class="line">        		a.attachEvent(<span class="string">'onclick'</span>,Hello_ok);</span><br><span class="line">        	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        		a.addEventListener(<span class="string">'click'</span>,Hello_ok,<span class="literal">false</span>);</span><br><span class="line">        	&#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">function</span> <span class="function"><span class="title">Hello_ok</span></span>()&#123;</span><br><span class="line">        	alert(<span class="string">"hello word"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">	&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>备注:JavaScript框架的navigator的userAgent的属性也可以用作判断是否为移动设备</p>
+
+        
+      </div>
+      <div class="post-footer clearfix">
+        <a href="/2015/08/28/attachEvent和addEventListener区别以及兼容/" class="post-more waves-button-light">MORE</a>
+      </div>
+    
+
+  </article>
+
+
+</li>
+  
+    <li class="post-list-item">
+  <article id="post-setTimeout的作用域一级this的指向" class="article article-type-post" itemscope itemprop="blogPost">
+    
+      
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/08/17/setTimeout的作用域一级this的指向/">setTimeout的作用域以及this的指向</a>
+    </h3>
+  
+
+
+
+      <div class="post-meat flex-row">
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/setTimeout作用域/">setTimeout作用域</a></li></ul>
+</div>
+        <time datetime="2015-08-17T10:37:40.000Z" itemprop="datePublished" class="post-tiem">
+  2015-08-17
+</time>
+      </div>
+      <div class="post-content" itemprop="postContent" >
+        
+          <p>setTimeout中的两个this到底指向谁？？为了便于区分，我们把setTimeout调用环境下的this称之为第一个this，把延迟执行函数中的this称之为第二个this，并在代码注释中标出来，方便您区分。先说得出的结论：第一个this的指向是需要根据上下文来确定的，默认为window；第二个this就是指向window。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">Foo</span></span>() &#123;</span><br><span class="line">    this.value = <span class="number">42</span>;</span><br><span class="line">    this.method = <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">        // this 指向全局对象</span><br><span class="line">        alert(this)   // 输出window  第二个this</span><br><span class="line">        alert(this.value); // 输出：undefined   第二个this</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="built_in">set</span>Timeout(this.method, <span class="number">500</span>);  // this指向Foo的实例对象  第一个this</span><br><span class="line">&#125;</span><br><span class="line">new Foo();</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">var value=<span class="number">33</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">Foo</span></span>() &#123;</span><br><span class="line">    this.value = <span class="number">42</span>;</span><br><span class="line">    this.method = <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">        // this 指向全局对象</span><br><span class="line">        alert(this)   // 输出window    第二个this</span><br><span class="line">        alert(this.value); // 输出：<span class="number">33</span>   第二个this</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="built_in">set</span>Timeout(this.method, <span class="number">500</span>);  // 这里的this指向Foo的实例对象  第一个this</span><br><span class="line">&#125;</span><br><span class="line">new Foo();</span><br><span class="line"></span><br><span class="line">&lt;!-- 等价于 --&gt;</span><br><span class="line">var value=<span class="number">33</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">Foo</span></span>() &#123;</span><br><span class="line">    this.value = <span class="number">42</span>;</span><br><span class="line">    <span class="built_in">set</span>Timeout(<span class="function"><span class="title">function</span></span>()&#123;alert(this);alert(this.value)&#125;, <span class="number">500</span>);  // 先后输出 window   <span class="number">33</span>  这里是第二个this</span><br><span class="line">&#125;</span><br><span class="line">new Foo();</span><br></pre></td></tr></table></figure>
+<p><strong>代码验证</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">test</span> = <span class="string">"in the window"</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span>Timeout(<span class="function"><span class="title">function</span></span>() &#123;alert(<span class="string">'outer '</span> + <span class="built_in">test</span>)&#125;, <span class="number">0</span>); // 输出 outer <span class="keyword">in</span> the window ，默认在window的全局作用域下</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">f</span></span>() &#123;</span><br><span class="line">  var <span class="built_in">test</span> = <span class="string">'in the f!'</span>;  // 局部变量，window作用域不可访问</span><br><span class="line">  <span class="built_in">set</span>Timeout(<span class="string">'alert("inner " + test)'</span>, <span class="number">0</span>);  // 输出 inner <span class="keyword">in</span> the window, 虽然在f方法的中调用，但执行代码(字符串形式的代码)默认在window全局作用域下，<span class="built_in">test</span>也指向全局的<span class="built_in">test</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f();</span><br></pre></td></tr></table></figure></p>
+<p>在f方法中，setTimeout中的test的值是外层的test，而不是f作用域中的test。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">test</span> = <span class="string">"in the window"</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span>Timeout(<span class="function"><span class="title">function</span></span>() &#123;alert(<span class="string">'outer'</span> + <span class="built_in">test</span>)&#125;, <span class="number">0</span>); // outer <span class="keyword">in</span> the window  ，没有问题，在全局下调用，访问全局中的<span class="built_in">test</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">f</span></span>() &#123;</span><br><span class="line">  var <span class="built_in">test</span> = <span class="string">'in the f!'</span>;</span><br><span class="line">  <span class="built_in">set</span>Timeout(<span class="function"><span class="title">function</span></span>()&#123;alert(<span class="string">'inner '</span>+ <span class="built_in">test</span>)&#125;, <span class="number">0</span>);  // inner <span class="keyword">in</span> the f!  有问题，不是说好了执行函数中的this指向的是window吗？那<span class="built_in">test</span>也应该对应window下                                                      //  的值才对，怎么<span class="built_in">test</span>的值却是 f()中的值呢？？？？</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f();</span><br><span class="line"></span><br><span class="line">&lt;!-- 等价于 --&gt;</span><br><span class="line">var <span class="built_in">test</span> = <span class="string">"in the window"</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span>Timeout(<span class="function"><span class="title">function</span></span>() &#123;alert(<span class="string">'outer '</span> + <span class="built_in">test</span>)&#125;, <span class="number">0</span>); // <span class="keyword">in</span> the window</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">f</span></span>() &#123;</span><br><span class="line">  var <span class="built_in">test</span> = <span class="string">'in the f!'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="function"><span class="title">ff</span></span>() &#123;alert(<span class="string">'inner '</span> + <span class="built_in">test</span>)&#125; // 能访问到f中的<span class="built_in">test</span>局部变量</span><br><span class="line"></span><br><span class="line">  <span class="built_in">set</span>Timeout(ff, <span class="number">0</span>);  // inner <span class="keyword">in</span> the f!</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f();</span><br></pre></td></tr></table></figure>
+<p>博文链接[<a href="http://www.geekcome.com/content-10-2517-1.html" target="_blank" rel="external">http://www.geekcome.com/content-10-2517-1.html</a>]</p>
+
+        
+      </div>
+      <div class="post-footer clearfix">
+        <a href="/2015/08/17/setTimeout的作用域一级this的指向/" class="post-more waves-button-light">MORE</a>
+      </div>
+    
+
+  </article>
+
+
+</li>
+  
+    <li class="post-list-item">
+  <article id="post-JavaScrip命名空间模式" class="article article-type-post" itemscope itemprop="blogPost">
+    
+      
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/08/17/JavaScrip命名空间模式/">JavaScrip命名空间模式</a>
+    </h3>
+  
+
+
+
+      <div class="post-meat flex-row">
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript命名空间/">JavaScript命名空间</a></li></ul>
+</div>
+        <time datetime="2015-08-17T03:27:33.000Z" itemprop="datePublished" class="post-tiem">
+  2015-08-17
+</time>
+      </div>
+      <div class="post-content" itemprop="postContent" >
+        
+          <p>命名空间是通过为项目或库创建一个全局对象，然后将所有的功能添加到该全局变量中。同时有效防止函数名、类名和其他人冲突。</p>
+<p>在学习JavaScript命名空间模式之前，我们先来了解简单的命名空间。</p>
+<h3 id="简单的命名空间">简单的命名空间</h3><p>由于JavaScript没有文件作用域，不同的函数分散在不同的文件中，甚至由不同的人编写，重名的概率大大增加。是不是足够小心就可以了呢？也不尽然，还有些意外情况，比如经常会用到继承，于是写了一个没出现过的函数名extend，不料在EcmaScript5中加入了extend函数，命名空间的必要性就体现出来了。<br>JavaScript有函数的作用域，可以利用这点把自定义的函数写到一个函数体内，这样函数内的变量、对象、函数就像在一个命名空间内一样和外部隔离。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;input <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"test"</span> onclick=<span class="string">"(new namespace()).alert();"</span>/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;script <span class="built_in">type</span>=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">          <span class="keyword">function</span> <span class="function"><span class="title">namespace</span></span>()&#123;</span><br><span class="line">              this.alert=<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">                   onsole.log(<span class="string">'test'</span>);</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">    &lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>这样自定义的alert方法就不会和window的alert冲突了。</p>
+<p>每次调用的时候都要实例化对象，然后调用其方法，很麻烦，那我们可以这样简化,如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;input <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"test"</span> onclick=<span class="string">"NS.alert();"</span>/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;script <span class="built_in">type</span>=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">         (<span class="keyword">function</span> <span class="function"><span class="title">namespace</span></span>()&#123;</span><br><span class="line">               this.alert=<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">                    console.log(<span class="string">'test'</span>);</span><br><span class="line">                  &#125;</span><br><span class="line"></span><br><span class="line">                window.NS=this;/*在自定义namespace函数最后把this赋值为window的NS属性，在调用的时候直接使用NS.xx就可以了。*/</span><br><span class="line">          &#125;)();</span><br><span class="line">      &lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>注:这里用到匿名函数，匿名函数是‘立即执行函数’</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span> <span class="function"><span class="title">xxx</span></span>()&#123;</span><br><span class="line">	//<span class="keyword">function</span> body</span><br><span class="line">&#125;)();&lt;!-- 最后的括号表示立即执行 ,可省略xxx --&gt;</span><br><span class="line">&lt;!-- 等价于 --&gt;</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">xxx</span></span>()&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line">xxx();</span><br></pre></td></tr></table></figure>
+<p>将匿名函数的方法定义到prototype中<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="title">fucntion</span></span>()&#123;</span><br><span class="line">	var _NS=<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	_NS.prototype.alert=<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">		console.log(<span class="string">'test'</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	window.NS=new _NS();</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
+<h3 id="JavaScript创建命名空间">JavaScript创建命名空间</h3><p><mark><strong>非常重要</strong></mark><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">// 编写一个namespace函数，要求此函数能够实现多层命名空间的嵌套</span><br><span class="line">// 声明一个全局对象Namespace，用来注册命名空间</span><br><span class="line">var Namespace = &#123;&#125;;</span><br><span class="line">// 全局对象仅仅存在register函数，参数为名称空间全路径，如<span class="string">"Grandsoft.GEA"</span></span><br><span class="line">Namespace.register = <span class="keyword">function</span>(fullPath) &#123;</span><br><span class="line">    // 将命名空间切成N部分, 比如Grandsoft、GEA等</span><br><span class="line">    var sArray = fullPath.split(<span class="string">'.'</span>);</span><br><span class="line">    var sEval = <span class="string">""</span>;</span><br><span class="line">    var str = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">for</span> (var i = <span class="number">0</span>; i &lt; sArray.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i != <span class="number">0</span>) str += <span class="string">"."</span>;</span><br><span class="line">        str += sArray[i];</span><br><span class="line">        //依次创建构造命名空间对象（假如不存在的话）的语句,比如先创建Grandsoft，然后创建Grandsoft.GEA，依次下去</span><br><span class="line">        sEval += <span class="string">"if (typeof("</span> + str + <span class="string">") == 'undefined') "</span> + str + <span class="string">" = new Object();"</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (sEval != <span class="string">""</span>) <span class="built_in">eval</span>(sEval);</span><br><span class="line">&#125;;</span><br><span class="line">// 上面就是在JavaScript中模拟命名空间机制的完整实现，使用方式如下： </span><br><span class="line">// 注册命名空间Grandsoft.GEA, Grandsoft.GCM</span><br><span class="line">Namespace.register(<span class="string">"Grandsoft.GEA"</span>);</span><br><span class="line">Namespace.register(<span class="string">"Grandsoft.GCM"</span>); </span><br><span class="line">// 在Grandsoft.GEA命名空间里面声明类Person</span><br><span class="line">Grandsoft.GEA.Person = <span class="keyword">function</span>(name, age)</span><br><span class="line">&#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">    this.age = age;</span><br><span class="line">&#125; </span><br><span class="line">// 给类Person添加一个公共方法show()</span><br><span class="line">Grandsoft.GEA.Person.prototype.show = <span class="function"><span class="title">function</span></span>()</span><br><span class="line">&#123;</span><br><span class="line">    alert(this.name + <span class="string">" is "</span> + this.age + <span class="string">" years old!"</span>);</span><br><span class="line">&#125; </span><br><span class="line">// 演示如何使用类Person</span><br><span class="line">var p = new Grandsoft.GEA.Person(<span class="string">"Singapo91"</span>, <span class="number">21</span>);</span><br><span class="line">p.show();</span><br></pre></td></tr></table></figure></p>
+
+        
+      </div>
+      <div class="post-footer clearfix">
+        <a href="/2015/08/17/JavaScrip命名空间模式/" class="post-more waves-button-light">MORE</a>
       </div>
     
 
@@ -160,6 +331,12 @@
 </li>
   
   </ul>
+  
+    <nav id="page-nav">
+      <div class="inner">
+        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+      </div>
+    </nav>
   
 
 

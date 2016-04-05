@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>attachEvent和addEventListener区别以及兼容 | Lu&#39;blog | Simple is beautiful, the pursuit of simple, efficient code.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="兼容">
+  
+    <link rel="alternative" href="/atom.xml" title="Lu&#39;blog" type="application/atom+xml">
+  
+  <link rel="shortcut icon" href="/img/favicon.jpg">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <nav id="menu"  >
+   <div class="inner">
+  <a href="javascript:;" class="header-icon waves-circle-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+  </a>
+  <div class="brand-wrap">
+    <div class="brand">
+      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+      <hgroup class="introduce">
+        <h5 class="nickname">Singa91</h5>
+        <a href="mailto:Singapo91@163.com" title="Singapo91@163.com" class="mail">Singapo91@163.com</a>
+      </hgroup>
+    </div>
+  </div>
+  <ul class="nav">
+    
+        <li class="waves-block">
+          <a href="/"  >
+            <i class="icon icon-lg icon-home"></i>
+            首页
+          </a>
+        </li>
+    
+        <li class="waves-block">
+          <a href="/archives"  >
+            <i class="icon icon-lg icon-archives"></i>
+            归档
+          </a>
+        </li>
+    
+        <li class="waves-block">
+          <a href="/tags/"  >
+            <i class="icon icon-lg icon-tags"></i>
+            标签
+          </a>
+        </li>
+    
+        <li class="waves-block">
+          <a href="https://github.com/ql91" target="_blank" >
+            <i class="icon icon-lg icon-github"></i>
+            Github
+          </a>
+        </li>
+    
+        <li class="waves-block">
+          <a href="http://www.weibo.com/ql912015" target="_blank" >
+            <i class="icon icon-lg icon-weibo"></i>
+            微博
+          </a>
+        </li>
+    
+        <li class="waves-block">
+          <a href="/footprint"  >
+            <i class="icon icon-lg icon-link"></i>
+            链接
+          </a>
+        </li>
+    
+  </ul>
+
+  <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>Lu&#39;blog &copy; 2016</p>
+  <!--<p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>-->
+</footer>
+
+</div>
+
+  </nav>
+  <main id="main">
+    <header class="header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-circle-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">attachEvent和addEventListener区别以及兼容</div>
+        
+        <a href="javascript:;" class="header-icon waves-circle-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header">
+  <div class="container">
+    <h1 class="author">attachEvent和addEventListener区别以及兼容</h1>
+    <h5 class="subtitle">2015-08-28</h5>
+  </div>
+</header>
+
+    <div class="container body-wrap">
+      
+  <article id="post-attachEvent和addEventListener区别以及兼容" class="article article-type-post" itemscope itemprop="blogPost">
+    
+      <div class="post-meat flex-row">
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/兼容/">兼容</a></li></ul>
+</div>
+      </div>
+      <div class="post-body">
+
+        <aside class="post-widget" id="post-widget">
+
+          
+          <div class="post-share" id="post-share" data-title="attachEvent和addEventListener区别以及兼容" data-pic="/img/logo.jpg" data-summary="null" data-url="http://yoursite.com/2015/08/28/attachEvent和addEventListener区别以及兼容/index.html">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+          
+
+          
+          <nav class="post-toc-wrap" id="post-toc">
+            
+          </nav>
+          
+        </aside>
+
+        <div class="post-main">
+
+            <div class="post-content" itemprop="postContent"><p>attachEvent和addEventListener都是动态为网页内的元素添加一个事件。通常你想为某个按扭添加一个单击事件时．你都会在按扭内写上onclick=事件名称.但是若对象需要绑定多个事件则无法使用这种方式。所以我们来看看下面的代码：</p>
+<p>区别:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">	&lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;input id=<span class="string">"a"</span> <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"点我"</span> /&gt;注意该按扭没有任何事件&lt;br/&gt;</span><br><span class="line">    &lt;input id=<span class="string">"b"</span> <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"点我绑定事件"</span> onclick=<span class="string">"att_Event()"</span> /&gt;点击该按扭为上面的按扭添加一个事件．</span><br><span class="line">	&lt;script <span class="built_in">type</span>=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">	  <span class="keyword">function</span> <span class="function"><span class="title">att_Event</span></span>()&#123;</span><br><span class="line">	  	var btn_a=document.getElementById(<span class="string">'a'</span>);</span><br><span class="line">	  	btn_a.value=<span class="string">"点我有事件"</span>;</span><br><span class="line">	   //方式：非ie都支持,但ie9以上支持</span><br><span class="line">	   btn_a.addEventListener(<span class="string">'click'</span>,Hello_ok,<span class="literal">false</span>);</span><br><span class="line">	   /*不一样的是，该方法不可以把同一事件绑定多次,但支持把不同的事件绑定到一个元素,<span class="literal">false</span>代表支持浏览器事件捕获功能，<span class="literal">true</span>代表支持浏览事件冒泡功能． 事件名称有click、mouseover、keydown等</span><br><span class="line">	   */</span><br><span class="line">	    </span><br><span class="line">	   //方式：只支持ie游览器,且版本<span class="number">11</span>以下支持,<span class="number">11</span>不支持</span><br><span class="line">	   //btn_a.attachEvent(<span class="string">'onclick'</span>,Hello_ok);</span><br><span class="line">	   /*attachEvent支持为某个元素绑定多个事件．执行顺序是，后绑定的先执行</span><br><span class="line">         事件名称有onclick、onmouseover、onkeydown等</span><br><span class="line">	   */</span><br><span class="line">	  &#125;</span><br><span class="line"></span><br><span class="line">	  <span class="keyword">function</span> <span class="function"><span class="title">Hello_ok</span></span>()&#123;</span><br><span class="line">	  	alert(<span class="string">"Hello word"</span>);</span><br><span class="line">	  &#125;</span><br><span class="line">	&lt;/script&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>兼容：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">	&lt;title&gt;&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;input id=<span class="string">"a"</span> <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"点我"</span> /&gt;注意该按扭没有任何事件&lt;br/&gt;</span><br><span class="line">    &lt;input id=<span class="string">"b"</span> <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"点我绑定事件"</span> onclick=<span class="string">"att_Event()"</span>/&gt;点击该按扭为上面的按扭添加一个事件．</span><br><span class="line">	&lt;script&gt;</span><br><span class="line">        <span class="keyword">function</span> <span class="function"><span class="title">att_Event</span></span>()&#123;</span><br><span class="line">        	var btn_a=document.getElementById(<span class="string">'a'</span>);</span><br><span class="line">        	a.value=<span class="string">"点我有事件"</span>;</span><br><span class="line"></span><br><span class="line">        	/*在网上看到document.all(返回所有页面元素这两个的集合)</span><br><span class="line">        	是判断是否为ie游览器的方法,但是经测试发现document.all</span><br><span class="line">        	的方法ff和chrome都支持，因此不能作为判断是否为ie游览器。</span><br><span class="line">        	经测试可以使用JavaScript框架的navigator的userAgent的属</span><br><span class="line">        	性来判断游览器的类别：</span><br><span class="line">        	<span class="number">1</span>.是否为ff;</span><br><span class="line">        	<span class="number">2</span>.是否为ie[&lt;mark&gt;注：ie11不支持&lt;/mark&gt;];</span><br><span class="line">        	<span class="number">3</span>.是否为其他游览器.</span><br><span class="line">        	*/</span><br><span class="line">             </span><br><span class="line">            <span class="keyword">function</span> <span class="function"><span class="title">isIE</span></span>()&#123;</span><br><span class="line">                <span class="keyword">if</span> ((navigator.userAgent.indexOf(<span class="string">'MSIE'</span>) &gt;= <span class="number">0</span>) &amp;&amp; (navigator.userAgent.indexOf(<span class="string">'Opera'</span>) &lt; <span class="number">0</span>))&#123;</span><br><span class="line">	            	alert(<span class="string">'你是使用IE'</span>);</span><br><span class="line">	            	<span class="built_in">return</span> <span class="literal">true</span>;</span><br><span class="line">	            &#125;<span class="keyword">else</span> <span class="keyword">if</span> (navigator.userAgent.indexOf(<span class="string">'Firefox'</span>) &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">	            	alert(<span class="string">'你是使用Firefox'</span>);</span><br><span class="line">	            	<span class="built_in">return</span> <span class="literal">false</span>;</span><br><span class="line">	            &#125;<span class="keyword">else</span> <span class="keyword">if</span> (navigator.userAgent.indexOf(<span class="string">'Opera'</span>) &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">	            	alert(<span class="string">'你是使用Opera'</span>);</span><br><span class="line">	            	<span class="built_in">return</span> <span class="literal">false</span>;</span><br><span class="line">	            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	            	alert(<span class="string">'你是使用其他的浏览器浏览网页！'</span>);</span><br><span class="line">	            	<span class="built_in">return</span> <span class="literal">false</span>;</span><br><span class="line">	            &#125;	</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        	<span class="keyword">if</span>(isIE())&#123;//返回所有页面元素这两个的集合,这是ie游览器特有的属性，放在<span class="keyword">if</span>中表示这是ie</span><br><span class="line">        		a.attachEvent(<span class="string">'onclick'</span>,Hello_ok);</span><br><span class="line">        	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        		a.addEventListener(<span class="string">'click'</span>,Hello_ok,<span class="literal">false</span>);</span><br><span class="line">        	&#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">function</span> <span class="function"><span class="title">Hello_ok</span></span>()&#123;</span><br><span class="line">        	alert(<span class="string">"hello word"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">	&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>备注:JavaScript框架的navigator的userAgent的属性也可以用作判断是否为移动设备</p>
+</div>
+
+            
+<nav class="post-nav flex-row">
+  <div class="flex-col waves-block prev">
+    
+      <a href="/2015/10/10/js实现文本框内容发生改变触发事件/" title="js实现文本框内容发生改变触发事件" id="post-prev" class="post-nav-link">
+        <i class="icon icon-chevron-left"></i>
+        <span class="article-nav-title">上一篇</span>
+      </a>
+    
+  </div>
+  <div class="flex-col waves-block next">
+    
+      <a href="/2015/08/17/setTimeout的作用域一级this的指向/" title="setTimeout的作用域以及this的指向" id="post-next" class="post-nav-link">
+        <span class="article-nav-title">下一篇</span>
+        <i class="icon icon-chevron-right"></i>
+      </a>
+    
+  </div>
+
+</nav>
+
+
+
+            
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="attachEvent和addEventListener区别以及兼容" data-title="attachEvent和addEventListener区别以及兼容" data-url="http://yoursite.com/2015/08/28/attachEvent和addEventListener区别以及兼容/index.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"ql91"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	 <p>最新访客:<ul class="ds-recent-visitors" data-num-items="50" data-avatar-size="30" id="ds-recent-visitors"></ul></p>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+
+        </div>
+
+      </div>
+
+    
+
+  </article>
+
+
+
+    </div>
+  </main>
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-circle-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<div class="global-share" id="global-share" data-title="attachEvent和addEventListener区别以及兼容" data-pic="/img/logo.jpg" data-summary="null" data-url="http://yoursite.com/2015/08/28/attachEvent和addEventListener区别以及兼容/index.html">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+<!--<script type="text/javascript">
+var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cspan id='cnzz_stat_icon_1258310100' style='display:none' %3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1258310100%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));
+</script>-->
+<script src="http://s95.cnzz.com/z_stat.php?id=1258310100&web_id=1258310100" language="JavaScript"></script>
+<!--<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?2433318d8cbf811d9440e206441a100c";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>-->
+
+
+
+
+
+
+</body>
+</html>
