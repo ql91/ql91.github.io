@@ -114,6 +114,56 @@
   <ul class="post-list">
   
     <li class="post-list-item">
+  <article id="pgae-移动开发需要注意的事项" class="article article-type-pgae" itemscope itemprop="blogPost">
+    
+      
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/04/06/移动开发需要注意的事项/">移动开发需要注意的事项</a>
+    </h3>
+  
+
+
+
+      <div class="post-meat flex-row">
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/移动开发/">移动开发</a></li></ul>
+</div>
+        <time datetime="2016-04-06T03:46:32.000Z" itemprop="datePublished" class="post-tiem">
+  2016-04-06
+</time>
+      </div>
+      <div class="post-content" itemprop="postContent" >
+        
+          <p>在介绍移动开发注意事项前,得先搞清楚一个概念”移动前端开发和 Web 前端开发的区别是什么?”,推荐知乎上的<a href="https://www.zhihu.com/question/20269059" target="_blank" rel="external">回答</a></p>
+<p>1、首先我们来看看webkit内核中的一些私有的meta标签，这些meta标签在开发webapp时起到非常重要的作用<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta content=<span class="string">"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"</span> name=<span class="string">"viewport"</span>&gt;</span><br><span class="line">&lt;meta content=<span class="string">"yes"</span> name=<span class="string">"apple-mobile-web-app-capable"</span>&gt;</span><br><span class="line">&lt;meta content=<span class="string">"black"</span> name=<span class="string">"apple-mobile-web-app-status-bar-style"</span>&gt;</span><br><span class="line">&lt;meta content=<span class="string">"telephone=no"</span> name=<span class="string">"format-detection"</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p>第一个meta标签表示：强制让文档的宽度与设备的宽度保持1:1，并且文档最大的宽度比例是1.0，且不允许用户点击屏幕放大浏览；<br>第二个meta标签是iphone设备中的safari私有meta标签，它表示：允许全屏模式浏览；<br>第三个meta标签也是iphone的私有标签，它指定的iphone中safari顶端的状态条的样式；<br>第四个meta标签表示：告诉设备忽略将页面中的数字识别为电话号码</p>
+<p>2、HTML5标签的使用<br>在开始编写webapp时，哥建议前端工程师使用HTML5，而放弃HTML4，因为HTML5可以实现一些HTML4中无法实现的丰富的WEB应用程序的体验，可以减少开发者很多的工作量，当然了你决定使用HTML5前，一定要对此非常熟悉，要知道HTML5的新标签的作用。比如定义一块内容或文章区域可使用section标签，定义导航条或选项卡可以直接使用nav标签等等。</p>
+<p>3、放弃CSS float属性<br>在项目开发过程中可以会遇到内容排列显示的布局，假如你遇见这样的视觉稿，哥建议你放弃float，可以直接使用display:inline-block;</p>
+<p>4、利用CSS3边框背景属性<br>这个按钮有圆角效果，有内发光效果还有高光效果，这样的按钮使用CSS3写是无法写出来的，当然圆角可以使用CSS3来写，但高光和内发光却无法使用CSS3编写，这个时候你不妨使用-webkit-border-image来定义这个按钮的样式。<br>-webkit-border-image就个很复杂的样式属性。</p>
+<p>5、自适应布局模式<br>在编写CSS时，我不建议前端工程师把容器（不管是外层容器还是内层）的宽度定死。为达到适配各种手持设备，我建议前端工程师使用自适应布局模式（支付宝采用了自适应布局模式），因为这样做可以让你的页面在ipad、itouch、ipod、iphone、android、web safarik、chrome都能够正常的显示，你无需再次考虑设备的分辨率</p>
+<p>6、如何去除Android平台中对邮箱地址的识别<br>看过iOS webapp API的同学都知道iOS提供了一个meta标签:用于禁用iOS对页面中电话号码的自动识别。在iOS中是不自动识别邮件地址的，但在Android平台，它会自动检测邮件地址，当用户touch到这个邮件地址时，Android会弹出一个框提示用户发送邮件，如果你不想Android自动识别页面中的邮件地址，你不妨加上这样一句meta标签在head中<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta content=<span class="string">"email=no"</span> name=<span class="string">"format-detection"</span> /&gt;</span><br></pre></td></tr></table></figure></p>
+<p>7、如何去除iOS和Android中的输入URL的控件条<br>你的老板或者PD或者交互设计师可能会要求你：能否让我们的webapp更加像nativeapp，我不想让用户看见那个输入url的控件条？<br>答案是可以做到的。我们可以利用一句简单的javascript代码来实现这个效果<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span>Timeout(scrollTo,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br></pre></td></tr></table></figure></p>
+<p>请注意，这句代码必须放在window.onload里才能够正常的工作，而且你的当前文档的内容高度必须是高于窗口的高度时，这句代码才能有效的执行。</p>
+<p>8、如何解决盒子边框溢出<br>当你指定了一个块级元素时，并且为其定义了边框，设置了其宽度为100％。在移动设备开发过程中我们通常会对文本框定义为宽度100％，将其定义为块级元素以实现全屏自适应的样式，但此时你会发现，该元素的边框(左右)各1个像素会溢了文档，导致出现横向滚动条，为解决这一问题，我们可以为其添加一个特殊的样式-webkit-box-sizing:border-box;用来指定该盒子的大小包括边框的宽度。</p>
+<p>后面会继续整理收集</p>
+<p>友情链接：<br><a href="http://alloyteam.github.io/Spirit/modules/Standard/" target="_blank" rel="external">Alloyteam移动开发规范概述</a><br>！！！<a href="https://github.com/jtyjty99999/mobileTech" target="_blank" rel="external">移动开发资源集合</a><br>！！！<a href="http://www.css88.com/archives/5480" target="_blank" rel="external">移动端不得不了解的html5 head标签</a></p>
+
+        
+      </div>
+      <div class="post-footer clearfix">
+        <a href="/2016/04/06/移动开发需要注意的事项/" class="post-more waves-button-light">MORE</a>
+      </div>
+    
+
+  </article>
+
+
+</li>
+  
+    <li class="post-list-item">
   <article id="post-js函数调用的4种方法" class="article article-type-post" itemscope itemprop="blogPost">
     
       
@@ -276,52 +326,6 @@
       </div>
       <div class="post-footer clearfix">
         <a href="/2015/08/17/setTimeout的作用域一级this的指向/" class="post-more waves-button-light">MORE</a>
-      </div>
-    
-
-  </article>
-
-
-</li>
-  
-    <li class="post-list-item">
-  <article id="post-JavaScrip命名空间模式" class="article article-type-post" itemscope itemprop="blogPost">
-    
-      
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/08/17/JavaScrip命名空间模式/">JavaScrip命名空间模式</a>
-    </h3>
-  
-
-
-
-      <div class="post-meat flex-row">
-        <div class="flex-col">
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript命名空间/">JavaScript命名空间</a></li></ul>
-</div>
-        <time datetime="2015-08-17T03:27:33.000Z" itemprop="datePublished" class="post-tiem">
-  2015-08-17
-</time>
-      </div>
-      <div class="post-content" itemprop="postContent" >
-        
-          <p>命名空间是通过为项目或库创建一个全局对象，然后将所有的功能添加到该全局变量中。同时有效防止函数名、类名和其他人冲突。</p>
-<p>在学习JavaScript命名空间模式之前，我们先来了解简单的命名空间。</p>
-<h3 id="简单的命名空间">简单的命名空间</h3><p>由于JavaScript没有文件作用域，不同的函数分散在不同的文件中，甚至由不同的人编写，重名的概率大大增加。是不是足够小心就可以了呢？也不尽然，还有些意外情况，比如经常会用到继承，于是写了一个没出现过的函数名extend，不料在EcmaScript5中加入了extend函数，命名空间的必要性就体现出来了。<br>JavaScript有函数的作用域，可以利用这点把自定义的函数写到一个函数体内，这样函数内的变量、对象、函数就像在一个命名空间内一样和外部隔离。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;input <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"test"</span> onclick=<span class="string">"(new namespace()).alert();"</span>/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;script <span class="built_in">type</span>=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">          <span class="keyword">function</span> <span class="function"><span class="title">namespace</span></span>()&#123;</span><br><span class="line">              this.alert=<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">                   onsole.log(<span class="string">'test'</span>);</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">    &lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
-<p>这样自定义的alert方法就不会和window的alert冲突了。</p>
-<p>每次调用的时候都要实例化对象，然后调用其方法，很麻烦，那我们可以这样简化,如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;input <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"test"</span> onclick=<span class="string">"NS.alert();"</span>/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;script <span class="built_in">type</span>=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">         (<span class="keyword">function</span> <span class="function"><span class="title">namespace</span></span>()&#123;</span><br><span class="line">               this.alert=<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">                    console.log(<span class="string">'test'</span>);</span><br><span class="line">                  &#125;</span><br><span class="line"></span><br><span class="line">                window.NS=this;/*在自定义namespace函数最后把this赋值为window的NS属性，在调用的时候直接使用NS.xx就可以了。*/</span><br><span class="line">          &#125;)();</span><br><span class="line">      &lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
-<p>注:这里用到匿名函数，匿名函数是‘立即执行函数’</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span> <span class="function"><span class="title">xxx</span></span>()&#123;</span><br><span class="line">	//<span class="keyword">function</span> body</span><br><span class="line">&#125;)();&lt;!-- 最后的括号表示立即执行 ,可省略xxx --&gt;</span><br><span class="line">&lt;!-- 等价于 --&gt;</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">xxx</span></span>()&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line">xxx();</span><br></pre></td></tr></table></figure>
-<p>将匿名函数的方法定义到prototype中<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="title">fucntion</span></span>()&#123;</span><br><span class="line">	var _NS=<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	_NS.prototype.alert=<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">		console.log(<span class="string">'test'</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	window.NS=new _NS();</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
-<h3 id="JavaScript创建命名空间">JavaScript创建命名空间</h3><p><mark><strong>非常重要</strong></mark><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">// 编写一个namespace函数，要求此函数能够实现多层命名空间的嵌套</span><br><span class="line">// 声明一个全局对象Namespace，用来注册命名空间</span><br><span class="line">var Namespace = &#123;&#125;;</span><br><span class="line">// 全局对象仅仅存在register函数，参数为名称空间全路径，如<span class="string">"Grandsoft.GEA"</span></span><br><span class="line">Namespace.register = <span class="keyword">function</span>(fullPath) &#123;</span><br><span class="line">    // 将命名空间切成N部分, 比如Grandsoft、GEA等</span><br><span class="line">    var sArray = fullPath.split(<span class="string">'.'</span>);</span><br><span class="line">    var sEval = <span class="string">""</span>;</span><br><span class="line">    var str = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">for</span> (var i = <span class="number">0</span>; i &lt; sArray.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i != <span class="number">0</span>) str += <span class="string">"."</span>;</span><br><span class="line">        str += sArray[i];</span><br><span class="line">        //依次创建构造命名空间对象（假如不存在的话）的语句,比如先创建Grandsoft，然后创建Grandsoft.GEA，依次下去</span><br><span class="line">        sEval += <span class="string">"if (typeof("</span> + str + <span class="string">") == 'undefined') "</span> + str + <span class="string">" = new Object();"</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (sEval != <span class="string">""</span>) <span class="built_in">eval</span>(sEval);</span><br><span class="line">&#125;;</span><br><span class="line">// 上面就是在JavaScript中模拟命名空间机制的完整实现，使用方式如下： </span><br><span class="line">// 注册命名空间Grandsoft.GEA, Grandsoft.GCM</span><br><span class="line">Namespace.register(<span class="string">"Grandsoft.GEA"</span>);</span><br><span class="line">Namespace.register(<span class="string">"Grandsoft.GCM"</span>); </span><br><span class="line">// 在Grandsoft.GEA命名空间里面声明类Person</span><br><span class="line">Grandsoft.GEA.Person = <span class="keyword">function</span>(name, age)</span><br><span class="line">&#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">    this.age = age;</span><br><span class="line">&#125; </span><br><span class="line">// 给类Person添加一个公共方法show()</span><br><span class="line">Grandsoft.GEA.Person.prototype.show = <span class="function"><span class="title">function</span></span>()</span><br><span class="line">&#123;</span><br><span class="line">    alert(this.name + <span class="string">" is "</span> + this.age + <span class="string">" years old!"</span>);</span><br><span class="line">&#125; </span><br><span class="line">// 演示如何使用类Person</span><br><span class="line">var p = new Grandsoft.GEA.Person(<span class="string">"Singapo91"</span>, <span class="number">21</span>);</span><br><span class="line">p.show();</span><br></pre></td></tr></table></figure></p>
-
-        
-      </div>
-      <div class="post-footer clearfix">
-        <a href="/2015/08/17/JavaScrip命名空间模式/" class="post-more waves-button-light">MORE</a>
       </div>
     
 
