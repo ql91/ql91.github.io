@@ -137,20 +137,8 @@
       </div>
       <div class="post-content" itemprop="postContent" >
         
-          <p>在介绍移动开发注意事项前,得先搞清楚一个概念”移动前端开发和 Web 前端开发的区别是什么?”,推荐知乎上的<a href="https://www.zhihu.com/question/20269059" target="_blank" rel="external">回答</a></p>
+          <p>在介绍移动开发注意事项前,得先搞清楚一个概念”移动前端开发和 Web 前端开发的区别是什么?”,推荐知乎上的<a href="https://www.zhihu.com/question/20269059">回答</a></p>
 <p>1、首先我们来看看webkit内核中的一些私有的meta标签，这些meta标签在开发webapp时起到非常重要的作用<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta content=<span class="string">"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"</span> name=<span class="string">"viewport"</span>&gt;</span><br><span class="line">&lt;meta content=<span class="string">"yes"</span> name=<span class="string">"apple-mobile-web-app-capable"</span>&gt;</span><br><span class="line">&lt;meta content=<span class="string">"black"</span> name=<span class="string">"apple-mobile-web-app-status-bar-style"</span>&gt;</span><br><span class="line">&lt;meta content=<span class="string">"telephone=no"</span> name=<span class="string">"format-detection"</span>&gt;</span><br></pre></td></tr></table></figure></p>
-<p>第一个meta标签表示：强制让文档的宽度与设备的宽度保持1:1，并且文档最大的宽度比例是1.0，且不允许用户点击屏幕放大浏览；<br>第二个meta标签是iphone设备中的safari私有meta标签，它表示：允许全屏模式浏览；<br>第三个meta标签也是iphone的私有标签，它指定的iphone中safari顶端的状态条的样式；<br>第四个meta标签表示：告诉设备忽略将页面中的数字识别为电话号码</p>
-<p>2、HTML5标签的使用<br>在开始编写webapp时，建议前端工程师使用HTML5，而放弃HTML4，因为HTML5可以实现一些HTML4中无法实现的丰富的WEB应用程序的体验，可以减少开发者很多的工作量，当然了你决定使用HTML5前，一定要对此非常熟悉，要知道HTML5的新标签的作用。比如定义一块内容或文章区域可使用section标签，定义导航条或选项卡可以直接使用nav标签等等。</p>
-<p>3、放弃CSS float属性<br>在项目开发过程中可以会遇到内容排列显示的布局，假如你遇见这样的视觉稿，建议你放弃float，可以直接使用display:inline-block;</p>
-<p>4、利用CSS3边框背景属性<br>这个按钮有圆角效果，有内发光效果还有高光效果，这样的按钮使用CSS3写是无法写出来的，当然圆角可以使用CSS3来写，但高光和内发光却无法使用CSS3编写，这个时候你不妨使用-webkit-border-image来定义这个按钮的样式。<br>-webkit-border-image就个很复杂的样式属性。</p>
-<p>5、自适应布局模式<br>在编写CSS时，不建议前端工程师把容器（不管是外层容器还是内层）的宽度定死。为达到适配各种手持设备，建议前端工程师使用自适应布局模式（支付宝采用了自适应布局模式），因为这样做可以让你的页面在ipad、itouch、ipod、iphone、android、web safarik、chrome都能够正常的显示，你无需再次考虑设备的分辨率</p>
-<p>6、如何去除Android平台中对邮箱地址的识别<br>看过iOS webapp API的同学都知道iOS提供了一个meta标签:用于禁用iOS对页面中电话号码的自动识别。在iOS中是不自动识别邮件地址的，但在Android平台，它会自动检测邮件地址，当用户touch到这个邮件地址时，Android会弹出一个框提示用户发送邮件，如果你不想Android自动识别页面中的邮件地址，你不妨加上这样一句meta标签在head中<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta content=<span class="string">"email=no"</span> name=<span class="string">"format-detection"</span> /&gt;</span><br></pre></td></tr></table></figure></p>
-<p>7、如何去除iOS和Android中的输入URL的控件条<br>你的老板或者PD或者交互设计师可能会要求你：能否让我们的webapp更加像nativeapp，我不想让用户看见那个输入url的控件条？<br>答案是可以做到的。我们可以利用一句简单的javascript代码来实现这个效果<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span>Timeout(scrollTo,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br></pre></td></tr></table></figure></p>
-<p>请注意，这句代码必须放在window.onload里才能够正常的工作，而且你的当前文档的内容高度必须是高于窗口的高度时，这句代码才能有效的执行。</p>
-<p>8、如何解决盒子边框溢出<br>当你指定了一个块级元素时，并且为其定义了边框，设置了其宽度为100％。在移动设备开发过程中我们通常会对文本框定义为宽度100％，将其定义为块级元素以实现全屏自适应的样式，但此时你会发现，该元素的边框(左右)各1个像素会溢了文档，导致出现横向滚动条，为解决这一问题，我们可以为其添加一个特殊的样式-webkit-box-sizing:border-box;用来指定该盒子的大小包括边框的宽度。</p>
-<p>后面会继续整理收集</p>
-<p>友情链接：<br><a href="http://alloyteam.github.io/Spirit/modules/Standard/" target="_blank" rel="external">Alloyteam移动开发规范概述</a><br>！！！<a href="https://github.com/jtyjty99999/mobileTech" target="_blank" rel="external">移动开发资源集合</a><br>！！！<a href="http://www.css88.com/archives/5480" target="_blank" rel="external">移动端不得不了解的html5 head标签</a></p>
-
         
       </div>
       <div class="post-footer clearfix">
@@ -334,11 +322,535 @@
 
 </li>
   
+    <li class="post-list-item">
+  <article id="post-JavaScrip命名空间模式" class="article article-type-post" itemscope itemprop="blogPost">
+    
+      
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/08/17/JavaScrip命名空间模式/">JavaScrip命名空间模式</a>
+    </h3>
+  
+
+
+
+      <div class="post-meat flex-row">
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript命名空间/">JavaScript命名空间</a></li></ul>
+</div>
+        <time datetime="2015-08-17T03:27:33.000Z" itemprop="datePublished" class="post-tiem">
+  2015-08-17
+</time>
+      </div>
+      <div class="post-content" itemprop="postContent" >
+        
+          <p>命名空间是通过为项目或库创建一个全局对象，然后将所有的功能添加到该全局变量中。同时有效防止函数名、类名和其他人冲突。</p>
+<p>在学习JavaScript命名空间模式之前，我们先来了解简单的命名空间。</p>
+<h3 id="简单的命名空间">简单的命名空间</h3><p>由于JavaScript没有文件作用域，不同的函数分散在不同的文件中，甚至由不同的人编写，重名的概率大大增加。是不是足够小心就可以了呢？也不尽然，还有些意外情况，比如经常会用到继承，于是写了一个没出现过的函数名extend，不料在EcmaScript5中加入了extend函数，命名空间的必要性就体现出来了。<br>JavaScript有函数的作用域，可以利用这点把自定义的函数写到一个函数体内，这样函数内的变量、对象、函数就像在一个命名空间内一样和外部隔离。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;input <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"test"</span> onclick=<span class="string">"(new namespace()).alert();"</span>/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;script <span class="built_in">type</span>=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">          <span class="keyword">function</span> <span class="function"><span class="title">namespace</span></span>()&#123;</span><br><span class="line">              this.alert=<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">                   onsole.log(<span class="string">'test'</span>);</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">    &lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>这样自定义的alert方法就不会和window的alert冲突了。</p>
+<p>每次调用的时候都要实例化对象，然后调用其方法，很麻烦，那我们可以这样简化,如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;input <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"test"</span> onclick=<span class="string">"NS.alert();"</span>/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;script <span class="built_in">type</span>=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">         (<span class="keyword">function</span> <span class="function"><span class="title">namespace</span></span>()&#123;</span><br><span class="line">               this.alert=<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">                    console.log(<span class="string">'test'</span>);</span><br><span class="line">                  &#125;</span><br><span class="line"></span><br><span class="line">                window.NS=this;/*在自定义namespace函数最后把this赋值为window的NS属性，在调用的时候直接使用NS.xx就可以了。*/</span><br><span class="line">          &#125;)();</span><br><span class="line">      &lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>注:这里用到匿名函数，匿名函数是‘立即执行函数’</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span> <span class="function"><span class="title">xxx</span></span>()&#123;</span><br><span class="line">	//<span class="keyword">function</span> body</span><br><span class="line">&#125;)();&lt;!-- 最后的括号表示立即执行 ,可省略xxx --&gt;</span><br><span class="line">&lt;!-- 等价于 --&gt;</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">xxx</span></span>()&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line">xxx();</span><br></pre></td></tr></table></figure>
+<p>将匿名函数的方法定义到prototype中<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="title">fucntion</span></span>()&#123;</span><br><span class="line">	var _NS=<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	_NS.prototype.alert=<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">		console.log(<span class="string">'test'</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	window.NS=new _NS();</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
+<h3 id="JavaScript创建命名空间">JavaScript创建命名空间</h3><p><mark><strong>非常重要</strong></mark><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">// 编写一个namespace函数，要求此函数能够实现多层命名空间的嵌套</span><br><span class="line">// 声明一个全局对象Namespace，用来注册命名空间</span><br><span class="line">var Namespace = &#123;&#125;;</span><br><span class="line">// 全局对象仅仅存在register函数，参数为名称空间全路径，如<span class="string">"Grandsoft.GEA"</span></span><br><span class="line">Namespace.register = <span class="keyword">function</span>(fullPath) &#123;</span><br><span class="line">    // 将命名空间切成N部分, 比如Grandsoft、GEA等</span><br><span class="line">    var sArray = fullPath.split(<span class="string">'.'</span>);</span><br><span class="line">    var sEval = <span class="string">""</span>;</span><br><span class="line">    var str = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">for</span> (var i = <span class="number">0</span>; i &lt; sArray.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i != <span class="number">0</span>) str += <span class="string">"."</span>;</span><br><span class="line">        str += sArray[i];</span><br><span class="line">        //依次创建构造命名空间对象（假如不存在的话）的语句,比如先创建Grandsoft，然后创建Grandsoft.GEA，依次下去</span><br><span class="line">        sEval += <span class="string">"if (typeof("</span> + str + <span class="string">") == 'undefined') "</span> + str + <span class="string">" = new Object();"</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (sEval != <span class="string">""</span>) <span class="built_in">eval</span>(sEval);</span><br><span class="line">&#125;;</span><br><span class="line">// 上面就是在JavaScript中模拟命名空间机制的完整实现，使用方式如下： </span><br><span class="line">// 注册命名空间Grandsoft.GEA, Grandsoft.GCM</span><br><span class="line">Namespace.register(<span class="string">"Grandsoft.GEA"</span>);</span><br><span class="line">Namespace.register(<span class="string">"Grandsoft.GCM"</span>); </span><br><span class="line">// 在Grandsoft.GEA命名空间里面声明类Person</span><br><span class="line">Grandsoft.GEA.Person = <span class="keyword">function</span>(name, age)</span><br><span class="line">&#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">    this.age = age;</span><br><span class="line">&#125; </span><br><span class="line">// 给类Person添加一个公共方法show()</span><br><span class="line">Grandsoft.GEA.Person.prototype.show = <span class="function"><span class="title">function</span></span>()</span><br><span class="line">&#123;</span><br><span class="line">    alert(this.name + <span class="string">" is "</span> + this.age + <span class="string">" years old!"</span>);</span><br><span class="line">&#125; </span><br><span class="line">// 演示如何使用类Person</span><br><span class="line">var p = new Grandsoft.GEA.Person(<span class="string">"Singapo91"</span>, <span class="number">21</span>);</span><br><span class="line">p.show();</span><br></pre></td></tr></table></figure></p>
+
+        
+      </div>
+      <div class="post-footer clearfix">
+        <a href="/2015/08/17/JavaScrip命名空间模式/" class="post-more waves-button-light">MORE</a>
+      </div>
+    
+
+  </article>
+
+
+</li>
+  
+    <li class="post-list-item">
+  <article id="post-js事件捕获和冒泡" class="article article-type-post" itemscope itemprop="blogPost">
+    
+      
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/08/07/js事件捕获和冒泡/">js事件捕获和冒泡</a>
+    </h3>
+  
+
+
+
+      <div class="post-meat flex-row">
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/冒泡/">冒泡</a></li></ul>
+</div>
+        <time datetime="2015-08-07T13:47:40.000Z" itemprop="datePublished" class="post-tiem">
+  2015-08-07
+</time>
+      </div>
+      <div class="post-content" itemprop="postContent" >
+        
+          <p><mark>##转载</mark></p>
+<h3 id="事件冒泡">事件冒泡</h3><p>微软提出了名为事件冒泡(event bubbling)的事件流。事件冒泡可以形象地比喻为把一颗石头投入水中，泡泡会一直从水底冒出水面。也就是说，事件会从最内层的元素开始发生，一直向上传播，直到document对象。</p>
+<h3 id="事件捕获">事件捕获</h3><p>网景提出另一种事件流名为事件捕获(event capturing)。与事件冒泡相反，事件会从最外层开始发生，直到最具体的元素。</p>
+<h3 id="W3C模型">W3C模型</h3><p>上面两种模式都有合理之处，所以W3C模型是将两者进行中和，在W3C模型中，任何事件发生时，先从顶层开始进行事件捕获，直到事件触发到达了事件源元素。然后，再从事件源往上进行事件冒泡，直到到达document。</p>
+<pre><code><span class="keyword">element</span>.addEventListener(event, <span class="function"><span class="keyword">function</span>, <span class="title">useCapture</span>)</span>
+</code></pre><p>event：事件名称</p>
+<p>function：事件触发后的执行函数</p>
+<p>useCapture：指定事件是在捕获阶段执行（true）还是在冒泡阶段执行（false，默认）</p>
+<h3 id="阻止冒泡">阻止冒泡</h3><p>上面我们知道事件是通过传播后才有冒泡和捕获的概念，但是有时候这并不是我们想要的，我们要阻止时间的传播，怎么办呢？</p>
+<pre><code><span class="keyword">event</span>.stopPropagation();
+</code></pre><p>IE下阻止事件传播的方法</p>
+<pre><code><span class="built_in">window</span>.event.returnValue = <span class="literal">false</span>;
+</code></pre><p>演示例子：<a href=""></a></p>
+<h3 id="事件代理">事件代理</h3><p>假如我们有一个学生列表，我们希望点列表中的任意一个名字，就用alert的方式把学生的名字弹出。当名字少时我们可以给每一个名字添加点击事件，这很明显是一个很笨的做法。我们可以考虑用上面的事件传播的特性来处理，通常我们叫它事件代理的方法。</p>
+<p>HTML代码如下：</p>
+<pre><code><span class="tag">&lt;<span class="title">ul</span> <span class="attribute">id</span>=<span class="value">"names"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">li</span>&gt;</span>张三<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">li</span>&gt;</span>李四<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">li</span>&gt;</span>王五<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">li</span>&gt;</span>小明<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">li</span>&gt;</span>小黑<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">li</span>&gt;</span>小白<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
+</code></pre><p>js绑定事件：</p>
+<pre><code><span class="list">(<span class="keyword">function</span><span class="list">()</span><span class="collection">{
+    var names = document.getElementById<span class="list">(<span class="string">"names"</span>)</span><span class="comment">;</span>
+    names.addEventListener<span class="list">(<span class="keyword">'click'</span>,function<span class="list">(<span class="keyword">e</span>)</span><span class="collection">{
+        var x = e.target;
+        if<span class="list">(<span class="keyword">x.nodeName.toLowerCase</span><span class="list">()</span> === 'li')</span><span class="collection">{
+            alert<span class="list">(<span class="keyword">'name='+x.innerHTML</span>)</span>
+        }</span>
+    }</span>)</span>
+}</span>)</span><span class="list">()</span><span class="comment">;</span>
+</code></pre><p>我们通过获取到点击的目标元素（e.target），然后再对目标元素做出一系列的操作。</p>
+<p>当然实现这一方式的方法还很多，这里就介绍这一种。</p>
+<p><em>事件都未考虑兼容性问题,具体实施的时候可能有差别</em></p>
+<p>参考资料：</p>
+<p>不兼容的事件冒泡: <a href="http://blog.csdn.net/hdchangchang/article/details/9224579" target="_blank" rel="external">http://blog.csdn.net/hdchangchang/article/details/9224579</a></p>
+<p>HTML DOM addEventListener() 方法: <a href="http://www.runoob.com/jsref/met-element-addeventlistener.html" target="_blank" rel="external">http://www.runoob.com/jsref/met-element-addeventlistener.html</a></p>
+<p>JS浏览器兼容性问题： <a href="http://dada-fangfang.iteye.com/blog/811749" target="_blank" rel="external">http://dada-fangfang.iteye.com/blog/811749</a></p>
+
+        
+      </div>
+      <div class="post-footer clearfix">
+        <a href="/2015/08/07/js事件捕获和冒泡/" class="post-more waves-button-light">MORE</a>
+      </div>
+    
+
+  </article>
+
+
+</li>
+  
+    <li class="post-list-item">
+  <article id="post-js模快化" class="article article-type-post" itemscope itemprop="blogPost">
+    
+      
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/08/07/js模快化/">js模快化</a>
+    </h3>
+  
+
+
+
+      <div class="post-meat flex-row">
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+</div>
+        <time datetime="2015-08-07T13:47:14.000Z" itemprop="datePublished" class="post-tiem">
+  2015-08-07
+</time>
+      </div>
+      <div class="post-content" itemprop="postContent" >
+        
+          <p><mark>##转载</mark></p>
+<h2 id="js模块化">js模块化</h2><p>何为模块？模块就是实现特定功能的一组方法。</p>
+<p>模块化的好处就不多说了，我们就介绍一些基本点，可以在以后的项目开发中应用到。</p>
+<h3 id="1、一般的写法">1、一般的写法</h3><p>简答的把函数和变量放在一起。</p>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">m1</span><span class="params">()</span></span>{
+    ...
+}
+
+<span class="function"><span class="keyword">function</span> <span class="title">m2</span><span class="params">()</span></span>{
+    ...
+}
+</code></pre><p>这种做法简单方便，但是很容易污染了全局变量，很容易与其他模块发生命名冲突，而且模块之间看不出来直接的关系。</p>
+<h3 id="2、对象的写法">2、对象的写法</h3><p>只要在上面的基础上稍作修改就能规避很多问题，我们把模块写成一个对象，该模块的方法和成员都放到这个对象里面。</p>
+<pre><code><span class="keyword">var</span> module1 = <span class="keyword">new</span> Objec({
+    name : <span class="string">'xiaoxiao'</span>,
+    m1 : <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
+        ...
+    },
+    m2 : <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
+        ...
+    }
+});
+</code></pre><p>通过这种方式很好的把成员和方法封装在一起了，这种方式很常用。但是它会暴露所有的成员变量，像这样module1.name = ‘xxx’的用法并不推荐使用。</p>
+<h3 id="3、立即执行函数的写法">3、立即执行函数的写法</h3><p>我们都知道在javascript中变量的作用域是函数，所以我们可以利用自执行函数来解决上面暴露成员变量的缺点。</p>
+<pre><code><span class="keyword">var</span> module1 = (<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
+    <span class="keyword">var</span> name = <span class="string">'xiaoxiao'</span>;
+
+    <span class="keyword">var</span> m1 = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
+        ...
+    }
+
+    <span class="keyword">var</span> m2 = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
+        ...
+    }
+
+    <span class="keyword">return</span> {
+        m1:m1,
+        m2:m2
+    }
+})();
+</code></pre><p>这种方式的关键在于return，如果没有return的内容也就没有任何意义了。</p>
+<p>如果我们要扩展这个模块我们可以这么做：</p>
+<pre><code>var module1 = (<span class="function"><span class="keyword">function</span><span class="params">(mod)</span></span>{
+
+    <span class="built_in">mod</span>.m3 = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
+        ...
+    }
+
+    <span class="keyword">return</span> <span class="built_in">mod</span>
+})(module1);
+</code></pre><p>在稍微演进一下，防止module1是空对象：</p>
+<pre><code>var module1 = (<span class="function"><span class="keyword">function</span><span class="params">(mod)</span></span>{
+
+    <span class="built_in">mod</span>.m3 = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{
+        ...
+    }
+
+    <span class="keyword">return</span> <span class="built_in">mod</span>
+})(window.module1||{});
+</code></pre><p>如果说为了使我们的模块独立性更强，需要用到的相关js库都要传入模块内</p>
+<pre><code><span class="keyword">var</span> module1 = (<span class="function"><span class="keyword">function</span><span class="params">($)</span><span class="comment">{
+
+        ...
+
+}</span>)<span class="params">(jQuery)</span>;</span>
+</code></pre><h3 id="4、javascript模块规范">4、javascript模块规范</h3><p>就像javascript一样，当我们发现他的好处后，各种规范也相继产生了。在模块化的重要性提高的同时，也产生了相应的规范。目前，比较流行的模块规范有两种：CMD和AMD。</p>
+<h4 id="CMD">CMD</h4><p>我们先来说CommonJS，在CommonJS中，有一个全局性方法require()，用于加载模块。我们熟悉的NodeJS就是建立在CommonJS的规范上的。</p>
+<p>假定有一个数学模块math.js，就可以像下面这样加载。</p>
+<pre><code>var <span class="built_in">math</span> = <span class="built_in">require</span>(<span class="string">'math'</span>);
+
+<span class="built_in">math</span>.add(<span class="number">1</span>,<span class="number">23</span>);
+</code></pre><p>像这样很方便的math的模块引进来。</p>
+<p>在CMD的规范当中推崇的是<strong>依赖就近</strong>原则，我们需要用到谋个模块时就近加载。</p>
+<p>这样的模式如果是应用在服务端还是相当不错的。</p>
+<p>但是对于浏览器来说，如果需要的时候再去加载这个模块就会导致浏览器停止在这里等待加载。对于访问者来说这是不能容忍的。</p>
+<p>所以针对我们特殊的环境，应用同步加载的方式是不可行的。</p>
+<h4 id="AMD">AMD</h4><p>RequireJS就是AMD（异步模块定义）的一种实现，和我们的ajax有点儿类似，它采用<strong>依赖前置</strong>的特点，充分的利用了回调函数的优势，解决浏览器环境的问题。</p>
+<p>这种方式也是通过require加载模块的，但不同的是他有两个参数；</p>
+<pre><code><span class="keyword">require</span>([<span class="class"><span class="keyword">module</span>],<span class="title">callback</span>);</span>
+</code></pre><p>第一个参数是数组，表示需要加载的模块；第二个参数就是我们的回调函数了，等前面的模块加载完成后执行。我们改写上面的例子:</p>
+<pre><code><span class="built_in">require</span>([<span class="string">'math'</span>],<span class="function"><span class="keyword">function</span><span class="params">(math)</span></span>{
+    <span class="built_in">math</span>.add(<span class="number">1.23</span>);
+});
+</code></pre><p>通过这样的方式就解决了上面出现的浏览器在加载模块时出现的假死的问题。</p>
+<h3 id="5、总结">5、总结</h3><p>本文主要讲解我们对于模块化的应用和提出了AMD和CMD这两种规范的一些优势和差别。</p>
+<p>参考资料：</p>
+<p>JavaSript模块规范-AMD规范与CMD规范介绍: <a href="http://blog.chinaunix.net/uid-26672038-id-4112229.html" target="_blank" rel="external">http://blog.chinaunix.net/uid-26672038-id-4112229.html</a></p>
+<p>AMD规范文档: <a href="https://github.com/amdjs/amdjs-api/wiki/AMD" target="_blank" rel="external">https://github.com/amdjs/amdjs-api/wiki/AMD</a></p>
+<p>CMD模块定义规范: <a href="https://github.com/seajs/seajs/issues/242" target="_blank" rel="external">https://github.com/seajs/seajs/issues/242</a></p>
+<p>模块系统: <a href="https://github.com/seajs/seajs/issues/240" target="_blank" rel="external">https://github.com/seajs/seajs/issues/240</a></p>
+<p>前端模块化开发的价值: <a href="https://github.com/seajs/seajs/issues/240" target="_blank" rel="external">https://github.com/seajs/seajs/issues/547</a></p>
+<p>前端模块化开发那点历史: <a href="https://github.com/seajs/seajs/issues/240" target="_blank" rel="external">https://github.com/seajs/seajs/issues/588</a></p>
+
+        
+      </div>
+      <div class="post-footer clearfix">
+        <a href="/2015/08/07/js模快化/" class="post-more waves-button-light">MORE</a>
+      </div>
+    
+
+  </article>
+
+
+</li>
+  
+    <li class="post-list-item">
+  <article id="post-js函数" class="article article-type-post" itemscope itemprop="blogPost">
+    
+      
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/08/07/js函数/">js函数</a>
+    </h3>
+  
+
+
+
+      <div class="post-meat flex-row">
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/函数/">函数</a></li></ul>
+</div>
+        <time datetime="2015-08-07T13:46:28.000Z" itemprop="datePublished" class="post-tiem">
+  2015-08-07
+</time>
+      </div>
+      <div class="post-content" itemprop="postContent" >
+        
+          <p><mark>##转载</mark></p>
+<h3 id="一、函数定义的三种方式">一、函数定义的三种方式</h3><p>方式1、函数声明</p>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span></span>{}
+</code></pre><p>方式2、函数表达式</p>
+<pre><code><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{};
+</code></pre><p>方式3、构造函数</p>
+<pre><code><span class="keyword">var</span> foo=<span class="keyword">new</span> <span class="function"><span class="keyword">Function</span><span class="params">("alert(<span class="string">'xiaoxiao'</span>)</span>");</span>
+</code></pre><p><em>注意：申明提前的问题</em></p>
+<p>变量和函数都有申明提前的概念，但是赋值还是在实际地方复制的。所以使用方式2的时候特别要注意了。</p>
+<p>用方式1声明函数并使用：</p>
+<pre><code>foo<span class="params">()</span>; <span class="comment">// 正常运行，因为foo在代码运行前已经被创建</span>
+<span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span> {</span>}
+</code></pre><p>用方式2声明函数并使用：</p>
+<pre><code>foo; <span class="comment">// 'undefined'</span>
+foo(); <span class="comment">// 出错：TypeError</span>
+<span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{};<span class="comment">//因为变量的赋值操作使用时在这里才完成</span>
+</code></pre><p>备注：表达式函数声明，需要在他后面才可调用此函数。</p>
+<h3 id="二、this的工作原理">二、this的工作原理</h3><p>this指针永远是这个引用所属的对象。</p>
+<p>参考资料： <a href="http://blog.chinaunix.net/uid-15223977-id-2774361.html" target="_blank" rel="external">http://blog.chinaunix.net/uid-15223977-id-2774361.html</a></p>
+<h3 id="三、闭包">三、闭包</h3><p>javascript规定，当前作用域总是能够访问外部作用域的变量。当我们需要在外部访问私有变量的时候就不可能了。只有通过闭包来实现这个功能。</p>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">Counter</span><span class="params">(start)</span> </span>{
+    <span class="keyword">var</span> count = start;
+    <span class="keyword">return</span> {
+        increment: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
+            count++;
+        },
+
+        <span class="keyword">get</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{
+            <span class="keyword">return</span> count;
+        }
+    }
+}
+
+<span class="keyword">var</span> foo = Counter(<span class="number">4</span>);
+foo.increment();
+foo.<span class="keyword">get</span>(); <span class="comment">// 5</span>
+</code></pre><p>foo.get()能够输出5，是应为返回的两个闭包increment和get保持了维持着对外部作用域Counter的引用，所以总能够访问到这个作用域内定义的变量count</p>
+<h4 id="循环中的闭包问题">循环中的闭包问题</h4><p>在实际开发中最容易出问题的是在循环中使用闭包</p>
+<pre><code><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) {
+    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
+        <span class="built_in">console</span>.log(i);  
+    }, <span class="number">1000</span>);
+}
+</code></pre><p>这里我们期望输出的是0到9的数字，但是实际输出的是10次10.</p>
+<p>当console.log被调用的时候，匿名函数保持了对外部变量i的引用，此时for循环已经结束，i的值已经是10了。</p>
+<p>解决办法：每次循环中创建变量i的拷贝,setTimeout外部的匿名函数会立即执行，并且把i作为它的参数，此时函数内e变量就拥有了i的一个拷贝。</p>
+<pre><code>for<span class="list">(<span class="keyword">var</span> i = <span class="number">0</span><span class="comment">; i &lt; 10; i++) {</span>
+    <span class="list">(<span class="keyword">function</span><span class="list">(<span class="keyword">e</span>)</span>{
+        setTimeout<span class="list">(<span class="keyword">function</span><span class="list">()</span> {
+            console.log<span class="list">(<span class="keyword">e</span>)</span><span class="comment">;  </span>
+        }, <span class="number">1000</span>)</span><span class="comment">;</span>
+    })</span><span class="list">(<span class="keyword">i</span>)</span><span class="comment">;</span>
+}</span>
+</code></pre><h3 id="四、构造函数">四、构造函数</h3><p>JavaScript 中的构造函数和其它语言中的构造函数是不同的。 通过 new 关键字方式调用的函数都被认为是构造函数。</p>
+<p>在构造函数内部 - 也就是被调用的函数内 - this 指向新创建的对象 Object。 这个新创建的对象的 prototype 被指向到构造函数的 prototype。</p>
+<h3 id="五、作用域和命名空间">五、作用域和命名空间</h3><h4 id="作用域">作用域</h4><p>javascript的作用域并不是其他语言中的花括号代码段，它并不支持块级作用域；而是函数作用域。</p>
+<p>ES6提出的新的操作（let关键字）可以支持块级作用域。</p>
+<pre><code><span class="variable"><span class="keyword">var</span> a</span> = <span class="number">5</span>;
+<span class="keyword">if</span>(<span class="literal">true</span>){
+    <span class="variable"><span class="keyword">var</span> a</span> = <span class="number">10</span>;
+}
+console.log(a);<span class="comment">//10</span>
+</code></pre><p>使用let关键字</p>
+<pre><code><span class="built_in">let</span> a = <span class="number">5</span>;
+<span class="keyword">if</span><span class="params">(<span class="literal">true</span>)</span>{
+    <span class="built_in">let</span> a = <span class="number">10</span>;
+}
+console.<span class="built_in">log</span><span class="params">(a)</span>; <span class="comment">//5</span>
+</code></pre><h4 id="命名空间">命名空间</h4><p>只有一个全局作用域导致的常见错误是命名冲突。在 JavaScript中，这可以通过 匿名包装器 轻松解决。</p>
+<pre><code>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
+    <span class="comment">// 函数创建一个命名空间</span>
+
+    <span class="built_in">window</span>.foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
+        <span class="comment">// 对外公开的函数，创建了闭包</span>
+    };
+
+})(); <span class="comment">// 立即执行此匿名函数</span>
+</code></pre>
+        
+      </div>
+      <div class="post-footer clearfix">
+        <a href="/2015/08/07/js函数/" class="post-more waves-button-light">MORE</a>
+      </div>
+    
+
+  </article>
+
+
+</li>
+  
+    <li class="post-list-item">
+  <article id="post-js对象" class="article article-type-post" itemscope itemprop="blogPost">
+    
+      
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/08/07/js对象/">js对象</a>
+    </h3>
+  
+
+
+
+      <div class="post-meat flex-row">
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/对象/">对象</a></li></ul>
+</div>
+        <time datetime="2015-08-07T13:46:06.000Z" itemprop="datePublished" class="post-tiem">
+  2015-08-07
+</time>
+      </div>
+      <div class="post-content" itemprop="postContent" >
+        
+          <p><mark>##转载</mark></p>
+<h2 id="对象">对象</h2><p>我们知道javascript并不是面向对象的语言，我们可以把javascript理解成基于对象的语言。在javascript当中所有的变量都是对象，除了null和undefined。</p>
+<h3 id="一、对象的使用和属性">一、对象的使用和属性</h3><p>前面说到所有变量都是对象，那我们尝试调用对象的toString方法来验证一下。</p>
+<pre><code>[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>].toString();    <span class="regexp">//</span><span class="string">"1,2,3,4"</span>
+<span class="keyword">true</span>.toString();    <span class="regexp">//</span><span class="string">"true"</span>
+<span class="string">' '</span>.toString();        <span class="regexp">//</span><span class="string">" "</span>
+<span class="number">2.14</span>.toString();    <span class="regexp">//</span><span class="string">"2.14"</span>
+<span class="number">2</span>.toString();    <span class="regexp">//</span><span class="constant">SyntaxError</span>
+</code></pre><p>为什么最后一项会出错呢？因为javascript的解释器尝试把“点操作符”解释为前面浮点数字中的一部分,所以就出错了。</p>
+<h4 id="访问属性">访问属性</h4><p>访问对象的属性有两种方式，点操作符和中括号操作符</p>
+<pre><code><span class="keyword">var</span> foo = {name: <span class="string">'xiao'</span>}
+foo.name; <span class="comment">// xiao</span>
+foo[<span class="string">'name'</span>]; <span class="comment">// xiao</span>
+
+<span class="keyword">var</span> <span class="keyword">get</span> = <span class="string">'name'</span>;
+foo[<span class="keyword">get</span>]; <span class="comment">// xiao</span>
+
+foo.1234; <span class="comment">// 出错：SyntaxError</span>
+foo[<span class="string">'1234'</span>]; <span class="comment">// 有效</span>
+</code></pre><p>从例子当中的最后两行我们可以看到js的对象属性并不是有效的的变量。我们并不推荐这么做，但是对js来说依旧有效。</p>
+<h4 id="删除属性">删除属性</h4><p>设置属性的值为null或undefined并不能真正的删除属性，而是移除了属性和值得关联关系；删除属性的唯一操作就是使用delete关键字。</p>
+<pre><code><span class="reserved">var</span> user = {
+    <span class="attribute">name</span>:<span class="string">'xiaoxiao'</span>,
+    <span class="attribute">sex</span>:<span class="string">'男'</span>,
+    <span class="attribute">age</span>:<span class="number">22</span>,
+    <span class="attribute">address</span>:<span class="string">'CQ'</span>
+}
+
+user.sex = <span class="literal">null</span>;
+user.age = <span class="literal">undefined</span>;
+<span class="keyword">delete</span> user.address;
+
+<span class="keyword">for</span>(<span class="reserved">var</span> i <span class="keyword">in</span> user){
+    <span class="keyword">if</span>(user.hasOwnProperty(i)){
+        <span class="built_in">console</span>.log(i+<span class="string">"="</span>+user[i]);
+    }
+}
+</code></pre><p>在浏览器控制信息为：</p>
+<pre><code><span class="variable">name=</span>xiaoxiao
+<span class="variable">sex=</span><span class="constant">null</span>
+<span class="variable">age=</span>undefined
+</code></pre><p>所以只能通过delete的方式对象的属性。</p>
+<h3 id="二、原型">二、原型</h3><p>在说原型之前，我们先来把对象的属性和方法，原型属性和方法，静态属性和方法的概念了解一下。</p>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>)</span>{
+    <span class="keyword">var</span> a1 = <span class="string">"a1"</span>;    <span class="comment">//对象的私有属性</span>
+
+    <span class="keyword">this</span>.b1 = <span class="string">"b2"</span>;        <span class="comment">//对象的属性</span>
+    <span class="keyword">this</span>.b2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{    <span class="comment">//对象的方法</span>
+        alert(<span class="string">"b2"</span>);
+    }
+}
+
+A.c1 = <span class="string">"c1"</span>;    <span class="comment">//静态属性</span>
+A.c2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{    <span class="comment">//静态方法</span>
+    alert(<span class="string">"c2"</span>);
+}
+
+A.prototype.d1 = <span class="string">"d1"</span>;    <span class="comment">//原型属性</span>
+A.prototype.d2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{    <span class="comment">//原型方法</span>
+    alert(<span class="string">"d2"</span>);
+}
+
+<span class="keyword">var</span> obj = <span class="keyword">new</span> A();
+<span class="built_in">console</span>.log(obj);
+</code></pre><p>在开发者工具下面我们看到：</p>
+<ol>
+<li>对象的方法和属性都在对象下</li>
+<li>对象的原型方法和原型属性在__proto__下</li>
+<li>对象的静态方法和属性在__proto__下的constructor里面</li>
+</ol>
+<p>有了上面的基础我们在来理解原型方面的东西。</p>
+<p>JavaScript 不包含传统的类继承模型，而是使用 prototype 原型模型。</p>
+<p>由于 JavaScript 是唯一一个被广泛使用的基于原型继承的语言，所以理解两种继承模式的差异是需要一定时间的。</p>
+<p>原型继承的本质实际上是在复制已经存在的对象。</p>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>{
+    <span class="keyword">this</span>.value = <span class="number">42</span>;
+}
+Foo.prototype = {
+    method: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{}
+};
+
+<span class="function"><span class="keyword">function</span> <span class="title">Bar</span>(<span class="params"></span>) </span>{}
+
+<span class="comment">// 设置Bar的prototype属性为Foo的实例对象</span>
+Bar.prototype = <span class="keyword">new</span> Foo();
+Bar.prototype.foo = <span class="string">'Hello World'</span>;
+
+<span class="comment">// 修正Bar.prototype.constructor为Bar本身</span>
+Bar.prototype.constructor = Bar;
+
+<span class="keyword">var</span> test = <span class="keyword">new</span> Bar() <span class="comment">// 创建Bar的一个新实例</span>
+
+<span class="comment">// 原型链</span>
+test [Bar的实例]
+    Bar.prototype [Foo的实例] 
+        { foo: <span class="string">'Hello World'</span> }
+        Foo.prototype
+            {method: ...};
+            <span class="built_in">Object</span>.prototype
+                {toString: ... <span class="comment">/* etc. */</span>};
+</code></pre><p>上面的例子中，test 对象从 Bar.prototype 和 Foo.prototype 继承下来；因此， 它能访问 Foo 的原型方法 method。同时，它也能够访问那个定义在原型上的 Foo 实例属性 value。 需要注意的是 new Bar() 不会创造出一个新的 Foo 实例，而是 重复使用它原型上的那个实例；因此，所有的 Bar 实例都会共享相同的 value 属性。</p>
+<p>在查找一个对象的属性的时候，javascript会在原型链上向上遍历，直到找到指定名称的值，当查找到原型链的顶端，也就是Object.prototype时已就位找到，则返回undefined。</p>
+<p><strong>应用</strong></p>
+<p>比如我们为数组Array添加一个删除的重复元素的方法，我们可以这么写：</p>
+<pre><code><span class="built_in">Array</span>.prototype.delRep = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+    <span class="comment">//...</span>
+}
+</code></pre><h3 id="三、hasOwnPrototype和in的区别">三、hasOwnPrototype和in的区别</h3><p>hasOwnPrototype和in都可以用来判断对象是否具有这个属性，但hasOwnPrototype是用来判断该属性是不是定义在自身上。</p>
+<pre><code><span class="comment">// 修改Object.prototype</span>
+<span class="built_in">Object</span>.prototype.bar = <span class="number">1</span>; 
+<span class="keyword">var</span> foo = {goo: <span class="literal">undefined</span>};
+
+<span class="string">'bar'</span> <span class="keyword">in</span> foo;    <span class="comment">// true</span>
+<span class="string">'goo'</span> <span class="keyword">in</span> foo;    <span class="comment">//true</span>
+
+foo.hasOwnProperty(<span class="string">'bar'</span>);    <span class="comment">// false,bar为原型上定义的属性，不属于foo本身自定义的属性，所以返回false</span>
+foo.hasOwnProperty(<span class="string">'goo'</span>);    <span class="comment">// true</span>
+</code></pre><p>参考资料：</p>
+<p>ECMAScript 6入门： <a href="http://es6.ruanyifeng.com/" target="_blank" rel="external">http://es6.ruanyifeng.com/</a></p>
+<p>js的Prototype属性 解释及常用方法: <a href="http://blog.sina.com.cn/s/blog_7045cb9e0100rtoh.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_7045cb9e0100rtoh.html</a></p>
+<p>前端开发必须知道的JS（一） 原型和继承：<a href="http://www.cnblogs.com/ljchow/archive/2010/06/08/1753526.html" target="_blank" rel="external">http://www.cnblogs.com/ljchow/archive/2010/06/08/1753526.html</a></p>
+
+        
+      </div>
+      <div class="post-footer clearfix">
+        <a href="/2015/08/07/js对象/" class="post-more waves-button-light">MORE</a>
+      </div>
+    
+
+  </article>
+
+
+</li>
+  
   </ul>
   
     <nav id="page-nav">
       <div class="inner">
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
       </div>
     </nav>
   
