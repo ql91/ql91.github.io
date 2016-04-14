@@ -123,7 +123,8 @@
         <aside class="post-widget" id="post-widget">
 
           
-          <div class="post-share" id="post-share" data-title="JS模块化编程之AMD规范" data-pic="/img/logo.jpg" data-summary="null" data-url="http://yoursite.com/2015/07/25/JS模块化编程之AMD规范/index.html">
+          <div class="post-share" id="post-share" data-title="JS模块化编程之AMD规范" data-pic="/img/logo.jpg" data-summary="&lt;h1 id=&quot;JS模块化编程之AMD规范&quot;&gt;JS模块化编程之AMD规范&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;模块很重要&lt;/strong&gt;？&lt;br&gt;有了模块，我们就可以更方便的使用别人的代码想要什么功能，就加载什么模块。&lt;br&gt;目前，Javascript模块规范共有两种：&lt;strong&gt;CommonJS&lt;/strong&gt;和&lt;strong&gt;AMD&lt;/strong&gt;。&lt;br&gt;这里介绍AMD(Asynchronous Module Definition)，意思是“异步模块定义”。&lt;/p&gt;
+&lt;h2 id=&quot;模块定义&quot;&gt;模块定义&lt;/h2&gt;&lt;p&gt;define(id?, dependencies?, factory);&lt;br&gt;其中：&lt;br&gt;id: 模块标识，可以省略。&lt;br&gt;dependencies: 所依赖的模块，可以省略。&lt;br&gt;factory: 模块的实现，或者一个JavaScript对象。&lt;br&gt;" data-url="http://yoursite.com/2015/07/25/JS模块化编程之AMD规范/index.html">
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
@@ -171,8 +172,7 @@
         <div class="post-main">
 
             <div class="post-content" itemprop="postContent"><h1 id="JS模块化编程之AMD规范">JS模块化编程之AMD规范</h1><p><strong>模块很重要</strong>？<br>有了模块，我们就可以更方便的使用别人的代码想要什么功能，就加载什么模块。<br>目前，Javascript模块规范共有两种：<strong>CommonJS</strong>和<strong>AMD</strong>。<br>这里介绍AMD(Asynchronous Module Definition)，意思是“异步模块定义”。</p>
-<h2 id="模块定义">模块定义</h2><p>define(id?, dependencies?, factory);<br>其中：<br>id: 模块标识，可以省略。<br>dependencies: 所依赖的模块，可以省略。<br>factory: 模块的实现，或者一个JavaScript对象。</p>
-<p>代码示例1: 定义一个alpha模块，依赖require，exports，beta模块</p>
+<h2 id="模块定义">模块定义</h2><p>define(id?, dependencies?, factory);<br>其中：<br>id: 模块标识，可以省略。<br>dependencies: 所依赖的模块，可以省略。<br>factory: 模块的实现，或者一个JavaScript对象。<br><a id="more"></a><br>代码示例1: 定义一个alpha模块，依赖require，exports，beta模块</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">define(<span class="string">"alpha"</span>, [<span class="string">"require"</span>, <span class="string">"exports"</span>, <span class="string">"beta"</span>], <span class="keyword">function</span> (require, exports, beta) &#123;</span><br><span class="line">     exports.verb = <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">         <span class="built_in">return</span> beta.verb();</span><br><span class="line">         //Or:</span><br><span class="line">         <span class="built_in">return</span> require(<span class="string">"beta"</span>).verb();</span><br><span class="line">     &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>代码示例2: 定义个匿名模块，依赖alpha模块<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">define([<span class="string">"alpha"</span>], <span class="keyword">function</span> (alpha) &#123;</span><br><span class="line">    <span class="built_in">return</span> &#123;</span><br><span class="line">        verb: <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">            <span class="built_in">return</span> alpha.verb() + <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
 <p>代码示例3: 使用JSON定义一个没有依赖的匿名模块。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">define(&#123;</span><br><span class="line">  add: <span class="keyword">function</span>(x, y)&#123;</span><br><span class="line">    <span class="built_in">return</span> x + y;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
@@ -243,7 +243,8 @@
 <div class="mask" id="mask"></div>
 <a href="javascript:;" id="gotop" class="waves-circle-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
-<div class="global-share" id="global-share" data-title="JS模块化编程之AMD规范" data-pic="/img/logo.jpg" data-summary="null" data-url="http://yoursite.com/2015/07/25/JS模块化编程之AMD规范/index.html">
+<div class="global-share" id="global-share" data-title="JS模块化编程之AMD规范" data-pic="/img/logo.jpg" data-summary="&lt;h1 id=&quot;JS模块化编程之AMD规范&quot;&gt;JS模块化编程之AMD规范&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;模块很重要&lt;/strong&gt;？&lt;br&gt;有了模块，我们就可以更方便的使用别人的代码想要什么功能，就加载什么模块。&lt;br&gt;目前，Javascript模块规范共有两种：&lt;strong&gt;CommonJS&lt;/strong&gt;和&lt;strong&gt;AMD&lt;/strong&gt;。&lt;br&gt;这里介绍AMD(Asynchronous Module Definition)，意思是“异步模块定义”。&lt;/p&gt;
+&lt;h2 id=&quot;模块定义&quot;&gt;模块定义&lt;/h2&gt;&lt;p&gt;define(id?, dependencies?, factory);&lt;br&gt;其中：&lt;br&gt;id: 模块标识，可以省略。&lt;br&gt;dependencies: 所依赖的模块，可以省略。&lt;br&gt;factory: 模块的实现，或者一个JavaScript对象。&lt;br&gt;" data-url="http://yoursite.com/2015/07/25/JS模块化编程之AMD规范/index.html">
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>

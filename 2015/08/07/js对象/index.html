@@ -123,7 +123,15 @@
         <aside class="post-widget" id="post-widget">
 
           
-          <div class="post-share" id="post-share" data-title="js对象" data-pic="/img/logo.jpg" data-summary="null" data-url="http://yoursite.com/2015/08/07/js对象/index.html">
+          <div class="post-share" id="post-share" data-title="js对象" data-pic="/img/logo.jpg" data-summary="&lt;p&gt;&lt;mark&gt;##转载&lt;/mark&gt;&lt;/p&gt;
+&lt;h2 id=&quot;对象&quot;&gt;对象&lt;/h2&gt;&lt;p&gt;我们知道javascript并不是面向对象的语言，我们可以把javascript理解成基于对象的语言。在javascript当中所有的变量都是对象，除了null和undefined。&lt;/p&gt;
+&lt;h3 id=&quot;一、对象的使用和属性&quot;&gt;一、对象的使用和属性&lt;/h3&gt;&lt;p&gt;前面说到所有变量都是对象，那我们尝试调用对象的toString方法来验证一下。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;].toString();    &lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;string&quot;&gt;&quot;1,2,3,4&quot;&lt;/span&gt;
+&lt;span class=&quot;keyword&quot;&gt;true&lt;/span&gt;.toString();    &lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;string&quot;&gt;&quot;true&quot;&lt;/span&gt;
+&lt;span class=&quot;string&quot;&gt;&#39; &#39;&lt;/span&gt;.toString();        &lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;string&quot;&gt;&quot; &quot;&lt;/span&gt;
+&lt;span class=&quot;number&quot;&gt;2.14&lt;/span&gt;.toString();    &lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;string&quot;&gt;&quot;2.14&quot;&lt;/span&gt;
+&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;.toString();    &lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;constant&quot;&gt;SyntaxError&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;为什么最后一项会出错呢？因为javascript的解释器尝试把“点操作符”解释为前面浮点数字中的一部分,所以就出错了。&lt;br&gt;" data-url="http://yoursite.com/2015/08/07/js对象/index.html">
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
@@ -178,7 +186,7 @@
 <span class="string">' '</span>.toString();        <span class="regexp">//</span><span class="string">" "</span>
 <span class="number">2.14</span>.toString();    <span class="regexp">//</span><span class="string">"2.14"</span>
 <span class="number">2</span>.toString();    <span class="regexp">//</span><span class="constant">SyntaxError</span>
-</code></pre><p>为什么最后一项会出错呢？因为javascript的解释器尝试把“点操作符”解释为前面浮点数字中的一部分,所以就出错了。</p>
+</code></pre><p>为什么最后一项会出错呢？因为javascript的解释器尝试把“点操作符”解释为前面浮点数字中的一部分,所以就出错了。<br><a id="more"></a></p>
 <h4 id="访问属性">访问属性</h4><p>访问对象的属性有两种方式，点操作符和中括号操作符</p>
 <pre><code><span class="keyword">var</span> foo = {name: <span class="string">'xiao'</span>}
 foo.name; <span class="comment">// xiao</span>
@@ -357,7 +365,15 @@ foo.hasOwnProperty(<span class="string">'goo'</span>);    <span class="comment">
 <div class="mask" id="mask"></div>
 <a href="javascript:;" id="gotop" class="waves-circle-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
-<div class="global-share" id="global-share" data-title="js对象" data-pic="/img/logo.jpg" data-summary="null" data-url="http://yoursite.com/2015/08/07/js对象/index.html">
+<div class="global-share" id="global-share" data-title="js对象" data-pic="/img/logo.jpg" data-summary="&lt;p&gt;&lt;mark&gt;##转载&lt;/mark&gt;&lt;/p&gt;
+&lt;h2 id=&quot;对象&quot;&gt;对象&lt;/h2&gt;&lt;p&gt;我们知道javascript并不是面向对象的语言，我们可以把javascript理解成基于对象的语言。在javascript当中所有的变量都是对象，除了null和undefined。&lt;/p&gt;
+&lt;h3 id=&quot;一、对象的使用和属性&quot;&gt;一、对象的使用和属性&lt;/h3&gt;&lt;p&gt;前面说到所有变量都是对象，那我们尝试调用对象的toString方法来验证一下。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;].toString();    &lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;string&quot;&gt;&quot;1,2,3,4&quot;&lt;/span&gt;
+&lt;span class=&quot;keyword&quot;&gt;true&lt;/span&gt;.toString();    &lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;string&quot;&gt;&quot;true&quot;&lt;/span&gt;
+&lt;span class=&quot;string&quot;&gt;&#39; &#39;&lt;/span&gt;.toString();        &lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;string&quot;&gt;&quot; &quot;&lt;/span&gt;
+&lt;span class=&quot;number&quot;&gt;2.14&lt;/span&gt;.toString();    &lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;string&quot;&gt;&quot;2.14&quot;&lt;/span&gt;
+&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;.toString();    &lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;constant&quot;&gt;SyntaxError&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;为什么最后一项会出错呢？因为javascript的解释器尝试把“点操作符”解释为前面浮点数字中的一部分,所以就出错了。&lt;br&gt;" data-url="http://yoursite.com/2015/08/07/js对象/index.html">
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>

@@ -114,14 +114,14 @@
   <ul class="post-list">
   
     <li class="post-list-item">
-  <article id="post-HTML新特性" class="article article-type-post" itemscope itemprop="blogPost">
+  <article id="post-JavaScrip命名空间模式" class="article article-type-post" itemscope itemprop="blogPost">
     
       
 
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/08/07/HTML新特性/">HTML新特性</a>
+      <a class="post-title-link" href="/2015/08/17/JavaScrip命名空间模式/">JavaScrip命名空间模式</a>
     </h3>
   
 
@@ -129,38 +129,61 @@
 
       <div class="post-meat flex-row">
         <div class="flex-col">
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html5/">html5</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript命名空间/">JavaScript命名空间</a></li></ul>
 </div>
-        <time datetime="2015-08-07T08:36:23.000Z" itemprop="datePublished" class="post-tiem">
+        <time datetime="2015-08-17T03:27:33.000Z" itemprop="datePublished" class="post-tiem">
+  2015-08-17
+</time>
+      </div>
+      <div class="post-content" itemprop="postContent" >
+        
+          <p>命名空间是通过为项目或库创建一个全局对象，然后将所有的功能添加到该全局变量中。同时有效防止函数名、类名和其他人冲突。</p>
+<p>在学习JavaScript命名空间模式之前，我们先来了解简单的命名空间。</p>
+<h3 id="简单的命名空间">简单的命名空间</h3><p>由于JavaScript没有文件作用域，不同的函数分散在不同的文件中，甚至由不同的人编写，重名的概率大大增加。是不是足够小心就可以了呢？也不尽然，还有些意外情况，比如经常会用到继承，于是写了一个没出现过的函数名extend，不料在EcmaScript5中加入了extend函数，命名空间的必要性就体现出来了。<br>JavaScript有函数的作用域，可以利用这点把自定义的函数写到一个函数体内，这样函数内的变量、对象、函数就像在一个命名空间内一样和外部隔离。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;input <span class="built_in">type</span>=<span class="string">"button"</span> value=<span class="string">"test"</span> onclick=<span class="string">"(new namespace()).alert();"</span>/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;script <span class="built_in">type</span>=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">          <span class="keyword">function</span> <span class="function"><span class="title">namespace</span></span>()&#123;</span><br><span class="line">              this.alert=<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">                   onsole.log(<span class="string">'test'</span>);</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">    &lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>这样自定义的alert方法就不会和window的alert冲突了。<br>
+        
+      </div>
+      <div class="post-footer clearfix">
+        <a href="/2015/08/17/JavaScrip命名空间模式/" class="post-more waves-button-light">MORE</a>
+      </div>
+    
+
+  </article>
+
+
+</li>
+  
+    <li class="post-list-item">
+  <article id="post-js事件捕获和冒泡" class="article article-type-post" itemscope itemprop="blogPost">
+    
+      
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/08/07/js事件捕获和冒泡/">js事件捕获和冒泡</a>
+    </h3>
+  
+
+
+
+      <div class="post-meat flex-row">
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/冒泡/">冒泡</a></li></ul>
+</div>
+        <time datetime="2015-08-07T13:47:40.000Z" itemprop="datePublished" class="post-tiem">
   2015-08-07
 </time>
       </div>
       <div class="post-content" itemprop="postContent" >
         
-          <p>HTML的十五大新特性</p>
-<h3 id="1-新的文档类型(New_Doctype)">1.新的文档类型(New Doctype)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!Doctype html&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="2-脚本和链接无type">2.脚本和链接无type</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- HTML4或XHTML --&gt;</span><br><span class="line">&lt;link rel=<span class="string">"stylesheet"</span> <span class="built_in">type</span>=<span class="string">"text/css"</span> href=<span class="string">""</span>&gt;</span><br><span class="line">&lt;script <span class="built_in">type</span>=<span class="string">"text/javascript"</span> src=<span class="string">""</span>&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- HMTL5 --&gt;</span><br><span class="line">&lt;link rel=<span class="string">"stylesheet"</span> href=<span class="string">""</span>&gt;</span><br><span class="line">&lt;script src=<span class="string">""</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="3-语义Header和Footer">3.语义Header和Footer</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- HTML4或XHTML --&gt;</span><br><span class="line">&lt;div id=<span class="string">"header"</span>&gt;&lt;/div&gt;</span><br><span class="line">...</span><br><span class="line">&lt;div id=<span class="string">"footer"</span>&gt;&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- HMTL5 --&gt;</span><br><span class="line">&lt;header&gt;&lt;/header&gt;</span><br><span class="line">...</span><br><span class="line">&lt;footer&gt;&lt;/footer&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="4-Hgroup">4.Hgroup</h3><p>在HTML5中，有许多新引入的元素，hgroup就是其中之一。假设我的网站名下面紧跟着一个子标题，我可以用”h1&gt;”和”h2”标签来分别定义。然而，这种定义没有说明这两者之间的关系。而且，h2标签的使用会带来更多问题，比如该页面上还有其他标题的时候。在HTML5中，我们可以用hgroup元素来将它们分组，这样就不会影响文件的大纲。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;header&gt;</span><br><span class="line">	&lt;hgroup&gt;</span><br><span class="line">		&lt;h1&gt;Aaaa&lt;/h1&gt;</span><br><span class="line">		&lt;h2&gt;Bbbb&lt;/h2&gt;</span><br><span class="line">	&lt;/hgroup&gt;</span><br><span class="line">&lt;/header&gt;</span><br></pre></td></tr></table></figure></p>
-<h3 id="5-标记元素_(Mark_Element)">5.标记元素 (Mark Element)</h3><p>你可以把它当做高亮标签。被这个标签修饰的字符串应当和用户当前的行动相关。比如说，当我在某博客中搜索“Open your Mind”时，我可以利用一些JavaScript将出现的词组用<mark>修饰一下。</mark><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;h3&gt;Hello,world&lt;/h3&gt;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">	&lt;mark&gt;China&lt;/mark&gt;</span><br><span class="line">&lt;/p&gt;</span><br></pre></td></tr></table></figure></p>
-<h3 id="6-图形元素">6.图形元素</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- HTML4或XHTML --&gt;</span><br><span class="line">&lt;img src=<span class="string">""</span> alt=<span class="string">"About me"</span>/&gt;</span><br><span class="line">&lt;p&gt;Image of Amy &lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- HMTL5 --&gt;</span><br><span class="line">&lt;!-- 然而，上述代码没有将文字和图片内在联系起来。因此，HTML5引入了&lt;figure&gt;元素。当和&lt;figcaption&gt;结合起来后，我们可以语义化地将注释和相应的图片联系起来。 --&gt;</span><br><span class="line">&lt;figure&gt;</span><br><span class="line">	&lt;img src=<span class="string">""</span> alt=<span class="string">"About me"</span>&gt;</span><br><span class="line">	&lt;figcaption&gt;</span><br><span class="line">		&lt;p&gt;Image of Amy&lt;/p&gt;</span><br><span class="line">	&lt;/figcaption&gt;</span><br><span class="line">&lt;/figure&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="7-重新定义small">7.重新定义small</h3><p>在HTML4或XHTML中，<br>small&gt;元素已经存在。然而，却没有如何正确使用这一元素的完整说明。在HTML5中，small&gt;被用来定义小字。试想下你网站底部的版权状态，根据对此元素新的HTML5定义，smal</p>
-<blockquote>
-<p>可以正确地诠释这些信息。</p>
-</blockquote>
-<h3 id="8-占位符_(Placeholder)">8.占位符 (Placeholder)</h3><p>在HTML4或XHTML中，你需要用JavaScript来给文本框添加占位符。比如，你可以提前设置好一些信息，当用户开始输入时，文本框中的文字就消失。而在HTML5中，新的“placeholder”就简化了这个问题。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;form action=<span class="string">"demo-form.php"</span>&gt;</span><br><span class="line">  &lt;input <span class="built_in">type</span>=<span class="string">"text"</span> name=<span class="string">"fname"</span> placeholder=<span class="string">"First name"</span>&gt;&lt;br&gt;</span><br><span class="line">  &lt;input <span class="built_in">type</span>=<span class="string">"text"</span> name=<span class="string">"lname"</span> placeholder=<span class="string">"Last name"</span>&gt;&lt;br&gt;</span><br><span class="line">  &lt;input <span class="built_in">type</span>=<span class="string">"submit"</span> value=<span class="string">"Submit"</span>&gt;</span><br><span class="line">&lt;/form</span><br><span class="line"></span><br><span class="line">&lt;p&gt;&lt;strong&gt;注意：&lt;/strong&gt; Internet Explorer <span class="number">9</span>及更早IE版本不支持input标签的 placeholder 属性。&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
-<h3 id="9-必要属性_(Required_Attribute)">9.必要属性 (Required Attribute)</h3><p>HTML5中的新属性“required”指定了某一输入是否必需。有两种方法声明这一属性。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;input <span class="built_in">type</span>=<span class="string">"text"</span> name=<span class="string">"someInput"</span> required /&gt;</span><br><span class="line">&lt;input <span class="built_in">type</span>=<span class="string">"text"</span> name=<span class="string">"someInput"</span> required=<span class="string">"required"</span>/&gt;</span><br><span class="line">&lt;!-- 当文本框被指定必需时，如果空白的话表格就不能提交 --&gt;</span><br></pre></td></tr></table></figure></p>
-<h3 id="10-Autofocus_属性_(Autofocus_Attribute)">10.Autofocus 属性 (Autofocus Attribute)</h3><h3 id="11-Audio_支持_(Audio_Support)">11.Audio 支持 (Audio Support)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;audio autoplay=<span class="string">"autoplay"</span> controls=<span class="string">"controls"</span>&gt;</span><br><span class="line">	&lt;<span class="built_in">source</span> src=<span class="string">"file.ogg"</span>/&gt;</span><br><span class="line">	&lt;<span class="built_in">source</span> src=<span class="string">"file.mp3"</span>/&gt;</span><br><span class="line">	&lt;<span class="built_in">source</span> src=<span class="string">"file.mp3"</span>/&gt;</span><br><span class="line">	&lt;a href=<span class="string">"file.mp3"</span>&gt;Download this file&lt;/a&gt;</span><br><span class="line">&lt;/audio&gt;</span><br><span class="line">&lt;!-- 使用&lt;audio&gt;元素时请记得包含两种音频格式。FireFox想要.ogg格式的文件，而Webkit浏览器则需要.mp3格式的。和往常一样，IE是不支持的，且Opera <span class="number">10</span>及以下版本只支持.wav格式 --&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="12-Video_支持_(Video_Support)">12.Video 支持 (Video Support)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;video controls preload&gt;</span><br><span class="line">	&lt;<span class="built_in">source</span> src=<span class="string">"cohagenPhoneCall.ogv"</span> <span class="built_in">type</span>=<span class="string">"video/ogg; codecs='vorbis, theora' "</span> /&gt;</span><br><span class="line">	&lt;<span class="built_in">source</span> src=<span class="string">"cohagenPhoneCall.mp4"</span> <span class="built_in">type</span>=<span class="string">"video/mp4; 'codecs='avc1.42E01E, mp4a.40.2'"</span> /&gt;</span><br><span class="line">	&lt;p&gt;</span><br><span class="line"> 		Your browser is old. </span><br><span class="line">		&lt;a href=<span class="string">"cohagenPhoneCall.mp4"</span>&gt;</span><br><span class="line">			Download this video instead.</span><br><span class="line">		&lt;/a&gt;</span><br><span class="line">	&lt;/p&gt;</span><br><span class="line">&lt;/video&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="13-视频预载_(Preload_attribute_in_Videos_element)">13.视频预载 (Preload attribute in Videos element)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;video preload&gt;&lt;/video&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="14-显示控制条">14.显示控制条</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 如果你使用过上面的每一个提到的技术点，你可能已经注意到，使用上面的代码，视频仅仅显示的是张图片，没有控制条。为了渲染出播放控制条，我们必须在video元素内指定controls属性。  --&gt;</span><br><span class="line">&lt;video preload controls&gt;&lt;/video&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="15-正规表达式_(Regular_Expressions)">15.正规表达式 (Regular Expressions)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 在HTML4或XHTML中，你需要用一些正规表达式来验证特定的文本。而HTML5中新的pattern属性让我们能够在标签处直接插入一个正规表达式。 --&gt;</span><br><span class="line">&lt;form action=<span class="string">""</span> method=<span class="string">"post"</span>&gt;</span><br><span class="line">	&lt;label <span class="keyword">for</span>=<span class="string">"username"</span>&gt;Username:&lt;/label&gt;</span><br><span class="line">	&lt;input <span class="built_in">type</span>=<span class="string">"text"</span> name=<span class="string">"username"</span> placeholder=<span class="string">"4 &lt;&gt; 10"</span> pattern=<span class="string">"[A-Za-z]&#123;4,10&#125;"</span>  autofocus  required &gt;</span><br><span class="line">	&lt;button&gt;Go&lt;/button&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
-<p>总结：内容不完善，后面继续补充~</p>
-
+          <p><mark>##转载</mark></p>
+<h3 id="事件冒泡">事件冒泡</h3><p>微软提出了名为事件冒泡(event bubbling)的事件流。事件冒泡可以形象地比喻为把一颗石头投入水中，泡泡会一直从水底冒出水面。也就是说，事件会从最内层的元素开始发生，一直向上传播，直到document对象。</p>
+<h3 id="事件捕获">事件捕获</h3><p>网景提出另一种事件流名为事件捕获(event capturing)。与事件冒泡相反，事件会从最外层开始发生，直到最具体的元素。<br>
         
       </div>
       <div class="post-footer clearfix">
-        <a href="/2015/08/07/HTML新特性/" class="post-more waves-button-light">MORE</a>
+        <a href="/2015/08/07/js事件捕获和冒泡/" class="post-more waves-button-light">MORE</a>
       </div>
     
 
@@ -170,162 +193,14 @@
 </li>
   
     <li class="post-list-item">
-  <article id="post-使用Hexo搭建博客" class="article article-type-post" itemscope itemprop="blogPost">
+  <article id="post-js模快化" class="article article-type-post" itemscope itemprop="blogPost">
     
       
 
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/08/07/使用Hexo搭建博客/">使用Hexo搭建博客</a>
-    </h3>
-  
-
-
-
-      <div class="post-meat flex-row">
-        <div class="flex-col">
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
-</div>
-        <time datetime="2015-08-07T01:56:05.000Z" itemprop="datePublished" class="post-tiem">
-  2015-08-07
-</time>
-      </div>
-      <div class="post-content" itemprop="postContent" >
-        
-          <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-        
-      </div>
-      <div class="post-footer clearfix">
-        <a href="/2015/08/07/使用Hexo搭建博客/" class="post-more waves-button-light">MORE</a>
-      </div>
-    
-
-  </article>
-
-
-</li>
-  
-    <li class="post-list-item">
-  <article id="post-前端性能优化" class="article article-type-post" itemscope itemprop="blogPost">
-    
-      
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/08/07/前端性能优化/">前端性能优化</a>
-    </h3>
-  
-
-
-
-      <div class="post-meat flex-row">
-        <div class="flex-col">
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端优化/">前端优化</a></li></ul>
-</div>
-        <time datetime="2015-08-07T01:56:05.000Z" itemprop="datePublished" class="post-tiem">
-  2015-08-07
-</time>
-      </div>
-      <div class="post-content" itemprop="postContent" >
-        
-          <h1 id="一、减少http请求次数">一、减少http请求次数</h1><p><strong>1.捆绑文件</strong>：多个样式表文件捆绑成一个文件<br><strong>2.CSS Sprites</strong>：多个图片拼成一张大图，通过CSS来控制每个小图展示的位置<br><strong>3.Image Map(图片/图像映射区域)</strong>：通过坐标来控制显示导航</p>
-<pre><code class="bash">&lt;img src=<span class="string">"planets.jpg"</span> border=<span class="string">"0"</span> usemap=<span class="string">"#planetmap"</span> alt=<span class="string">"Planets"</span> /&gt;
-
-       &lt;map name=<span class="string">"planetmap"</span> id=<span class="string">"planetmap"</span>&gt;
-                &lt;area shape=<span class="string">"circle"</span> coords=<span class="string">"180,139,14"</span> href =<span class="string">"venus.html"</span> alt=<span class="string">"Venus"</span> /&gt;
-                &lt;area shape=<span class="string">"circle"</span> coords=<span class="string">"129,161,10"</span> href =<span class="string">"mercur.html"</span> alt=<span class="string">"Mercury"</span> /&gt;
-                &lt;area shape=<span class="string">"rect"</span> coords=<span class="string">"0,0,110,260"</span> href =<span class="string">"sun.html"</span> alt=<span class="string">"Sun"</span> /&gt;
-       &lt;/map&gt;
-</code></pre>
-<h1 id="二、减少DNS查询次数:_域名系统（Domain_Name_System）">二、减少DNS查询次数: 域名系统（Domain Name System）</h1><p>当我们的网页引入了外部的脚本或者图片，DNS查询需要消耗响应的时间。</p>
-<h1 id="三、缓存Ajax">三、缓存Ajax</h1><p>缓存原理：Ajax在发送的数据成功后，会把请求的URL和返回的响应结果保存在缓存内，当下一次调用Ajax发送相同的请求时，它会直接从缓存中把数据取出来，这是为了提高页面的响应速度和用户体验。当前这要求两次请求URL完全相同，包括参数。这个时候，浏览器就不会与服务器交互。<br>不足：如果通过Ajax对一些后台数据进行更改的时候，虽然数据在后台已经发生改变，但是页面缓存中并没有改变，对于相同的URL，Ajax提交过去以后，浏览器还只是简单的从缓存中拿数据，这种情况当然就不行了。<br>解决缓存方法<br>1.在ajax发送请求前加上 xmlHttpRequest.setRequestHeader(“Cache-Control”,”no-cache”);<br>2.在服务端加 header(“Cache-Control: no-cache, must-revalidate”);<br>3.在ajax发送请求前加上 xmlHttpRequest.setRequestHeader(“If-Modified-Since”,”0″);</p>
-<h1 id="四、延迟加载和提前加载">四、延迟加载和提前加载</h1><p>通过延迟加载脚本来完成一些高级功能<br>通过提前加载网页中访问的资源：<br> 1.无条件提前加载<br> 2.有条件加载：根据用户输入的推断需要加载的内容<br> 3.有预期的加载：一般发生在网页重新设计的时候，由于用户经常访问旧网页，本地对旧的网页内容缓存充分从而显得旧网页速度很快，而新的网页内容却没有缓存，设计者可以在旧网页的内容中预先加载一些新网页中可能用到的内容，这样新的网页就会生下来一些需要下载的资源。</p>
-<h1 id="五、减少DOM元素数量">五、减少DOM元素数量</h1><p>网页中元素过多对网页的加载和脚本执行都是沉重的负担。<br>document.getElementsByTagName(‘*’).length ：可计算网页中的元素</p>
-<h1 id="六、根据域名划分内容">六、根据域名划分内容</h1><p>浏览器一般对同一个域的下载连接数有所限制，按照域名划分下载内容可以浏览器增大并行下载连接，但是注意控制域名使用在2-4个之间，不然dns查询也是个问题。<br>一般网站规划会将静态资源放在类似于static.example.com，动态内容放在www.example.com上。这样做还有一个好处是可以在静态的域名上避免使用cookie。后面我们会在cookie的规则中提到。</p>
-<h1 id="七、避免404">七、避免404</h1><p>404我们都不陌生，代表服务器没有找到资源，我们要特别要注意404的情况不要在我们提供的网页资源上，客户端发送一个请求但是服务器却返回一个无用的结果，时间浪费掉了。<br>更糟糕的是我们网页中需要加载一个外部脚本，结果返回一个404，不仅阻塞了其他脚本下载，下载回来的内容(404)客户端还会将其当成Javascript去解析。</p>
-<h1 id="八、CSS">八、CSS</h1><p>1.将样式表置顶<br>样式表(css)放在网页的HEAD中会让网页显得加载速度更快，因为这样做可以使浏览器逐步加载已将下载的网页内容。这对内容比较多的网页尤其重要，用户不用一直等待在一个白屏上，而是可以先看已经下载的内容。<br>2.用<link>代替@import<br>避免使用@import的原因很简单，因为它相当于将css放在网页内容底部。</p>
-<h1 id="九、JavaScript">九、JavaScript</h1><p>1.将脚本置底<br>-把脚本置底，这样可以让网页渲染所需要的内容尽快加载显示给用户。<br>-现在主流浏览器都支持defer关键字，可以指定脚本在文档加载后执行。<br>-HTML5中新加了async关键字，可以让脚本异步执行。<br>2.使用外部Javascirpt和CSS文件<br>-使用外部Javascript和CSS文件可以使这些文件被浏览器缓存，从而在不同的请求内容之间重用。<br>-使用外部Javascript和CSS文件的决定因素在于这些外部文件的重用率，如果用户在浏览我们的页面时会访问多次相同页面或者可以重用脚本的不同页面，那么外部文件形式可以为你带来很大的好处。但对于用户通常只会访问一次的页面.<br>3.精简Javascript和CSS<br>精简就是将Javascript或CSS中的空格和注释全去掉<br>精简的工具：<br>JS compressors:<br>Packer<br>JSMin<br>Closure compiler<br>YUICompressor (also does CSS)<br>AjaxMin (also does CSS)</p>
-<p>CSS compressors:<br>CSSTidy<br>Minify<br>YUICompressor (also does JS)<br>AjaxMin (also does JS)<br>CSSCompressor</p>
-<p>与VS集成比较好的工具如下：<br>YUICompressor - 编译集成，包含在NuGet.<br>AjaxMin  - 编译集成</p>
-<h1 id="十、图片">十、图片</h1><p>1.优化图像<br>尝试把GIF格式转换成PNG格式，看看是否节省空间。大多数情况下是可以压缩的。下面这条简单的命令可以安全地把GIF格式转换为PNG格式：<br>convert image.gif image.png<br>2.优化CSS Sprite<br>-Spirite中水平排列图片，垂直排列会增加文件大小；<br>-Spirite中把颜色较近的组合在一起可以降低颜色数，理想状况是低于256色以便适用PNG8格式；<br>-不要在Spirite的图像中间留有较大空隙。这虽然不大会增加文件大小,但对于用户代理来说它需要更少的内存来把图片解压为像素地图。100×100的图片为1万像素，1000×1000就是100万像素。<br>3.不要在HTML中缩放图片<br>不要通过图片缩放来适应页面，如果你需要小图片，就直接使用小图片吧。</p>
-<p><a href="http://www.cnblogs.com/developersupport/p/webpage-performance-best-practices.html">前端优化参考链接</a></p>
-        
-      </div>
-      <div class="post-footer clearfix">
-        <a href="/2015/08/07/前端性能优化/" class="post-more waves-button-light">MORE</a>
-      </div>
-    
-
-  </article>
-
-
-</li>
-  
-    <li class="post-list-item">
-  <article id="post-浏览器是如何渲染页面和加载页面" class="article article-type-post" itemscope itemprop="blogPost">
-    
-      
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/07/27/浏览器是如何渲染页面和加载页面/">浏览器是如何渲染页面和加载页面</a>
-    </h3>
-  
-
-
-
-      <div class="post-meat flex-row">
-        <div class="flex-col">
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web前端/">web前端</a></li></ul>
-</div>
-        <time datetime="2015-07-27T02:05:21.000Z" itemprop="datePublished" class="post-tiem">
-  2015-07-27
-</time>
-      </div>
-      <div class="post-content" itemprop="postContent" >
-        
-          <h1 id="浏览器是如何渲染页面和加载页面?">浏览器是如何渲染页面和加载页面?</h1><ol>
-<li>浏览器加载的顺序是从上到下，渲染的顺序也是从上到下，加载和渲染是同时进行的。</li>
-<li>在渲染到页面的某一部分时，其上面的所有部分都已经加载完成（并不是说所有相关联的元素都已经加载完）。</li>
-<li>如果遇到语义解释性的标签嵌入文件（JS脚本，CSS样式），那么此时加载过程会启用单独连接进行加载</li>
-<li>并且在加载后进行解析，解析过程中，停止页面所有往下元素的加载。</li>
-<li>样式表在加载完成后，将和以前加载的所有样式表一起进行解析，解析完成后，将对此前所有元素（含以前已经渲染的）重新进行渲染。</li>
-<li>JS、CSS中如有重定义，后定义函数将覆盖前定义函数。</li>
-</ol>
-
-        
-      </div>
-      <div class="post-footer clearfix">
-        <a href="/2015/07/27/浏览器是如何渲染页面和加载页面/" class="post-more waves-button-light">MORE</a>
-      </div>
-    
-
-  </article>
-
-
-</li>
-  
-    <li class="post-list-item">
-  <article id="post-JS模块化编程之AMD规范" class="article article-type-post" itemscope itemprop="blogPost">
-    
-      
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2015/07/25/JS模块化编程之AMD规范/">JS模块化编程之AMD规范</a>
+      <a class="post-title-link" href="/2015/08/07/js模快化/">js模快化</a>
     </h3>
   
 
@@ -335,29 +210,115 @@
         <div class="flex-col">
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
 </div>
-        <time datetime="2015-07-25T13:09:48.000Z" itemprop="datePublished" class="post-tiem">
-  2015-07-25
+        <time datetime="2015-08-07T13:47:14.000Z" itemprop="datePublished" class="post-tiem">
+  2015-08-07
 </time>
       </div>
       <div class="post-content" itemprop="postContent" >
         
-          <h1 id="JS模块化编程之AMD规范">JS模块化编程之AMD规范</h1><p><strong>模块很重要</strong>？<br>有了模块，我们就可以更方便的使用别人的代码想要什么功能，就加载什么模块。<br>目前，Javascript模块规范共有两种：<strong>CommonJS</strong>和<strong>AMD</strong>。<br>这里介绍AMD(Asynchronous Module Definition)，意思是“异步模块定义”。</p>
-<h2 id="模块定义">模块定义</h2><p>define(id?, dependencies?, factory);<br>其中：<br>id: 模块标识，可以省略。<br>dependencies: 所依赖的模块，可以省略。<br>factory: 模块的实现，或者一个JavaScript对象。</p>
-<p>代码示例1: 定义一个alpha模块，依赖require，exports，beta模块</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">define(<span class="string">"alpha"</span>, [<span class="string">"require"</span>, <span class="string">"exports"</span>, <span class="string">"beta"</span>], <span class="keyword">function</span> (require, exports, beta) &#123;</span><br><span class="line">     exports.verb = <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">         <span class="built_in">return</span> beta.verb();</span><br><span class="line">         //Or:</span><br><span class="line">         <span class="built_in">return</span> require(<span class="string">"beta"</span>).verb();</span><br><span class="line">     &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>代码示例2: 定义个匿名模块，依赖alpha模块<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">define([<span class="string">"alpha"</span>], <span class="keyword">function</span> (alpha) &#123;</span><br><span class="line">    <span class="built_in">return</span> &#123;</span><br><span class="line">        verb: <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">            <span class="built_in">return</span> alpha.verb() + <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-<p>代码示例3: 使用JSON定义一个没有依赖的匿名模块。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">define(&#123;</span><br><span class="line">  add: <span class="keyword">function</span>(x, y)&#123;</span><br><span class="line">    <span class="built_in">return</span> x + y;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-<p>代码示例4：定义一个兼容Modules/Wrappings模块化规范的匿名模块。</p>
-<p>Modules/Wrappings是CommonJS Modules的浏览器端解决方案。AMD规范兼容Modules/Wrappings。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">define(<span class="keyword">function</span> (require, exports, beta) &#123;</span><br><span class="line">    exports.verb = <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">        <span class="built_in">return</span> beta.verb();</span><br><span class="line">        //Or:</span><br><span class="line">        <span class="built_in">return</span> require(<span class="string">"beta"</span>).verb();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-<h2 id="模块加载">模块加载</h2><p>require([module], callback)</p>
-<p>AMD模块化规范中使用全局或局部的require函数实现加载一个或多个模块，所有模块加载完成之后的回调函数。</p>
-<p>其中：</p>
-<p>[module]：是一个数组，里面的成员就是要加载的模块；<br>callback：是模块加载完成之后的回调函数。<br>代码示例：加载一个math模块，然后调用方法 math.add(2, 3);<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">require([<span class="string">'math'</span>], <span class="keyword">function</span> (math) &#123;</span><br><span class="line">　math.add(<span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+          <p><mark>##转载</mark></p>
+<h2 id="js模块化">js模块化</h2><p>何为模块？模块就是实现特定功能的一组方法。</p>
+<p>模块化的好处就不多说了，我们就介绍一些基本点，可以在以后的项目开发中应用到。</p>
+<h3 id="1、一般的写法">1、一般的写法</h3><p>简答的把函数和变量放在一起。</p>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">m1</span><span class="params">()</span></span>{
+    ...
+}
 
+<span class="function"><span class="keyword">function</span> <span class="title">m2</span><span class="params">()</span></span>{
+    ...
+}
+</code></pre><p>这种做法简单方便，但是很容易污染了全局变量，很容易与其他模块发生命名冲突，而且模块之间看不出来直接的关系。<br>
         
       </div>
       <div class="post-footer clearfix">
-        <a href="/2015/07/25/JS模块化编程之AMD规范/" class="post-more waves-button-light">MORE</a>
+        <a href="/2015/08/07/js模快化/" class="post-more waves-button-light">MORE</a>
+      </div>
+    
+
+  </article>
+
+
+</li>
+  
+    <li class="post-list-item">
+  <article id="post-js函数" class="article article-type-post" itemscope itemprop="blogPost">
+    
+      
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/08/07/js函数/">js函数</a>
+    </h3>
+  
+
+
+
+      <div class="post-meat flex-row">
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/函数/">函数</a></li></ul>
+</div>
+        <time datetime="2015-08-07T13:46:28.000Z" itemprop="datePublished" class="post-tiem">
+  2015-08-07
+</time>
+      </div>
+      <div class="post-content" itemprop="postContent" >
+        
+          <p><mark>##转载</mark></p>
+<h3 id="一、函数定义的三种方式">一、函数定义的三种方式</h3><p>方式1、函数声明</p>
+<pre><code><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span></span>{}
+</code></pre><p>方式2、函数表达式</p>
+<pre><code><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>{};
+</code></pre>
+        
+      </div>
+      <div class="post-footer clearfix">
+        <a href="/2015/08/07/js函数/" class="post-more waves-button-light">MORE</a>
+      </div>
+    
+
+  </article>
+
+
+</li>
+  
+    <li class="post-list-item">
+  <article id="post-js对象" class="article article-type-post" itemscope itemprop="blogPost">
+    
+      
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2015/08/07/js对象/">js对象</a>
+    </h3>
+  
+
+
+
+      <div class="post-meat flex-row">
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/对象/">对象</a></li></ul>
+</div>
+        <time datetime="2015-08-07T13:46:06.000Z" itemprop="datePublished" class="post-tiem">
+  2015-08-07
+</time>
+      </div>
+      <div class="post-content" itemprop="postContent" >
+        
+          <p><mark>##转载</mark></p>
+<h2 id="对象">对象</h2><p>我们知道javascript并不是面向对象的语言，我们可以把javascript理解成基于对象的语言。在javascript当中所有的变量都是对象，除了null和undefined。</p>
+<h3 id="一、对象的使用和属性">一、对象的使用和属性</h3><p>前面说到所有变量都是对象，那我们尝试调用对象的toString方法来验证一下。</p>
+<pre><code>[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>].toString();    <span class="regexp">//</span><span class="string">"1,2,3,4"</span>
+<span class="keyword">true</span>.toString();    <span class="regexp">//</span><span class="string">"true"</span>
+<span class="string">' '</span>.toString();        <span class="regexp">//</span><span class="string">" "</span>
+<span class="number">2.14</span>.toString();    <span class="regexp">//</span><span class="string">"2.14"</span>
+<span class="number">2</span>.toString();    <span class="regexp">//</span><span class="constant">SyntaxError</span>
+</code></pre><p>为什么最后一项会出错呢？因为javascript的解释器尝试把“点操作符”解释为前面浮点数字中的一部分,所以就出错了。<br>
+        
+      </div>
+      <div class="post-footer clearfix">
+        <a href="/2015/08/07/js对象/" class="post-more waves-button-light">MORE</a>
       </div>
     
 
@@ -370,7 +331,7 @@
   
     <nav id="page-nav">
       <div class="inner">
-        <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+        <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">下一页</a>
       </div>
     </nav>
   
